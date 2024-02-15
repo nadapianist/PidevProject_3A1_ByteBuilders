@@ -6,21 +6,20 @@ public class Activity {
     private String name;
     private Date date_act;
     private String description;
-    private int id_chall;
 
-    public Activity(String name, Date date_act, String description, int id_chall) {
+    public Activity(String name, Date date_act, String description) {
         this.name = name;
         this.date_act = date_act;
         this.description = description;
-        this.id_chall = id_chall;
+
     }
 
-    public Activity(int id_act, String name, Date date_act, String description, int id_chall) {
+    public Activity(int id_act, String name, Date date_act, String description) {
         this.id_act = id_act;
         this.name = name;
         this.date_act = date_act;
         this.description = description;
-        this.id_chall = id_chall;
+
     }
 
     public Activity() {
@@ -59,13 +58,7 @@ public class Activity {
         this.description = description;
     }
 
-    public int getId_chall() {
-        return id_chall;
-    }
 
-    public void setId_chall(int id_chall) {
-        this.id_chall = id_chall;
-    }
 
     @Override
     public String toString() {
@@ -73,8 +66,7 @@ public class Activity {
                 "id_act=" + id_act +
                 ", name='" + name + '\'' +
                 ", date_act=" + date_act +
-                ", Description='" +  description+ '\'' +
-                ", id_chall=" + id_chall +
+                ", Description='" +  description+
                 '}';
     }
 }
