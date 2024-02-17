@@ -1,0 +1,12 @@
+tn\esprit\Services\HostelService.class
+tn\esprit\Controllers\DeleteHostel.class
+tn\esprit\Main.class
+tn\esprit\Utils\myDB.class
+tn\esprit\Controllers\UpdateHostel.class
+tn\esprit\Controllers\ShowHostelList.class
+tn\esprit\Entities\Reservation.class
+tn\esprit\Entities\Hostel.class
+tn\esprit\App\MainFx.class
+tn\esprit\Controllers\AddHostel.class
+tn\esprit\Services\ReservationService.class
+tn\esprit\Services\IService.class
