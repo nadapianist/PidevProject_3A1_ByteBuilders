@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controller.UpdateLocation">
+   <children>
+      <TextField fx:id="NewNameId" layoutX="169.0" layoutY="134.0" />
+      <TextField fx:id="NewInfosId" layoutX="169.0" layoutY="188.0" />
+      <TextField fx:id="Idloc" layoutX="169.0" layoutY="32.0" />
+      <Label layoutX="85.0" layoutY="138.0" text=" New Name" />
+      <Label layoutX="95.0" layoutY="192.0" prefHeight="17.0" prefWidth="54.0" text="New Info" />
+      <Label layoutX="103.0" layoutY="36.0" text="Id:" />
+      <Text layoutX="63.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Want to edit something?" wrappingWidth="149.0" />
+      <Button fx:id="ConfirmUpdateButton" layoutX="332.0" layoutY="259.0" mnemonicParsing="false" onAction="#SaveChanges" text=" Yes" />
+      <Button fx:id="CancelUpdateButton" layoutX="257.0" layoutY="259.0" mnemonicParsing="false" onAction="#ReturnToList" text=" No" />
+   </children>
+</AnchorPane>

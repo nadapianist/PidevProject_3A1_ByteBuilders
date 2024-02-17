@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controller.AddLocation">
+   <children>
+      <TextField fx:id="NameField" layoutX="127.0" layoutY="62.0" promptText="enter Name.." />
+      <TextField fx:id="infoField" layoutX="127.0" layoutY="110.0" promptText="give some info.." />
+      <TextField fx:id="HostelIDField" layoutX="359.0" layoutY="110.0" promptText="hostel?" />
+      <TextField fx:id="ActivityIdField" layoutX="359.0" layoutY="62.0" promptText="activity?" />
+      <TextField fx:id="categoryField" layoutX="127.0" layoutY="165.0" promptText="mention the category" />
+      <TextField fx:id="ratingField" layoutX="359.0" layoutY="165.0" promptText="rate this location" />
+      <Button fx:id="AddButton" layoutX="375.0" layoutY="250.0" mnemonicParsing="false" onAction="#AddNewLocation" text=" save" />
+      <Button fx:id="ReturnButton" layoutX="282.0" layoutY="250.0" mnemonicParsing="false" onAction="#ToHome" text=" return" />
+   </children>
+</AnchorPane>
