@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.AddHostel">
+    <children>
+        <TextField id="Name_hostel" fx:id="Name_hostelID" layoutX="113.0" layoutY="79.0" />
+        <TextField id="NBstars" fx:id="NBstarsID" layoutX="113.0" layoutY="149.0" />
+        <TextField id="Info" fx:id="InfoID" layoutX="113.0" layoutY="219.0" />
+        <Button id="AddButton" fx:id="AddButton" layoutX="300.0" layoutY="250.0" mnemonicParsing="false" onAction="#AddHostel" text=" Add" />
+        <Label layoutX="27.0" layoutY="83.0" text=" Name_hostel" />
+        <Label layoutX="33.0" layoutY="153.0" prefHeight="17.0" prefWidth="68.0" text="NBstars" />
+        <Label layoutX="33.0" layoutY="223.0" prefHeight="17.0" prefWidth="68.0" text="Info" />
+        <Button fx:id="NavButton" layoutX="362.0" layoutY="250.0" mnemonicParsing="false" onAction="#HomePage" text=" Back" />
+    </children>
+</AnchorPane>
