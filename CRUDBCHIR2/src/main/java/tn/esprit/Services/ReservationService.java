@@ -23,7 +23,7 @@ public class ReservationService {
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1,p.getIdtourist());
         ps.setInt(2,p.getIDh());
-        ps.setDate(3, p.getDate_reserv());
+        ps.setDate(3, new java.sql.Date(p.getDate_reserv().getTime()));
         ps.setString(4,p.getPayment_method());
         ps.executeUpdate();
         System.out.println("Hostel added!");
@@ -31,33 +31,33 @@ public class ReservationService {
 
 
     public void update2(int Idtourist, int IDh, Date date_reserv, String payment_method) throws SQLException {
-        String query = "UPDATE `hostel` SET `date_reserv` = ?, `payment_method` = ? WHERE `Idtourist`= ? and `IDh`= ?";
+        String query = "UPDATE `reservation` SET `date_reserv` = ?, `payment_method` = ? WHERE `Idtourist`= ? and `IDh`= ?";
         PreparedStatement preparedStmt = con.prepareStatement(query);
-
+        java.sql.Date sqlDate = new java.sql.Date(date_reserv.getTime());
 // Set the parameters
-        preparedStmt.setInt(1, Idtourist);
-        preparedStmt.setInt(2,IDh);
-        preparedStmt.setDate(3, (java.sql.Date) date_reserv);
-        preparedStmt.setString(4,payment_method);
+        preparedStmt.setInt(3, Idtourist);
+        preparedStmt.setInt(4,IDh);
+        preparedStmt.setDate(1, sqlDate);
+        preparedStmt.setString(2,payment_method);
 // Execute the PreparedStatement
         int row_updated=preparedStmt.executeUpdate();
         if (row_updated > 0) {
-            System.out.println("Person updated");
+            System.out.println("Reservation updated");
         } else {
-            System.out.println("Person not found");
+            System.out.println("Reservation not found");
         }
     }
 
-    public void delete(Reservation p, int id) throws SQLException {
+    public void delete(int id1,int id2) throws SQLException {
         String query = "DELETE FROM `reservation` WHERE `Idtourist` = ? AND `IDh` = ?";
         PreparedStatement preparedStmt = con.prepareStatement(query);
-        preparedStmt.setInt(1, p.getIdtourist());
-        preparedStmt.setInt(2, p.getIDh());
+        preparedStmt.setInt(1, id1);
+        preparedStmt.setInt(2, id2);
         int rowsDeleted = preparedStmt.executeUpdate();
         if (rowsDeleted > 0) {
-            System.out.println("Reservation for tourist with ID " + p.getIdtourist() + " and hostel ID " + p.getIDh() + " deleted");
+            System.out.println("Reservation for tourist with ID " + id1 + " and hostel ID " + id2 + " deleted");
         } else {
-            System.out.println("Reservation for tourist with ID " + p.getIdtourist() + " and hostel ID " + p.getIDh() + " not found");
+            System.out.println("Reservation for tourist with ID " + id1 + " and hostel ID " + id2 + " not found");
         }
     }
 

@@ -15,7 +15,10 @@ public class Reservation {
         this.date_reserv = date_reserv;
         this.payment_method = payment_method;
     }
-
+    /*public Reservation(Date date_reserv, String payment_method) {
+        this.date_reserv = date_reserv;
+        this.payment_method = payment_method;
+    }*/
     // Getter and Setter methods for each attribute
     public int getIdtourist() {
         return Idtourist;
@@ -33,8 +36,8 @@ public class Reservation {
         this.IDh = IDh;
     }
 
-    public java.sql.Date getDate_reserv() {
-        return (java.sql.Date) date_reserv;
+    public  Date getDate_reserv() {
+        return date_reserv;
     }
 
     public void setDate_reserv(Date date_reserv) {

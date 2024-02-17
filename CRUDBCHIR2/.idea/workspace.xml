@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df5ddf22-5a43-496e-a4fd-38bc9b328a64" name="Changes" comment="" />
+    <list default="true" id="df5ddf22-5a43-496e-a4fd-38bc9b328a64" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/Controllers/AddReservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/Controllers/DeleteReservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/Controllers/ShowReservationList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/Controllers/UpdateReservation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/Controllers/menu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/AddReservation.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/DeleteReservation.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ShowReservationList.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/UpdateReservation.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/App/MainFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/App/MainFx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/Entities/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/Entities/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tn/esprit/Services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tn/esprit/Services/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tn/esprit/App/MainFx.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tn/esprit/App/MainFx.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tn/esprit/Controllers/AddHostel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tn/esprit/Controllers/AddHostel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tn/esprit/Controllers/DeleteHostel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tn/esprit/Controllers/DeleteHostel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tn/esprit/Entities/Reservation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tn/esprit/Entities/Reservation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tn/esprit/Services/ReservationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tn/esprit/Services/ReservationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +42,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -27,23 +53,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Desktop/CRUD bel interface&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/PC/IdeaProjects/CRUDBCHIR2/src/main/java/tn/esprit/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Hostel__Reservation__management",
+    "last_opened_file_path": "C:/Users/PC/IdeaProjects/PidevProject_3A1_ByteBuilders/CRUDBCHIR2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "onboarding.tips.debug.path": "C:/Users/PC/IdeaProjects/CRUDBCHIR2/src/main/java/tn/esprit/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="CRUDBCHIR2 [javafx:run]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
       <MavenSettings>
@@ -94,6 +122,7 @@
       <workItem from="1708111762524" duration="2896000" />
       <workItem from="1708114908178" duration="11000" />
       <workItem from="1708157169125" duration="854000" />
+      <workItem from="1708199406543" duration="776000" />
     </task>
     <servers />
   </component>
