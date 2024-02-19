@@ -2,8 +2,10 @@ package tn.esprit;
 
 import tn.esprit.entities.Activity;
 import tn.esprit.entities.Challenge;
+import tn.esprit.entities.ReviewChallenge;
 import tn.esprit.services.ActivityService;
 import tn.esprit.services.ChallengeService;
+import tn.esprit.services.ReviewChallengeService;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -75,14 +77,48 @@ public class Main {
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
         }
+////////////////////////////////////reviews///////////////////////
+        ReviewChallenge r1 = new ReviewChallenge(1,7,"the best expirience ever",Date.valueOf("2024-01-04"),"share");
+        ReviewChallengeService rs = new ReviewChallengeService();
 
+       /* try {
+            rs.addd(r1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());;
+        }
+        try {
+            System.out.println(rs.diplayList());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }*/
 
+       /* ReviewChallenge rev = new ReviewChallenge(1,7,"exp",Date.valueOf("2024-01-04"),"share");
+        try {
+            rs.update(rev);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());;
+        }
+        try {
+            System.out.println(rs.diplayList());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }*/
+        try {
+            rs.delete(r1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());;
+        }
 
         /////////////////////////////////////////////////////////////////SIMPLE ADVANCED FEATURES //////////////////////////
 
 /////search BY date
         try {
             System.out.println(as.SearchByDate(Date.valueOf("2024-02-06")));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            System.out.println(cs.Search("pas"));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
