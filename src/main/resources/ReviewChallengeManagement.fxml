@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="737.0" prefWidth="1210.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.ReviewChallengeManagement">
+   <children>
+      <TableView fx:id="TableViewReviewChallenge" layoutX="568.0" layoutY="256.0" prefHeight="362.0" prefWidth="577.0" stylesheets="@design.css">
+        <columns>
+            <TableColumn fx:id="idact_column" prefWidth="89.60000610351562" text="IDActivity" />
+            <TableColumn fx:id="nameactivity_column" prefWidth="73.5999755859375" text="Name Activity" />
+            <TableColumn fx:id="id_chall_column" prefWidth="105.60003662109375" text="IDChallenge" />
+            <TableColumn fx:id="namechallenge_column" prefWidth="89.5999755859375" text="Name Challenge" />
+            <TableColumn fx:id="Titlerev_column" prefWidth="51.9998779296875" text="TitleRev" />
+          <TableColumn fx:id="Info_column" minWidth="0.0" prefWidth="67.2000732421875" text="Info" />
+          <TableColumn fx:id="Datepub_column" prefWidth="98.39984130859375" text="DatePub" />
+        </columns>
+      </TableView>
+      <AnchorPane layoutY="51.0" prefHeight="675.0" prefWidth="216.0" styleClass="main-bg" stylesheets="@design.css">
+         <children>
+            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="61.0" layoutY="89.0" size="100" />
+            <Label layoutX="43.0" layoutY="103.0" text="Welcome ,Admin" textFill="#fcfcfc">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Line endX="68.80000305175781" layoutX="116.0" layoutY="126.0" startX="-100.0" stroke="#f4f4f4" />
+            <Button layoutX="10.0" layoutY="144.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="User Management" />
+            <Button layoutX="9.0" layoutY="193.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Location Management" />
+            <Button layoutX="9.0" layoutY="242.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Activity Management" />
+            <Button layoutX="10.0" layoutY="291.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Challenge Management" />
+            <Button layoutX="10.0" layoutY="340.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Review Management" />
+            <Button layoutX="10.0" layoutY="389.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Hostel Management" />
+            <Button layoutX="10.0" layoutY="438.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Reservation Management" />
+            <Button layoutX="9.0" layoutY="487.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Post Management" />
+            <Button layoutX="9.0" layoutY="536.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Forum Management" />
+            <Button layoutX="8.0" layoutY="586.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Transport Management" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="-1.0" prefHeight="52.0" prefWidth="1210.0" styleClass="main-bg" stylesheets="@design.css">
+         <children>
+            <Label layoutX="141.0" layoutY="7.0" text="Tunism Dsktop App" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="1153.0" layoutY="13.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="27.0" styleClass="close" stylesheets="@design.css" />
+            <FontAwesomeIconView glyphName="CLOSE" layoutX="1162.0" layoutY="30.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="257.0" layoutY="252.0" prefHeight="370.0" prefWidth="293.0" styleClass="AnchorPane" stylesheets="@design.css">
+         <children>
+            <Label layoutX="75.0" layoutY="32.0" text="Review Form " textFill="WHITE" underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="32.0" layoutY="317.0" mnemonicParsing="false" onAction="#AddReviewChallenge" text="Add" />
+            <Button layoutX="106.0" layoutY="317.0" mnemonicParsing="false" onAction="#DeleteReviewChallenge" text="Delete" />
+            <Button layoutX="188.0" layoutY="317.0" mnemonicParsing="false" onAction="#UpdateReviewChallenge" text="Update" />
+            <TextField fx:id="ID_act_id" layoutX="18.0" layoutY="110.0" prefHeight="26.0" prefWidth="114.0" promptText="IDActivity" />
+            <TextField fx:id="id_chall_id" layoutX="166.0" layoutY="110.0" prefHeight="26.0" prefWidth="114.0" promptText="IDChallenge" />
+            <TextField fx:id="id_info" layoutX="166.0" layoutY="187.0" prefHeight="26.0" prefWidth="114.0" promptText="Info" />
+            <TextField fx:id="id_title_rev" layoutX="16.0" layoutY="187.0" prefHeight="26.0" prefWidth="123.0" promptText="Title Review" />
+            <TextField fx:id="id_date_pub" layoutX="94.0" layoutY="269.0" prefHeight="26.0" prefWidth="101.0" promptText="DatePublication" />
+            <Label layoutX="51.0" layoutY="81.0" text="ID Activity" textFill="#f7f7f7">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="56.0" layoutY="159.0" text="Title" textFill="#f4f4f4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="202.0" layoutY="159.0" text="Info" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="117.0" layoutY="236.0" text="Date Pub" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="182.0" layoutY="82.0" text="ID Challenge" textFill="#fffefe">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="404.0" layoutY="82.0" text="Review Management" underline="true">
+         <font>
+            <Font name="Malgun Gothic Semilight" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Search_rev_field" layoutX="670.0" layoutY="205.0" promptText="Search" />
+      <Button layoutX="857.0" layoutY="205.0" mnemonicParsing="false" onAction="#SearchReview" text="Search" />
+      <Button layoutX="917.0" layoutY="205.0" mnemonicParsing="false" onAction="#SortReview" text="Sort" />
+   </children>
+</AnchorPane>
