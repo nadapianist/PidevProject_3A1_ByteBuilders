@@ -11,4 +11,6 @@ public interface ITransport {
     void update(int id,String brand,int distance,int chargeTime)throws SQLException;
     void delete(int id)throws SQLException;
     List<Transport> displayList() throws SQLException;
+    List<Transport> SearchTransports(String Brand) throws SQLException;
+    List<Transport> SortTransports() throws SQLException;
 }

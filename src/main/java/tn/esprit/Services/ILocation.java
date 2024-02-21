@@ -10,4 +10,6 @@ public interface ILocation {
     void update(int ID,String name,String info)throws SQLException;
     void delete(int id)throws SQLException;
     List<Location> displayList() throws SQLException;
+    List<Location> SearchLocations(String Name) throws SQLException;
+    List<Location> SortLocations() throws SQLException;
 }

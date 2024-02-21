@@ -83,4 +83,46 @@ public class LocationService implements ILocation {
         return locations;
 
     }
+
+    @Override
+    public List<Location> SearchLocations(String Name) throws SQLException {
+        String query="SELECT * FROM `location` WHERE `Name`=?";
+        PreparedStatement ps= this.con.prepareStatement(query);
+        ps.setString(1,Name);
+        ResultSet res = ps.executeQuery();
+        List<Location> locations = new ArrayList<>();
+        while(res.next()){
+            Location l=new Location(
+                    res.getString("Name")
+                    ,res.getString("info")
+                    ,res.getString("category")
+                    ,res.getInt("activity")
+                    ,res.getInt("hostel")
+                    ,res.getInt("rating")
+            );
+            locations.add(l);
+        }
+        return locations;
+    }
+
+    @Override
+    public List<Location> SortLocations() throws SQLException {
+        String query="SELECT * from `location` ORDER BY `category` ASC";
+        stm=con.createStatement();
+        ResultSet res=stm.executeQuery(query);
+        List<Location> locations=new ArrayList<>();
+        while(res.next()){
+            Location l=new Location(
+                    res.getString("Name")
+                    ,res.getString("info")
+                    ,res.getString("category")
+                    ,res.getInt("activity")
+                    ,res.getInt("hostel")
+                    ,res.getInt("rating")
+            );
+            locations.add(l);
+        }
+
+        return locations;
+    }
 }

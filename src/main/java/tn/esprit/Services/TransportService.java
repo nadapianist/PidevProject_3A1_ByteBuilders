@@ -73,7 +73,7 @@ public class TransportService implements ITransport {
         ResultSet res=stm.executeQuery(query);
         List<Transport> transports=new ArrayList<>();
         while(res.next()){
-            int idTourist = res.getInt("IDtourist");
+           // int idTourist = res.getInt("IDtourist");
             Transport t=new Transport(
                     res.getString("Brand")
                     ,res.getString("Type")
@@ -84,6 +84,45 @@ public class TransportService implements ITransport {
             transports.add(t);
         }
 
+        return transports;
+    }
+
+    @Override
+    public List<Transport> SearchTransports(String Brand) throws SQLException {
+        String query="SELECT * FROM `transport` WHERE `Brand`=?";
+        PreparedStatement ps= this.con.prepareStatement(query);
+        ps.setString(1,Brand);
+        ResultSet res = ps.executeQuery();
+        List<Transport> transports = new ArrayList<>();
+        while(res.next()){
+            Transport t=new Transport(
+                    res.getString("Brand")
+                    ,res.getString("Type")
+                    ,res.getInt("Distance")
+                    ,res.getInt("ChargingTime")
+                    ,res.getInt("IDtourist")
+            );
+            transports.add(t);
+        }
+        return transports;
+    }
+
+    @Override
+    public List<Transport> SortTransports() throws SQLException {
+        String query="SELECT * from `transport` ORDER BY `Type` ASC";
+        stm=con.createStatement();
+        ResultSet res=stm.executeQuery(query);
+        List<Transport> transports = new ArrayList<>();
+        while(res.next()){
+            Transport t=new Transport(
+                    res.getString("Brand")
+                    ,res.getString("Type")
+                    ,res.getInt("Distance")
+                    ,res.getInt("ChargingTime")
+                    ,res.getInt("IDtourist")
+            );
+            transports.add(t);
+        }
         return transports;
     }
 }
