@@ -7,19 +7,26 @@ public class Location {
     private String category;
     private int ActivityID;
     private int hostelID;
-    private int rating;
-    private boolean popular;
 
 
-    public Location(String name, String info, String category,int id_activity,int id_hostel, int rating) {
+
+    public Location(String name, String info, String category,int id_activity,int id_hostel) {
 
         this.Name = name;
         this.info = info;
         this.category = category;
         this.ActivityID=id_activity;
         this.hostelID=id_hostel;
-        this.rating = rating;
 
+    }
+
+    public Location(int ID, String name, String info, String category, int activityID, int hostelID) {
+        this.ID = ID;
+        Name = name;
+        this.info = info;
+        this.category = category;
+        ActivityID = activityID;
+        this.hostelID = hostelID;
     }
 
     @Override
@@ -30,7 +37,6 @@ public class Location {
                 ", category='" + category + '\'' +
                 ", Activity=" + ActivityID +
                 ", hostel=" + hostelID +
-                ", rating=" + rating +
                 '}';
     }
 
@@ -82,19 +88,4 @@ public class Location {
         this.hostelID=val;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public boolean isPopular() {
-        return popular;
-    }
-
-    public void setPopular(boolean popular) {
-        this.popular = popular;
-    }
 }

@@ -1,5 +1,9 @@
 package tn.esprit.Controller;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,14 +12,44 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
 import tn.esprit.Entity.Location;
+import tn.esprit.Entity.Rating;
+import tn.esprit.Entity.Transport;
+import tn.esprit.Exception.InvalidLengthException;
 import tn.esprit.Services.LocationService;
+import tn.esprit.Services.RatingService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 public class ShowLocations {
+    public final int  MAXLENGTH=10;
+    public Button viewRating;
+    @FXML
+    private Label AvgLocRating;
+    @FXML
+    private Text avgRating;
+
+    @FXML
+    private TableView<Rating>RatingList;
+    @FXML
+    private TableColumn<Rating, Integer> nbStarsCol;
+
+    @FXML
+    private TableColumn<Rating, Date> ratingDateCol;
+    @FXML
+    private TableColumn<Rating, Integer> IdLocCol;
+
+    @FXML
+    private TableColumn<Rating, Integer> userIdCol;
 
     @FXML
     private TextField categorylocationId;
@@ -29,8 +63,7 @@ public class ShowLocations {
     private TextField LocationHostelId;
     @FXML
     private TextField IDLocId;
-    @FXML
-    private TextField ratingLocationId;
+
     @FXML
     private Button ManageTransportButton;
     @FXML
@@ -61,22 +94,22 @@ public class ShowLocations {
 
     @FXML
     private TableColumn<Location, String> categoryLoc;
-    @FXML
-    private TableColumn<Location, Integer> ratingLoc;
+    private final RatingService rs=new RatingService();
     private final LocationService ls=new LocationService();
+
+    //List Initiation
     @FXML
     void initialize() {
         try {
             List<Location> Locations=ls.displayList();
             ObservableList<Location> observableList= FXCollections.observableList(Locations);
             LocationList.setItems(observableList);
+
             NameLoc.setCellValueFactory(new PropertyValueFactory<>("Name"));
             InfoLoc.setCellValueFactory(new PropertyValueFactory<>("info"));
             categoryLoc.setCellValueFactory(new PropertyValueFactory<>("category"));
             ActivityLocId.setCellValueFactory(new PropertyValueFactory<>("ActivityID"));
             LocHostelId.setCellValueFactory(new PropertyValueFactory<>("hostelID"));
-            ratingLoc.setCellValueFactory(new PropertyValueFactory<>("rating"));
-
 
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
@@ -86,6 +119,7 @@ public class ShowLocations {
         }
 
     }
+    //Search and sort
     public void SearchByName(ActionEvent actionEvent) {
         try {
             String name = NameSearchField.getText();
@@ -97,7 +131,7 @@ public class ShowLocations {
             categoryLoc.setCellValueFactory(new PropertyValueFactory<>("category"));
             ActivityLocId.setCellValueFactory(new PropertyValueFactory<>("ActivityID"));
             LocHostelId.setCellValueFactory(new PropertyValueFactory<>("hostelID"));
-            ratingLoc.setCellValueFactory(new PropertyValueFactory<>("rating"));
+
 
         }catch(SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
@@ -118,7 +152,7 @@ public class ShowLocations {
             categoryLoc.setCellValueFactory(new PropertyValueFactory<>("category"));
             ActivityLocId.setCellValueFactory(new PropertyValueFactory<>("ActivityID"));
             LocHostelId.setCellValueFactory(new PropertyValueFactory<>("hostelID"));
-            ratingLoc.setCellValueFactory(new PropertyValueFactory<>("rating"));
+
 
         }catch(SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
@@ -127,15 +161,19 @@ public class ShowLocations {
             alert.showAndWait();
         }
     }
+    //CRUD
     public void AddNewLocation(ActionEvent actionEvent) {
+
         try{
+            validateStringLength(nameLocationId.getText(), MAXLENGTH);
             ls.add(new Location(
-                    nameLocationId.getText()
+                    Integer.parseInt(IDLocId.getText())
+                    ,nameLocationId.getText()
                     ,infoLocationId.getText()
                     ,categorylocationId.getText()
                     ,Integer.parseInt(activityLocationId.getText())
                     ,Integer.parseInt(LocationHostelId.getText())
-                    ,Integer.parseInt(ratingLocationId.getText())
+
             ));
             Alert alert= new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Confirmation");
@@ -148,8 +186,25 @@ public class ShowLocations {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
 
+        }catch(NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Invalid ID format. Please enter a valid integer.");
+            alert.showAndWait();
+        }catch(InvalidLengthException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Invalid Input Length");
+            alert.showAndWait();
         }
     }
+
+    public static void validateStringLength(String str, int maxLength) throws InvalidLengthException {
+        if (str.length() > maxLength) {
+            throw new InvalidLengthException("The given string must not exceed " + maxLength + " characters.");
+        }
+    }
+
     public void SaveChanges(ActionEvent actionEvent) {
         try{
             ls.update(Integer.parseInt(IDLocId.getText()),
@@ -184,6 +239,7 @@ public class ShowLocations {
 
         }
     }
+    //pages navigation
     public void ToLocationPage(ActionEvent actionEvent) throws IOException {
         Parent root= FXMLLoader.load(getClass().getResource("/ShowLocations.fxml"));
         ManageLocationsButton.getScene().setRoot(root);
@@ -195,6 +251,44 @@ public class ShowLocations {
         ManageTransportButton.getScene().setRoot(root);
         System.out.println("moved");
     }
+
+    @FXML
+     void ShowRatings(ActionEvent actionEvent) {
+        try {
+            int idlocation=Integer.parseInt(IDLocId.getText());
+            List<Rating> ratings = rs.displayList(idlocation);
+            ObservableList<Rating> observableList = FXCollections.observableList(ratings);
+            RatingList.setItems(observableList);
+
+            userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+            IdLocCol.setCellValueFactory(new PropertyValueFactory<>("IdLoc"));
+            ratingDateCol.setCellValueFactory(new PropertyValueFactory<>("ratingDate"));
+            nbStarsCol.setCellValueFactory(new PropertyValueFactory<>("nbStars"));
+
+            double sumOfStars = 0;
+            int numOfRatings = 0;
+
+            for (Rating rating : ratings) {
+                if (rating.getIdLoc() == idlocation) {
+                    sumOfStars += rating.getNbStars();
+                    numOfRatings++;
+                }
+            }
+            double avgRating = sumOfStars / Math.max(numOfRatings, 1d);
+            System.out.println("Average Rating:"+String.format("%.2f", avgRating));
+            AvgLocRating.setText("Average Rating:"+String.format("%.2f", avgRating));
+
+
+        }
+        catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+
 
 
 

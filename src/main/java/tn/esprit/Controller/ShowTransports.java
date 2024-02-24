@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import tn.esprit.Entity.Location;
 import tn.esprit.Entity.Transport;
+import tn.esprit.Exception.InvalidLengthException;
 import tn.esprit.Services.TransportService;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ShowTransports {
+    public final int  MAXLENGTH=10;
     @FXML
     private TextField SearchField;
     @FXML
@@ -99,7 +101,9 @@ public class ShowTransports {
     }
 
     public void AddNewTransport(ActionEvent actionEvent) {
+
         try{
+            validateStringLength(brandTrId.getText(), MAXLENGTH);
             ts.add(new Transport(
                     brandTrId.getText()
                     ,typeTrId.getText()
@@ -119,10 +123,24 @@ public class ShowTransports {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
 
+        }catch(NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Invalid ID format. Please enter a valid integer.");
+            alert.showAndWait();
+        }catch(InvalidLengthException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Invalid Input Length");
+            alert.showAndWait();
         }
         
     }
-
+    public static void validateStringLength(String str, int maxLength) throws InvalidLengthException {
+        if (str.length() > maxLength) {
+            throw new InvalidLengthException("The given string must not exceed " + maxLength + " characters.");
+        }
+    }
     public void SaveChanges(ActionEvent actionEvent) {
         try{
             ts.update(Integer.parseInt(idTransportId.getText())

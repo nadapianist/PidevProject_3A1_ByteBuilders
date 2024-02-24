@@ -13,14 +13,13 @@
 
 <AnchorPane prefHeight="742.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controller.ShowLocations">
    <children>
-      <TableView fx:id="LocationList" layoutX="748.0" layoutY="171.0" prefHeight="200.0" prefWidth="442.0">
+      <TableView fx:id="LocationList" layoutX="748.0" layoutY="171.0" prefHeight="200.0" prefWidth="374.0">
         <columns>
           <TableColumn fx:id="NameLoc" prefWidth="75.0" text=" Name" />
           <TableColumn fx:id="InfoLoc" prefWidth="75.0" text=" info" />
             <TableColumn fx:id="categoryLoc" prefWidth="73.0" text="category" />
             <TableColumn fx:id="ActivityLocId" prefWidth="77.0" text="activity" />
             <TableColumn fx:id="LocHostelId" prefWidth="75.0" text="hostel" />
-            <TableColumn fx:id="ratingLoc" prefWidth="75.0" text="rating" />
         </columns>
       </TableView>
        <AnchorPane layoutY="94.0" prefHeight="648.0" prefWidth="222.0" styleClass="main-bg" stylesheets="@design.css">
@@ -88,20 +87,14 @@
                        <Font name="System Bold" size="14.0" />
                    </font>
                </Label>
-            <Label layoutX="33.0" layoutY="265.0" text="ID Hostel" textFill="WHITE">
+            <Label layoutX="115.0" layoutY="267.0" text="ID Hostel" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="165.0" layoutY="265.0" text="rating" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="LocationHostelId" layoutX="29.0" layoutY="291.0" prefHeight="25.0" prefWidth="121.0" />
-            <TextField fx:id="ratingLocationId" layoutX="164.0" layoutY="291.0" prefHeight="25.0" prefWidth="131.0" />
-            <TextField fx:id="IDLocId" layoutX="72.0" layoutY="89.0" promptText="ID Location" />
-            <Label layoutX="76.0" layoutY="59.0" text=" Location ID" textFill="#fff9f9">
+            <TextField fx:id="LocationHostelId" layoutX="86.0" layoutY="293.0" prefHeight="25.0" prefWidth="121.0" />
+            <TextField fx:id="IDLocId" layoutX="83.0" layoutY="103.0" promptText="ID Location" />
+            <Label layoutX="107.0" layoutY="67.0" text=" Location ID" textFill="#fff9f9">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -109,14 +102,35 @@
            </children>
        </AnchorPane>
       
-      <TextField fx:id="NameSearchField" layoutX="977.0" layoutY="136.0" promptText="SearchName" />
-      <Button fx:id="SearchButton" layoutX="1136.0" layoutY="136.0" mnemonicParsing="false" onAction="#SearchByName" text=" search" />
-      <RadioButton fx:id="SortButton" layoutX="892.0" layoutY="140.0" mnemonicParsing="false" onAction="#FilterByCategory" text="Category" />
-      <Text layoutX="830.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter By:" />
-      <Label layoutX="55.0" layoutY="154.0" text="Name" textFill="#fff9f9">
+      <TextField fx:id="NameSearchField" layoutX="913.0" layoutY="136.0" promptText="SearchName" />
+      <Button fx:id="SearchButton" layoutX="1068.0" layoutY="136.0" mnemonicParsing="false" onAction="#SearchByName" text=" search" />
+      <RadioButton fx:id="SortButton" layoutX="814.0" layoutY="140.0" mnemonicParsing="false" onAction="#FilterByCategory" text="Category" />
+      <Text layoutX="753.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter By:" />
+      <TableView fx:id="RatingList" layoutX="775.0" layoutY="439.0" prefHeight="200.0" prefWidth="334.0">
+        <columns>
+          <TableColumn fx:id="userIdCol" prefWidth="75.0" text="User ID" />
+          <TableColumn fx:id="IdLocCol" prefWidth="75.0" text=" Location ID" />
+            <TableColumn fx:id="ratingDateCol" text=" Rating Date" />
+            <TableColumn fx:id="nbStarsCol" prefWidth="103.0" text=" Number of Stars" />
+        </columns>
+      </TableView>
+      <Label layoutX="794.0" layoutY="401.0" text="Ratings for each location:" textFill="#2d0565">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
+      <Button fx:id="viewRating" layoutX="962.0" layoutY="398.0" mnemonicParsing="false" onAction="#ShowRatings" text=" View" textFill="#1e1e1e" />
+      <Label layoutX="806.0" layoutY="694.0" textFill="#4c047c">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="AvgLocRating" layoutX="780.0" layoutY="661.0" text="Label" textFill="#0731e3">
+         <font>
+            <Font name="AGaramondPro-BoldItalic" size="13.0" />
+         </font>
+      </Label>
+
+    
    </children>
 </AnchorPane>

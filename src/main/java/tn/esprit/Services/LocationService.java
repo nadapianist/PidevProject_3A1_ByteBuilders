@@ -1,6 +1,7 @@
 package tn.esprit.Services;
 
 import tn.esprit.Entity.Location;
+import tn.esprit.Entity.Rating;
 import tn.esprit.Utils.MyDatabase;
 
 import java.sql.*;
@@ -15,7 +16,7 @@ public class LocationService implements ILocation {
     }
     @Override
     public void add(Location l) throws SQLException {
-        String query = "INSERT INTO `location`(`ID`,`Name`, `info`,`category`,`activity`,`hostel`,`rating`) VALUES (?,?,?,?,?,?,?)";
+        String query = "INSERT INTO `location`(`ID`,`Name`, `info`,`category`,`activity`,`hostel`) VALUES (?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1,l.getID());
         ps.setString(2,l.getName());
@@ -23,7 +24,7 @@ public class LocationService implements ILocation {
         ps.setString(4, l.getCategory());
         ps.setInt(5,l.getActivityID());
         ps.setInt(6,l.getHostelID());
-        ps.setInt(7,l.getRating());
+
 
         ps.executeUpdate();
         System.out.println("New  Location!");
@@ -75,7 +76,7 @@ public class LocationService implements ILocation {
                     ,res.getString("category")
                     ,res.getInt("activity")
                     ,res.getInt("hostel")
-                    ,res.getInt("rating")
+
             );
             locations.add(l);
         }
@@ -98,7 +99,7 @@ public class LocationService implements ILocation {
                     ,res.getString("category")
                     ,res.getInt("activity")
                     ,res.getInt("hostel")
-                    ,res.getInt("rating")
+
             );
             locations.add(l);
         }
@@ -118,11 +119,33 @@ public class LocationService implements ILocation {
                     ,res.getString("category")
                     ,res.getInt("activity")
                     ,res.getInt("hostel")
-                    ,res.getInt("rating")
+
             );
             locations.add(l);
         }
 
         return locations;
+    }
+
+    @Override
+    public List<Rating> getRatingsForLocation(int idlocation) throws SQLException {
+        List<Rating> ratings = new ArrayList<>();
+        String query = "SELECT * FROM `rating` WHERE `IdLoc` = ?";
+
+             PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, idlocation);
+            ResultSet res = preparedStatement.executeQuery();
+                while (res.next()) {
+                    Rating rating = new Rating(
+
+                             res.getInt("userId")
+                            ,res.getInt("IdLoc")
+                            , res.getDate("ratingDate")
+                            ,res.getInt("nbStars")
+
+                    );
+                    ratings.add(rating);
+                }
+        return ratings;
     }
 }

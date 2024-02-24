@@ -41,7 +41,6 @@ private final LocationService ls=new LocationService();
                 ,categoryField.getText()
                 ,Integer.parseInt(ActivityIdField.getText())
                 ,Integer.parseInt(HostelIDField.getText())
-                ,Integer.parseInt(ratingField.getText())
                 ));
         Alert alert= new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Confirmation");
