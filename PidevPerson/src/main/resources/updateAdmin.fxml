@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="475.0" prefWidth="600.0" style="-fx-background-color: #00aebd;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.updateAdmin">
+   <children>
+      <Region layoutX="90.0" layoutY="57.0" prefHeight="382.0" prefWidth="420.0" style="-fx-background-radius: 55; -fx-background-color: white;" stylesheets="@Style/design.css" />
+      <FontAwesomeIconView glyphName="USER" layoutX="189.0" layoutY="128.0" size="40" />
+      <Text layoutX="225.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify your account" wrappingWidth="189.33673095703125">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="modmailA" alignment="CENTER" layoutX="225.0" layoutY="187.0" promptText="Email Address" />
+      <TextField fx:id="modidA" alignment="CENTER" layoutX="225.0" layoutY="146.0" promptText="Admin ID" />
+      <PasswordField fx:id="modpwdA" alignment="CENTER" layoutX="227.0" layoutY="231.0" promptText="Password" />
+      <Button layoutX="260.0" layoutY="276.0" mnemonicParsing="false" onAction="#modA" prefHeight="26.0" prefWidth="83.0" style="-fx-background-radius: 55; -fx-background-color: E18B10;" stylesheets="@Style/design.css" text="Modify" textFill="WHITE" />
+   </children>
+</AnchorPane>
