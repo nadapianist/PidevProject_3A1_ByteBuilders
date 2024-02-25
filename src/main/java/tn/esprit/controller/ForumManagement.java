@@ -96,6 +96,14 @@ public class ForumManagement {
     @FXML
     void initialize() {
         try {
+            ForumList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    // Update text fields with the selected forum's data
+                    ContentForumid.setText(newSelection.getContentForum());
+                   NB_postsid.setText(String.valueOf(newSelection.getNB_posts()));
+                    Categoryid.setText(newSelection.getCategory());
+                }
+            });
 
             List<forum> forums=fs.displayList();
             ObservableList<forum> observableList= FXCollections.observableList(forums);
@@ -164,11 +172,51 @@ public class ForumManagement {
 
     @FXML
     void SaveChanges(ActionEvent event) {
+        forum selectedForum = ForumList.getSelectionModel().getSelectedItem();
 
+        if (selectedForum != null) {
+            try {
+                // Update the selected forum with the values from the text fields
+                selectedForum.setContentForum(ContentForumid.getText());
+                selectedForum.setNB_posts(Integer.parseInt(NB_postsid.getText()));
+                selectedForum.setCategory(Categoryid.getText());
+
+                // Call your service method to update the forum
+                fs.update(selectedForum);
+
+                // Refresh the TableView to reflect the changes
+                ForumList.refresh();
+
+                System.out.println("Forum updated!");
+            } catch (SQLException | NumberFormatException e) {
+                // Handle any SQL exception or number format exception
+                e.printStackTrace();
+            }
+        }
     }
+
+
+
 
     @FXML
     void SearchByContent(ActionEvent event) {
+        try {
+            String content = ContentSearchField.getText();
+            List<forum> SearchResults = fs.SearchByContent(content);
+            ObservableList<forum> observableList= FXCollections.observableList(SearchResults);
+            ForumList.setItems(observableList);
+            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
+            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
+            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
+            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
+
+
+        }catch(SQLException e){
+            Alert alert= new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
 
     }
 

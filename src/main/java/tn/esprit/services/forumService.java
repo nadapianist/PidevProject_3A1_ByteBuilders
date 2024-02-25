@@ -68,5 +68,38 @@ public class forumService implements IService<forum>{
         return forums;
     }
 
+    @Override
+    public List<forum> SearchByContent(String ContentForum) throws SQLException {
+        String query;
+        PreparedStatement ps;
+
+        if (ContentForum.isEmpty()) {
+            // If search content is empty, retrieve all forums
+            query = "SELECT * FROM `forum`";
+            ps = this.con.prepareStatement(query);
+        } else {
+            // If search content is not empty, perform the search
+            query = "SELECT * FROM `forum` WHERE `ContentForum`=?";
+            ps = this.con.prepareStatement(query);
+            ps.setString(1, ContentForum);
+        }
+
+        ResultSet res = ps.executeQuery();
+        List<forum> forums = new ArrayList<>();
+
+        while (res.next()) {
+            forum f = new forum(
+                    res.getInt("IDForum"),
+                    res.getString("ContentForum"),
+                    res.getInt("NB_posts"),
+                    res.getString("Category"));
+
+            forums.add(f);
+        }
+
+        return forums;
+    }
+
+
 
 }

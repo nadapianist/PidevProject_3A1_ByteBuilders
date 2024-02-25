@@ -73,48 +73,10 @@ public postService(){con= MyDataBase.getInstance().getCon();}
         return posts;
     }
 
-    public List<post> displayListAll() throws SQLException {
-        String query = "SELECT * FROM `post`";
-        stm = con.createStatement();
-        ResultSet resultSet = stm.executeQuery(query);
-        List<post> posts = new ArrayList<>();
-        while (resultSet.next()) {
-            post p = ResultPosts(resultSet);
-            posts.add(p);
-        }
-        return posts;
+    @Override
+    public List<post> SearchByContent(String t) throws SQLException {
+        return null;
     }
-    public List<post> searchByContent(String ContentPost) throws SQLException {
-        String query = "SELECT * FROM `post` WHERE ContentPost LIKE ?";
-        PreparedStatement ps = con.prepareStatement(query);
-        ps.setString(1, "%" + ContentPost + "%");
-
-        ResultSet res = ps.executeQuery();
-        List<post> posts = new ArrayList<>();
-
-        while (res.next()) {
-            post p = ResultPosts(res);
-           posts.add(p);
-        }
-
-        return posts;
-    }
-    public List<post> searchByCategory(String categoryPost) throws SQLException {
-        String query = "SELECT * FROM `post` WHERE categoryPost LIKE ?";
-        PreparedStatement ps = con.prepareStatement(query);
-        ps.setString(1, "%" + categoryPost + "%");
-
-        ResultSet res = ps.executeQuery();
-        List<post> posts = new ArrayList<>();
-
-        while (res.next()) {
-            post p = ResultPosts(res);
-            posts.add(p);
-        }
-
-        return posts;
-    }
-
 
 
 }
