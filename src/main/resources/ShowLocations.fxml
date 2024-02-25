@@ -125,7 +125,7 @@
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="AvgLocRating" layoutX="780.0" layoutY="661.0" text="Label" textFill="#0731e3">
+      <Label fx:id="AvgLocRating" layoutX="780.0" layoutY="661.0" text="Average Rating:" textFill="#0731e3">
          <font>
             <Font name="AGaramondPro-BoldItalic" size="13.0" />
          </font>
