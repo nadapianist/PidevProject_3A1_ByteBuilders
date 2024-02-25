@@ -12,6 +12,7 @@ import tn.esprit.entities.post;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
 
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -138,52 +139,6 @@ void initpost(){
     }
 }
 
-    /*@FXML
-    void initialize() {
-        try {
-            // Initialize the forum list
-            List<forum> forums = fs.displayList();
-            ObservableList<forum> observableList = FXCollections.observableList(forums);
-            ForumList.setItems(observableList);
-            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
-            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
-            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
-            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
-
-            // Add a listener to ForumList to update text fields with selected forum's data
-            ForumList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                if (newSelection != null) {
-                    // Update text fields with the selected forum's data
-                    ContentForumid.setText(newSelection.getContentForum());
-                    NB_postsid.setText(String.valueOf(newSelection.getNB_posts()));
-                    Categoryid.setText(newSelection.getCategory());
-
-                    // Load the posts associated with the selected forum
-                    try {
-                        List<post> posts = ps.displayList();
-                        ObservableList<post> postObservableList = FXCollections.observableList(posts);
-                        PostsList.setItems(postObservableList);
-                        IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
-                        ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
-                        PhotoPost.setCellValueFactory(new PropertyValueFactory<>("PhotoPost"));
-                        DatePost.setCellValueFactory(new PropertyValueFactory<>("DatePost"));
-                        UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
-                        CategoryPost.setCellValueFactory(new PropertyValueFactory<>("CategoryPost"));
-                    } catch (SQLException e) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("ERROR");
-                        alert.setContentText(e.getMessage());
-                        alert.showAndWait();
-                    }
-                }
-            });
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
-    }*/
 
     @FXML
     void AddNewForum(ActionEvent event)  {
@@ -265,7 +220,7 @@ void initpost(){
 
 
 
-    @FXML
+    /*@FXML
     void SearchByContent(ActionEvent event) {
         try {
             String content = ContentSearchField.getText();
@@ -285,7 +240,35 @@ void initpost(){
             alert.showAndWait();
         }
 
-    }
+    }*/
+    /*@FXML
+    void SearchByContent(KeyEvent event) {
+        try {
+            String content = ContentSearchField.getText();
+            List<forum> SearchResults;
+
+
+            if (content.isEmpty()) {
+                // If the search field is empty, display all forums
+                SearchResults = fs.displayList();
+            } else {
+                // Use a service method to search by content dynamically
+                SearchResults = fs.SearchByContent(content);            }
+
+            ObservableList<forum> observableList = FXCollections.observableList(SearchResults);
+            ForumList.setItems(observableList);
+            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
+            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
+            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
+            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }*/
+
 
     @FXML
     void ToForumPage(ActionEvent event) {
@@ -298,5 +281,41 @@ void initpost(){
     }
 
 
+    public void DeletePostAD(ActionEvent actionEvent) {
+        post selectedPost = PostsList.getSelectionModel().getSelectedItem();
+
+        if (selectedPost != null) {
+            try {
+                // Call your service method to delete the forum
+                ps.delete(selectedPost.getIDPost());
+
+                // Remove the selected forum from the TableView
+                PostsList.getItems().remove(selectedPost);
+            } catch (SQLException e) {
+                // Handle any SQL exception
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void SearchByContent(javafx.scene.input.KeyEvent keyEvent) {
+        try {
+            String content = ContentSearchField.getText();
+            List<forum> SearchResults=fs.SearchByContent(content);
+            ObservableList<forum> observableList = FXCollections.observableList(SearchResults);
+            ForumList.setItems(observableList);
+
+            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
+            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
+            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
+            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
 
 }

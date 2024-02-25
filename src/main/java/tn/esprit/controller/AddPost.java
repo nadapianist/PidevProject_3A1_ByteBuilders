@@ -34,9 +34,6 @@ package tn.esprit.controller;
         import static javax.swing.text.html.HTML.Attribute.MAXLENGTH;
 
 public class AddPost implements Initializable {
-    public final int  MAXLENGTH=10;
-
-
 
 @FXML
 private Button AddImage;
@@ -103,7 +100,6 @@ CategoryPost.setItems(categoryPostList);
                         ContentPost.getText()
                         , PhotoPost.getId()
                         , (String) CategoryPost.getValue(),123
-
                 ));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Confirmation");

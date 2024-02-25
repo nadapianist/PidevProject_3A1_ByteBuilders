@@ -79,11 +79,12 @@ public class forumService implements IService<forum>{
             ps = this.con.prepareStatement(query);
         } else {
             // If search content is not empty, perform the search
-            query = "SELECT * FROM `forum` WHERE `ContentForum`=?";
+            query = "SELECT * FROM `forum` WHERE `ContentForum` LIKE ?";
             ps = this.con.prepareStatement(query);
-            ps.setString(1, ContentForum);
-        }
+                        ps.setString(1, "%" + ContentForum + "%");
 
+        }
+        System.out.println("SQL Query: " + ps.toString());
         ResultSet res = ps.executeQuery();
         List<forum> forums = new ArrayList<>();
 
@@ -99,6 +100,7 @@ public class forumService implements IService<forum>{
 
         return forums;
     }
+
 
 
 

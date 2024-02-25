@@ -83,8 +83,9 @@
                 </Label>
             </children>
         </AnchorPane>
-        <TextField fx:id="ContentSearchField" layoutX="913.0" layoutY="136.0" promptText="SearchContent" />
-        <Button fx:id="SearchButton" layoutX="1068.0" layoutY="136.0" mnemonicParsing="false" onAction="#SearchByContent" text=" search" />
+
+        <TextField fx:id="ContentSearchField" layoutX="913.0" layoutY="136.0" promptText="SearchContent" onKeyReleased="#SearchByContent" />
+
         <RadioButton fx:id="SortButton" layoutX="814.0" layoutY="140.0" mnemonicParsing="false" onAction="#FilterByCategory" text="Category" />
         <Text layoutX="753.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter By:" />
         <TableView fx:id="PostsList" layoutX="671.0" layoutY="439.0" prefHeight="200.0" prefWidth="535.0">
@@ -102,6 +103,7 @@
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
+      <Button fx:id="DeletePostAD" layoutX="676.0" layoutY="655.0" mnemonicParsing="false" onAction="#DeletePostAD" text="DeletePost" />
 
     </children>
 

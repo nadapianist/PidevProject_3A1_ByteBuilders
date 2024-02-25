@@ -37,10 +37,10 @@ public class post {
         ContentPost = contentPost;
         PhotoPost = photoPost;
     }
-    public post(String categoryPost, String contentPost, String photoPost, int UserID) {
-        this.categoryPost = categoryPost;
-        ContentPost = contentPost;
-        PhotoPost = photoPost;
+    public post(String ContentPost, String PhotoPost, String CategoryPost, int UserID) {
+        this.categoryPost = CategoryPost;
+        this.ContentPost = ContentPost;
+        this.PhotoPost = PhotoPost;
         this.UserID=UserID;
     }
 
