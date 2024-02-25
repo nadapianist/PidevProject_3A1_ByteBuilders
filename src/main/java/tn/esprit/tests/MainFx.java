@@ -13,7 +13,7 @@ public class MainFx extends Application {
     }
 
     public void start (Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/postManagement.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/ForumManagement.fxml"));
         Parent root=loader.load();
         Scene scene = new Scene(root);
         stage.setTitle("Post Management");

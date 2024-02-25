@@ -1,14 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.esprit.controller.ForumManagement"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.ForumManagement">
+    <children>
+        <TableView fx:id="ForumList" layoutX="753.0" layoutY="171.0" prefHeight="200.0" prefWidth="374.0">
+        <columns>
+            <TableColumn fx:id="IDForum" prefWidth="92.0" text=" IDForum" />
+            <TableColumn fx:id="ContentForum" prefWidth="112.0" text=" ContentForum" />
+            <TableColumn fx:id="NB_posts" prefWidth="60.0" text=" NB_posts" />
+            <TableColumn fx:id="Category" prefWidth="109.0" text="Category" />
+        </columns>
+
+    </TableView>
+        <AnchorPane layoutY="94.0" prefHeight="648.0" prefWidth="222.0" styleClass="main-bg" stylesheets="@design.css">
+            <children>
+                <Button layoutX="14.0" layoutY="146.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="User Management" />
+                <Button layoutX="14.0" layoutY="195.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Location Management" />
+                <Button layoutX="13.0" layoutY="245.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Activity Management" />
+                <Button layoutX="13.0" layoutY="295.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Challenge Management" />
+                <Button layoutX="12.0" layoutY="394.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Hostel Management" />
+                <Button layoutX="13.0" layoutY="444.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Reservation Management" />
+                <Button fx:id="ManagePostsButton" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#ToPostsPage" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Post Management" />
+                <Button fx:id="ManageForumButton" layoutX="12.0" layoutY="542.0" mnemonicParsing="false" onAction="#ToForumPage" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Forum Management" />
+                <Button layoutX="13.0" layoutY="591.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Transport Management" />
+                <Button layoutX="13.0" layoutY="342.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Review Management" />
+                <Line endX="100.0" layoutX="112.0" layoutY="116.0" startX="-100.0" />
+                <Label layoutX="47.0" layoutY="77.0" text="Welcome,Admin" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="90.0" prefWidth="1210.0" styleClass="main-bg" stylesheets="@design.css">
+            <children>
+                <Label layoutX="54.0" layoutY="26.0" text=" Tunism Desktop App" textFill="WHITE">
+                    <font>
+                        <Font size="24.0" />
+                    </font></Label>
+            </children>
+        </AnchorPane>
+        <Label layoutX="454.0" layoutY="90.0" prefHeight="40.0" prefWidth="222.0" text="Forum Management" underline="true">
+            <font>
+                <Font name="Microsoft Himalaya" size="32.0" />
+            </font></Label>
+        <AnchorPane layoutX="352.0" layoutY="140.0" prefHeight="399.0" prefWidth="315.0" styleClass="AnchorPane" stylesheets="@design.css">
+            <children>
+                <Label layoutX="93.0" layoutY="14.0" text="Forum Form" textFill="#f2f2f2" underline="true">
+                    <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="ContentForumid" layoutX="162.0" layoutY="174.0" prefHeight="26.0" prefWidth="133.0" />
+                <TextField fx:id="NB_postsid" layoutX="32.0" layoutY="233.0" prefHeight="26.0" prefWidth="121.0" />
+                <TextField fx:id="Categoryid" layoutX="161.0" layoutY="233.0" prefHeight="26.0" prefWidth="134.0" />
+                <Button fx:id="AddButton" layoutX="64.0" layoutY="336.0" mnemonicParsing="false" onAction="#AddNewForum" text=" Add " />
+                <Button fx:id="EditButton" layoutX="236.0" layoutY="336.0" mnemonicParsing="false" onAction="#SaveChanges" text="Save" />
+                <Button fx:id="DeleteLocButton" layoutX="141.0" layoutY="336.0" mnemonicParsing="false" onAction="#DeleteForumById" text=" Delete " />
+                <Label layoutX="166.0" layoutY="144.0" text="ContentForum" textFill="#f7f7f7">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="29.0" layoutY="207.0" text="NB_posts" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="165.0" layoutY="207.0" text="Categoryid" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <TextField fx:id="ContentSearchField" layoutX="913.0" layoutY="136.0" promptText="SearchContent" />
+        <Button fx:id="SearchButton" layoutX="1068.0" layoutY="136.0" mnemonicParsing="false" onAction="#SearchByContent" text=" search" />
+        <RadioButton fx:id="SortButton" layoutX="814.0" layoutY="140.0" mnemonicParsing="false" onAction="#FilterByCategory" text="Category" />
+        <Text layoutX="753.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter By:" />
+        <TableView fx:id="PostsList" layoutX="671.0" layoutY="439.0" prefHeight="200.0" prefWidth="535.0">
+            <columns>
+                <TableColumn fx:id="IDPost" prefWidth="75.0" text="IDPost" />
+                <TableColumn fx:id="ContentPost" prefWidth="75.0" text=" ContentPost" />
+                <TableColumn fx:id="PhotoPost" text=" PhotoPost" />
+                <TableColumn fx:id="DatePost" prefWidth="103.0" text="DatePost" />
+                <TableColumn fx:id="UserID" prefWidth="103.0" text="UserID" />
+                <TableColumn fx:id="CategoryPost" prefWidth="103.0" text="CategoryPost" />
+            </columns>
+        </TableView>
+        <Label layoutX="866.0" layoutY="399.0" text="Posts for each category:" textFill="#2d0565">
+            <font>
+                <Font name="System Bold Italic" size="13.0" />
+            </font>
+        </Label>
+
+    </children>
 
 </AnchorPane>

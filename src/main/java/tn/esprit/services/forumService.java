@@ -14,29 +14,28 @@ public class forumService implements IService<forum>{
     public forumService(){con= MyDataBase.getInstance().getCon();}
     @Override
     public void add(forum f) throws SQLException {
-        String query = "INSERT INTO `forum`(`ContentForum`, `NB_posts`, `IDPost`, `Category`) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO `forum`(`ContentForum`, `NB_posts`, `Category`) VALUES (?, ?, ?)";
 
 
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, f.getContentForum());
             ps.setInt(2, f.getNB_posts());
-            ps.setInt(3, f.getIDPost());
-            ps.setString(4, f.getCategory());
-
+            ps.setString(3, f.getCategory());
+           // ps.setInt(1, f.getIDForum());
             ps.executeUpdate();
             System.out.println("forum added!");
         }
     }
 
     public void update(forum f) throws SQLException{
-        String query="UPDATE `forum` SET  ContentForum=?,NB_posts=?,IDPost=?,Category=? WHERE IDForum=?";
+        String query="UPDATE `forum` SET  ContentForum=?,NB_posts=?,Category=? WHERE IDForum=?";
         try(PreparedStatement ps = con.prepareStatement(query)){
             ps.setString(1,f.getContentForum());
             ps.setInt(2,f.getNB_posts());
-            ps.setInt(3,f.getIDPost());
-            ps.setString(4,f.getCategory());
+
+            ps.setString(3,f.getCategory());
             // Assuming there is an 'IDPost' field in your 'post' table
-            ps.setInt(5, f.getIDForum());
+            ps.setInt(4, f.getIDForum());
 
 
             ps.executeUpdate();
@@ -50,7 +49,7 @@ public class forumService implements IService<forum>{
         System.out.println("forum deleted!");
     }
     public List<forum> displayList() throws SQLException {
-        String query = "SELECT `ContentForum`, `NB_posts`, `IDPost`, `Category` FROM `forum`";
+        String query = "SELECT * FROM `forum`";
         PreparedStatement ps= this.con.prepareStatement(query);
         ResultSet res = ps.executeQuery();
         List<forum> forums = new ArrayList<>();
@@ -58,9 +57,9 @@ public class forumService implements IService<forum>{
         while(res.next()) {
             forum f = new forum(
 
+                    res.getInt("IDForum"),
                     res.getString("ContentForum"),
                     res.getInt("NB_posts"),
-                    res.getInt("IDPost"),
                     res.getString("Category"));
 
             forums.add(f);

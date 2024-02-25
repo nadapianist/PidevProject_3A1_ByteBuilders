@@ -1,24 +1,20 @@
 package tn.esprit.entities;
 
 public class forum {
-    private int IDForum	,NB_posts, IDPost;
+    private int IDForum	,NB_posts;
     private String ContentForum,Category;
 
-    public forum(int IDForum , String ContentForum,int NB_posts, int IDPost, String Category) {
+    public forum(int IDForum , String ContentForum,int NB_posts,  String Category) {
         this.IDForum = IDForum;
         this.ContentForum = ContentForum;
         this.NB_posts = NB_posts;
-        this.IDPost = IDPost;
         this.Category = Category;
     }
 
-    public forum(String ContentForum,int NB_posts, int IDPost, String Category) {
-        this.ContentForum = ContentForum;
-        this.NB_posts = NB_posts;
-        this.IDPost = IDPost;
+    public forum() {
 
-        this.Category = Category;
     }
+
 
     public int getIDForum() {
         return IDForum;
@@ -36,13 +32,7 @@ public class forum {
         this.NB_posts = NB_posts;
     }
 
-    public int getIDPost() {
-        return IDPost;
-    }
 
-    public void setIDPost(int IDPost) {
-        this.IDPost = IDPost;
-    }
 
     public String getContentForum() {
         return ContentForum;
@@ -64,8 +54,8 @@ public class forum {
     public String toString() {
         return "forum{" +
                 ", ContentForum='" +ContentForum + '\''
-                +"NB_posts=" + NB_posts +", IDPost=" + IDPost +
-                ", Category='" + Category + '\'' +
+                +"NB_posts=" + NB_posts + '\''
+                + ", Category='" + Category + '\'' +
                 '}';
     }
 }

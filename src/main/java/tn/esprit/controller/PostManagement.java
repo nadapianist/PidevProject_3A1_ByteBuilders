@@ -1,5 +1,7 @@
 package tn.esprit.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +9,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import tn.esprit.entities.post;
 import tn.esprit.controller.PostDao;
+import tn.esprit.services.postService;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +48,7 @@ public class PostManagement {
     private TableView<post> postList;
     @FXML
     void initialize() {
+
         // Fetch and display the list of posts when the application starts
         loadPosts();
     }
@@ -63,6 +68,21 @@ public class PostManagement {
 
     }
     // Method to load and display the list of posts
+    /*private void loadPosts() {
+        // Assuming PostDao is a class responsible for database operations related to posts
+        PostDao postDao = new PostDao();
+
+        // Fetch the list of posts from the database
+        List<post> posts = postDao.getAllPosts();
+
+        // Clear existing items in the TableView
+        postList.getItems().clear();
+
+        // Add fetched posts to the TableView
+       // postList.getItems().addAll(posts);
+        postList.getItems().setAll(posts);
+
+    }*/
     private void loadPosts() {
         // Assuming PostDao is a class responsible for database operations related to posts
         PostDao postDao = new PostDao();
@@ -77,4 +97,7 @@ public class PostManagement {
         postList.getItems().addAll(posts);
     }
 
+
+    public void AddPostAdmin(ActionEvent actionEvent) {
+    }
 }

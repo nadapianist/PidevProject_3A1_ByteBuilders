@@ -2,6 +2,8 @@ package tn.esprit.entities;
 
 import java.util.Date;
 import java.util.List;
+import javafx.beans.property.*;
+
 
 
 public class post {
@@ -30,6 +32,17 @@ public class post {
         this.categoryPost = categoryPost;
     }
 
+    public post(String categoryPost, String contentPost, String photoPost) {
+        this.categoryPost = categoryPost;
+        ContentPost = contentPost;
+        PhotoPost = photoPost;
+    }
+    public post(String categoryPost, String contentPost, String photoPost, int UserID) {
+        this.categoryPost = categoryPost;
+        ContentPost = contentPost;
+        PhotoPost = photoPost;
+        this.UserID=UserID;
+    }
 
     public int getIDPost() {
         return IDPost;
@@ -72,14 +85,14 @@ public class post {
     }
 
     public Date getDatePost() {
-        return DatePost;
+        return new Date();
     }
 
     public void setDatePost(Date datePost) {
         DatePost = datePost;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "post{" +
                 "UserID=" + UserID +
@@ -88,6 +101,20 @@ public class post {
                 ", PhotoPost='" + PhotoPost + '\'' +
                 ", DatePost=" + DatePost +
                 '}';
+    }*/
+    @Override
+    public String toString() {
+        return "post{" +
+
+                ", ContentPost='" + ContentPost + '\'' +
+                ", PhotoPost='" + PhotoPost + '\'' +
+                ", DatePost=" + DatePost +
+                ", UserID=" + UserID +
+                ", categoryPost='" + categoryPost + '\'' +
+                '}';
     }
 
+
+    public void setPostData(post p) {
+    }
 }
