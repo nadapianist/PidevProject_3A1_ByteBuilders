@@ -51,16 +51,17 @@ public postService(){con= MyDataBase.getInstance().getCon();}
     }
     private post ResultPosts(ResultSet res)throws SQLException{
     return new post(
+            res.getInt("IDPost"),
             res.getString("ContentPost"),
             res.getString("PhotoPost"),
             res.getDate("DatePost") ,
-            res.getInt("UserPost"),
+            res.getInt("UserID"),
             res.getString("categoryPost"));
 
 
     }
     public List<post> displayList() throws SQLException {
-        String query = "SELECT  `ContentPost`, `PhotoPost`, `DatePost`, `UserID`, `categoryPost` FROM `post`";
+        String query = "SELECT  * FROM `post`";
         PreparedStatement ps = this.con.prepareStatement(query);
         ResultSet res = ps.executeQuery();
         List<post> posts = new ArrayList<>();

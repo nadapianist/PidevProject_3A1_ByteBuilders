@@ -104,7 +104,6 @@ public class ForumManagement {
                     Categoryid.setText(newSelection.getCategory());
                 }
             });
-
             List<forum> forums=fs.displayList();
             ObservableList<forum> observableList= FXCollections.observableList(forums);
             ForumList.setItems(observableList);
@@ -112,13 +111,80 @@ public class ForumManagement {
             ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
+            initpost();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-        }
+        }}
+void initpost(){
+        try{
+    List<post> posts=ps.displayList();
+    ObservableList<post> observableListt= FXCollections.observableList(posts);
+    PostsList.setItems(observableListt);
+    IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
+    ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
+    PhotoPost.setCellValueFactory(new PropertyValueFactory<>("PhotoPost"));
+    DatePost.setCellValueFactory(new PropertyValueFactory<>("DatePost"));
+    UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+    CategoryPost.setCellValueFactory(new PropertyValueFactory<>("CategoryPost"));}
+        catch (SQLException e){
+        Alert alert= new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR");
+        alert.setContentText(e.getMessage());
+        alert.showAndWait();
+
     }
+}
+
+    /*@FXML
+    void initialize() {
+        try {
+            // Initialize the forum list
+            List<forum> forums = fs.displayList();
+            ObservableList<forum> observableList = FXCollections.observableList(forums);
+            ForumList.setItems(observableList);
+            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
+            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
+            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
+            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
+
+            // Add a listener to ForumList to update text fields with selected forum's data
+            ForumList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    // Update text fields with the selected forum's data
+                    ContentForumid.setText(newSelection.getContentForum());
+                    NB_postsid.setText(String.valueOf(newSelection.getNB_posts()));
+                    Categoryid.setText(newSelection.getCategory());
+
+                    // Load the posts associated with the selected forum
+                    try {
+                        List<post> posts = ps.displayList();
+                        ObservableList<post> postObservableList = FXCollections.observableList(posts);
+                        PostsList.setItems(postObservableList);
+                        IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
+                        ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
+                        PhotoPost.setCellValueFactory(new PropertyValueFactory<>("PhotoPost"));
+                        DatePost.setCellValueFactory(new PropertyValueFactory<>("DatePost"));
+                        UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+                        CategoryPost.setCellValueFactory(new PropertyValueFactory<>("CategoryPost"));
+                    } catch (SQLException e) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("ERROR");
+                        alert.setContentText(e.getMessage());
+                        alert.showAndWait();
+                    }
+                }
+            });
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }*/
+
     @FXML
     void AddNewForum(ActionEvent event)  {
         try{
@@ -129,9 +195,10 @@ public class ForumManagement {
             f.setCategory(Categoryid.getText());
             fs.add(f);
             initialize();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Confirmation");
-            alert.setContentText("A new post is added");
+            alert.setContentText("A new forum is added");
             alert.showAndWait();
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -229,5 +296,7 @@ public class ForumManagement {
     void ToPostsPage(ActionEvent event) {
 
     }
+
+
 
 }

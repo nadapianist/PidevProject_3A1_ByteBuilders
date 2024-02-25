@@ -71,12 +71,12 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="34.0" layoutY="135.0" text="NB_posts" textFill="WHITE">
+                <Label layoutX="9.0" layoutY="135.0" text="Number of posts" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="34.0" layoutY="190.0" text="Categoryid" textFill="WHITE">
+                <Label layoutX="34.0" layoutY="190.0" text="Category" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
