@@ -37,6 +37,14 @@ public class MyDataBase {
     public Connection getCon() {
         return this.con;
     }
+
+    public Connection reconnect() throws SQLException {
+        if (con != null && con.isClosed()) {
+            con = DriverManager.getConnection(URL, USERNAME, PWD);
+        }
+        return con;
+    }
+
     /*public static ObservableList<post> getDataposts(){
         Connection conn = instance.getCon();
         ObservableList<post> list= FXCollections.observableArrayList();

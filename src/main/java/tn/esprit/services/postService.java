@@ -1,7 +1,9 @@
 package tn.esprit.services;
 import javafx.collections.ObservableList;
+import tn.esprit.entities.forum;
 import tn.esprit.entities.post;
 import tn.esprit.utils.MyDataBase;
+import tn.esprit.services.forumService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +14,18 @@ public class postService implements IService<post>{
     Connection con ;
     Statement stm;
 
-public postService(){con= MyDataBase.getInstance().getCon();}
+public postService(){
+    con= MyDataBase.getInstance().getCon();
+    try {
+        if (con.isClosed()) {
+            con = MyDataBase.getInstance().reconnect();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Handle the exception appropriately
+    }
+}
+
+
     @Override
     public void add(post p) throws SQLException {
         String query = "INSERT INTO `post`(`ContentPost`, `PhotoPost`, `DatePost`, `UserID`, `categoryPost`) VALUES (?, ?, ?, ?, ?)";
@@ -59,6 +72,7 @@ public postService(){con= MyDataBase.getInstance().getCon();}
             res.getString("categoryPost"));
 
 
+
     }
     public List<post> displayList() throws SQLException {
         String query = "SELECT  * FROM `post`";
@@ -67,7 +81,19 @@ public postService(){con= MyDataBase.getInstance().getCon();}
         List<post> posts = new ArrayList<>();
 
         while (res.next()) {
-            post p=ResultPosts(res);
+            post p=new post(
+                    res.getInt("IDPost"),
+                    res.getString("ContentPost"),
+                    res.getString("PhotoPost"),
+                    res.getDate("DatePost") ,
+                    res.getInt("UserID"),
+                    res.getString("categoryPost"));
+            forumService fs = new forumService();
+            //forum forumData = fs.getForumById(res.getInt("IDForum"));
+            //p.setForumCategory(forumData.getCategory());
+           // post p=ResultPosts(res);
+           // forumService fs = new forumService();
+
             posts.add(p);
         }
 

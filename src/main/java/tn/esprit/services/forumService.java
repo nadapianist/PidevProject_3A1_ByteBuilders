@@ -5,6 +5,7 @@ import tn.esprit.utils.MyDataBase;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import tn.esprit.controller.ForumDao;
 
 
 public class forumService implements IService<forum>{
@@ -99,6 +100,35 @@ public class forumService implements IService<forum>{
         }
 
         return forums;
+    }
+    public forum getForumById(int forumId) throws SQLException {
+        String query = "SELECT * FROM forum WHERE IDForum = ?";
+        try (Connection con = MyDataBase.instance.getCon();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, forumId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new forum(
+                            rs.getInt("IDForum"),
+                            rs.getString("ContentForum"),
+                            rs.getInt("NB_posts"),
+                            rs.getString("Category")
+                    );
+                }
+            }
+        }
+        return null; // Return null if no forum with the given ID is found
+    }
+    public List<String> getAllCategories() throws SQLException {
+        List<String> categories = new ArrayList<>();
+
+        // Assuming there is a method in your DAO or somewhere to retrieve unique categories
+        // Replace 'yourForumDao' with the actual instance of your DAO class
+        // Replace 'getUniqueCategories()' with the actual method to get unique categories
+        categories = ForumDao.getUniqueCategories();
+
+
+        return categories;
     }
 
 

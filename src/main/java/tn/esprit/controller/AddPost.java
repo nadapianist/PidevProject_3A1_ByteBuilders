@@ -1,72 +1,83 @@
-
 package tn.esprit.controller;
 
-        import javafx.collections.FXCollections;
-        import javafx.collections.ObservableList;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Parent;
-        import javafx.scene.control.Alert;
-        import javafx.stage.FileChooser;
-        import javafx.stage.Stage;
-        import tn.esprit.Exception.InvalidLengthException;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
-        import javafx.fxml.Initializable;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.ComboBox;
-        import javafx.scene.control.TextArea;
-        import javafx.scene.image.ImageView;
-        import tn.esprit.entities.Image;
-        import tn.esprit.entities.post;
-        import tn.esprit.services.ImageAPI;
-        import tn.esprit.services.postService;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import tn.esprit.entities.post;
+import tn.esprit.services.forumService;
+import tn.esprit.services.postService;
 
-        import javax.swing.text.html.HTML;
-        import java.io.File;
-        import java.io.IOException;
-        import java.net.MalformedURLException;
-        import java.net.URL;
-        import java.sql.SQLException;
-        import java.util.ResourceBundle;
-
-        import static javax.swing.text.html.HTML.Attribute.MAXLENGTH;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class AddPost implements Initializable {
 
-@FXML
-private Button AddImage;
+    @FXML
+    private Button AddImage;
     @FXML
     private Button AddPostButton;
 
 
 
-@FXML
-private Button CancelAddingButton;
-
-@FXML
-private ComboBox <String> CategoryPost;
-
-@FXML
-private TextArea ContentPost;
-
-@FXML
-private Button ManageForumButton;
-
-@FXML
-private Button ManagePostsButton;
-
-@FXML
-private ImageView PhotoPost;
-    private final postService ps=new postService();
-    ObservableList<String> categoryPostList= FXCollections.observableArrayList("Activity","Challenge");
+    @FXML
+    private Button CancelAddingButton;
 
     @FXML
-public void initialize(URL url, ResourceBundle resourceBundle){
+    private ComboBox <String> CategoryPost;
 
-CategoryPost.setValue("Location");
-CategoryPost.setItems(categoryPostList);
+    @FXML
+    private TextArea ContentPost;
+
+    @FXML
+    private Button ManageForumButton;
+
+    @FXML
+    private Button ManagePostsButton;
+
+    @FXML
+    private ImageView PhotoPost;
+    private final postService ps=new postService();
+    private final forumService fs = new forumService();
+    //ObservableList<String> categoryPostList= FXCollections.observableArrayList("Activity","Challenge");
+
+    @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle){
+
+        try {
+            // Fetch categories from the database
+            List<String> categories = fs.getAllCategories();
+
+            // If you have any default values, add them
+            categories.add(0, "pick category!");
+
+            // Set the ComboBox items
+            CategoryPost.setItems(FXCollections.observableArrayList(categories));
+            CategoryPost.setValue(categories.get(0)); // Set a default value if needed
+        } catch (SQLException e) {
+            // Handle the exception
+            e.printStackTrace();
+        }
+
+       // CategoryPost.setValue("Location");
+       // CategoryPost.setItems(categoryPostList);
 
 
     }
@@ -78,43 +89,40 @@ CategoryPost.setItems(categoryPostList);
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
-        fileChooser.setInitialDirectory(new File("C:/Users/tcp/Desktop/CRUD/src/main/java/image"));
 
-        File file = fileChooser.showOpenDialog(null);
+        File file = fileChooser.showOpenDialog(new Stage());
 
-        if (file != null) {
-            try {
-                // Obtenez le chemin absolu du fichier
-                String imageFile = file.toURI().toURL().toString();
-               // imageFile = imageFile.substring(2);
-                Image.setImage(new Image(imageFile));
+        if ( file!= null) {
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();}
-    }}
+                Image image = new Image(file.toURI().toString());
+                PhotoPost.setImage(image);
+                String selectedImagePath=file.getAbsolutePath();
 
-    @FXML
-        void AddNewPost(ActionEvent event){
-            try {
-                ps.add(new post(
-                        ContentPost.getText()
-                        , PhotoPost.getId()
-                        , (String) CategoryPost.getValue(),123
-                ));
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Confirmation");
-                alert.setContentText("A post is added");
-                alert.showAndWait();
-            } catch (SQLException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+        }}
 
-            }
+   @FXML
+    void AddNewPost(ActionEvent event){
 
+        try {
+            ps.add(new post(
+                    ContentPost.getText()
+                    , PhotoPost.getId()
+                    , (String) CategoryPost.getValue(),123
+            ));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Confirmation");
+            alert.setContentText("A post is added");
+            alert.showAndWait();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
 
         }
+
+
+    }
 
 
     @FXML

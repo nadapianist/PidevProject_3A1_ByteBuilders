@@ -7,6 +7,7 @@ import javafx.beans.property.*;
 
 
 public class post {
+    private String ForumCategory;
 
     private int  IDPost, UserID;
    private String categoryPost,ContentPost	,PhotoPost;
@@ -46,6 +47,13 @@ public class post {
 
     public int getIDPost() {
         return IDPost;
+    }
+    public String getForumCategory() {
+        return ForumCategory;
+    }
+
+    public void setForumCategory(String forumCategory) {
+        ForumCategory = forumCategory;
     }
 
     public void setIDPost(int IDPost) {
