@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import tn.esprit.entities.Activity;
 import tn.esprit.entities.Challenge;
 import tn.esprit.services.ActivityService;
@@ -58,7 +59,7 @@ public class ChallengeManagement {
     @FXML
     private TextField points_id;
     private final ChallengeService cs = new ChallengeService();
-
+    private Challenge selectedChallenge;
 
 
     @FXML
@@ -69,6 +70,15 @@ public class ChallengeManagement {
             String description = desc_ch_id.getText().trim();
             String points = points_id.getText().trim();
 
+            if (name.isEmpty() || description.isEmpty() || points.isEmpty()) {
+                throw new IllegalArgumentException("All fields must be filled out.");
+            }
+
+            // Validate name input
+            if (!name.matches("[a-zA-Z]+")) {
+                throw new IllegalArgumentException("Name must contain only letters.");
+            }
+
             int IDChInt = Integer.parseInt(points);
 
             // Create a new challenge object
@@ -77,35 +87,52 @@ public class ChallengeManagement {
             alert.setTitle("Confirmation");
             alert.setContentText("A new Activity is Added");
             alert.showAndWait();
-          //  clearFields();
+            RefreshTableView();
+            clearFields();
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-         //   clearFields();
+            clearFields();
 
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText("Invalid points format. Please enter a valid integer.");
             alert.showAndWait();
-          //  clearFields();
+            clearFields();
 
         } catch (IllegalArgumentException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-           // clearFields();
+            clearFields();
         }
 
+    }
+    @FXML
+    void OnClickChallenge(MouseEvent event) {
+        if (event.getClickCount() == 1) {
+            // Single click detected
+            selectedChallenge = TableViewChallenge.getSelectionModel().getSelectedItem();
+            if (selectedChallenge != null) {
+                id_chall.setText(String.valueOf(selectedChallenge.getId_chall()));
+                name_ch_id.setText(selectedChallenge.getName_ch());
+                desc_ch_id.setText(selectedChallenge.getDesc_ch());
+                points_id.setText(String.valueOf(selectedChallenge.getPoints()));
+            } else {
+                clearFields();
+            }
+        }
     }
 
     @FXML
     void initialize() throws SQLException {
         try {
+            RefreshTableView();
             List<Challenge> challenges = cs.diplayList();
             ObservableList<Challenge> observableList = FXCollections.observableList(challenges);
             TableViewChallenge.setItems(observableList);
@@ -121,6 +148,22 @@ public class ChallengeManagement {
         }
 
     }
+    private void RefreshTableView() {
+        try {
+            List<Challenge> challenges = cs.diplayList();
+            ObservableList<Challenge> observableList = FXCollections.observableList(challenges);
+            TableViewChallenge.setItems(observableList);
+            id_ch_column.setCellValueFactory(new PropertyValueFactory<>("id_chall"));
+            Name_ch_column.setCellValueFactory(new PropertyValueFactory<>("name_ch"));
+            desc_ch_column.setCellValueFactory(new PropertyValueFactory<>("desc_ch"));
+            points_column.setCellValueFactory(new PropertyValueFactory<>("points"));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
     @FXML
     void UpdateChallenge(ActionEvent event) {
         try {
@@ -134,7 +177,8 @@ public class ChallengeManagement {
             alert.setTitle("Confirmation");
             alert.setContentText("A new Activity is Added");
             alert.showAndWait();
-
+            RefreshTableView();
+            clearFields();
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -163,6 +207,8 @@ public class ChallengeManagement {
                 alert.setTitle("Confirmation");
                 alert.setContentText("Activity deleted successfully.");
                 alert.showAndWait();
+                RefreshTableView();
+                clearFields();
             } else {
                 // Display an error message if the ID text is empty
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -181,6 +227,50 @@ public class ChallengeManagement {
         }
     }
 
+    @FXML
+    void Search_challenge(ActionEvent event) {
+
+        try {
+            ChallengeService as = new ChallengeService();
+            ObservableList<Challenge> challenges = FXCollections.observableArrayList(as.Search(Search_ch_field.getText()));
+
+            Name_ch_column.setCellValueFactory(new PropertyValueFactory<>("name_ch"));
+            desc_ch_column.setCellValueFactory(new PropertyValueFactory<>("desc_ch"));
+            points_column.setCellValueFactory(new PropertyValueFactory<>("points"));
+
+            TableViewChallenge.setItems(challenges);
+        } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Search Failed");
+            alert.setContentText("An error occurred while searching for challenges: " + ex.getMessage());
+            alert.showAndWait();
+        }
+
+
+    }
+
+
+    @FXML
+    void SortChallenge(ActionEvent event) {
+
+        ChallengeService cs = new ChallengeService();
+
+        ObservableList<Challenge> challenges = cs.Sort();
+
+        Name_ch_column.setCellValueFactory(new PropertyValueFactory<>("name_ch"));
+        desc_ch_column.setCellValueFactory(new PropertyValueFactory<>("desc_ch"));
+        points_column.setCellValueFactory(new PropertyValueFactory<>("points"));
+
+        TableViewChallenge.setItems(challenges);
+    }
+
+    private void clearFields() {
+        id_chall.clear();
+        name_ch_id.clear();
+        desc_ch_id.clear();
+        points_id.clear();
+    }
     @FXML
     void NextReview(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ReviewChallengeManagement.fxml"));
