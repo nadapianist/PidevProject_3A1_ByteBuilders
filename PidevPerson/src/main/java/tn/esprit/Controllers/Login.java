@@ -107,7 +107,7 @@ public class Login {
             System.out.println("tourist");
         } else if (user instanceof LocalCom) {
             LocalCom localcom = (LocalCom) user;
-            System.out.println("localcom");
+            System.out.println("localCom");
         } else {
             System.out.println("Autre type d'utilisateur ou null");
         }

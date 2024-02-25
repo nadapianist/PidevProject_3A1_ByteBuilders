@@ -6,21 +6,25 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="609.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.TouristSignUpController">
+<AnchorPane prefHeight="526.0" prefWidth="388.0" style="-fx-background-color: #00aebd;" stylesheets="@Style/design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.TouristSignUpController">
    <children>
-      <AnchorPane layoutX="138.0" layoutY="25.0" prefHeight="566.0" prefWidth="316.0" style="-fx-background-radius: 20; -fx-background-color: pink;" stylesheets="@/Style/design.css">
+      <AnchorPane layoutX="36.0" layoutY="35.0" prefHeight="458.0" prefWidth="316.0" style="-fx-background-radius: 20; -fx-background-color: white;" stylesheets="@/Style/design.css">
          <children>
-            <FontAwesomeIconView glyphName="USER" layoutX="49.0" layoutY="69.0" size="50" />
-            <Label alignment="CENTER" layoutX="98.0" layoutY="42.0" prefHeight="18.0" prefWidth="99.0" text="Tourist Sign Up" textAlignment="RIGHT" />
-            <TextField fx:id="FnameID" alignment="CENTER" layoutX="73.0" layoutY="188.0" promptText="First Name" />
-            <TextField fx:id="BioID" alignment="CENTER" layoutX="76.0" layoutY="332.0" promptText="Bio" />
-            <TextField fx:id="LnameID" alignment="CENTER" layoutX="73.0" layoutY="234.0" promptText="Last Name" />
-            <TextField fx:id="PhoneID" alignment="CENTER" layoutX="73.0" layoutY="284.0" promptText="Phone Number" />
-            <TextField fx:id="EmailID" alignment="CENTER" layoutX="73.0" layoutY="87.0" promptText="Email" />
-            <TextField fx:id="PreferencesID" alignment="CENTER" layoutX="73.0" layoutY="380.0" promptText="Preferences" />
-            <PasswordField fx:id="PasswordID" alignment="CENTER" layoutX="77.0" layoutY="135.0" promptText="Password" />
-            <Button layoutX="125.0" layoutY="438.0" mnemonicParsing="false" onAction="#signup" text="Sign Up" />
+            <FontAwesomeIconView glyphName="USER" layoutX="59.0" layoutY="69.0" size="50" />
+            <Label alignment="CENTER" layoutX="108.0" layoutY="42.0" prefHeight="18.0" prefWidth="99.0" text="Tourist Sign Up" textAlignment="RIGHT">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="FnameID" alignment="CENTER" layoutX="73.0" layoutY="188.0" promptText="First Name" style="-fx-background-radius: 55;" />
+            <TextField fx:id="BioID" alignment="CENTER" layoutX="76.0" layoutY="332.0" promptText="Bio" style="-fx-background-radius: 55;" />
+            <TextField fx:id="LnameID" alignment="CENTER" layoutX="73.0" layoutY="234.0" promptText="Last Name" style="-fx-background-radius: 55;" />
+            <TextField fx:id="PhoneID" alignment="CENTER" layoutX="73.0" layoutY="284.0" promptText="Phone Number" style="-fx-background-radius: 55;" />
+            <TextField fx:id="EmailID" alignment="CENTER" layoutX="73.0" layoutY="87.0" promptText="Email" style="-fx-background-radius: 55;" />
+            <TextField fx:id="PreferencesID" alignment="CENTER" layoutX="73.0" layoutY="380.0" promptText="Preferences" style="-fx-background-radius: 55;" />
+            <PasswordField fx:id="PasswordID" alignment="CENTER" layoutX="77.0" layoutY="135.0" promptText="Password" style="-fx-background-radius: 55;" />
+            <Button layoutX="122.0" layoutY="416.0" mnemonicParsing="false" onAction="#signup" style="-fx-background-color: #fba819; -fx-background-radius: 55;" text="Sign Up" />
          </children>
       </AnchorPane>
    </children>

@@ -81,7 +81,7 @@
             <TableColumn fx:id="colpnL" prefWidth="101.5999755859375" text="Phone Number" />
             <TableColumn fx:id="colemailL" minWidth="0.0" prefWidth="159.99993896484375" text="Email" />
             <TableColumn fx:id="colpwdL" prefWidth="81.60003662109375" text="Password" />
-            <TableColumn fx:id="colprefL" prefWidth="84.800048828125" text="Availability" />
+            <TableColumn fx:id="availL" prefWidth="84.800048828125" text="Availability" />
         </columns>
       </TableView>
       <Button layoutX="923.0" layoutY="333.0" mnemonicParsing="false" onAction="#deleteL" text="Delete" />

@@ -2,31 +2,21 @@ package tn.esprit.Controllers;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-
 import javafx.stage.Stage;
 import tn.esprit.entities.LocalCom;
-import tn.esprit.entities.Tourist;
+import tn.esprit.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import tn.esprit.entities.Tourist;
-import tn.esprit.entities.User;
-import tn.esprit.services.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class updateTourist {
-    @FXML
-    private TextField userID;
+public class updateLocalCom {
 
     @FXML
-    private TextField BioID;
+    private TextField AvailabilityID;
 
     @FXML
     private TextField EmailID;
@@ -44,46 +34,43 @@ public class updateTourist {
     private TextField PhoneID;
 
     @FXML
-    private TextField PreferencesID;
+    private TextField userID;
 
-
-    tn.esprit.services.UserService UserService = new UserService();
+    UserService UserService = new UserService();
     UserService su = new UserService();
 
-    private Tourist creteModifiedTourist() {
+    private LocalCom createModifiedLocal() {
         int idUtil = Integer.parseInt(userID.getText());
         String name = FnameID.getText();
         String lname = LnameID.getText();
         String email = EmailID.getText();
         String mdp = PasswordID.getText();
         int phone = Integer.parseInt(PhoneID.getText());
-        String bio = BioID.getText();
-        String pref = PreferencesID.getText();
+        String avai = AvailabilityID.getText();
 
-        if (name.isEmpty() || lname.isEmpty() || email.isEmpty() || mdp.isEmpty() || bio.isEmpty()||pref.isEmpty()) {
+        if (name.isEmpty() || lname.isEmpty() || email.isEmpty() || mdp.isEmpty() || avai.isEmpty()) {
             System.out.println("All fields are required.");
             return null;
         }
 
-        Tourist modifiedTourist = new Tourist(idUtil, email, mdp, name, lname, phone, bio,pref);
-        return modifiedTourist;
+        LocalCom localcomModified = new LocalCom(idUtil, email, mdp, name, lname, phone, avai);
+        return localcomModified;
     }
 
-    public void initDonneesTourist(Tourist tourist) {
-        userID.setText(String.valueOf(tourist.getUserID()));
-        EmailID.setText(String.valueOf(tourist.getEmail()));
-        PasswordID.setText(tourist.getPwd());
-        FnameID.setText(tourist.getFname());
-        LnameID.setText(tourist.getLname());
-        PhoneID.setText(String.valueOf(tourist.getPhone()));
-        BioID.setText(tourist.getBio());
-        PreferencesID.setText(tourist.getPreferences());
+    public void initDonneesLocal(LocalCom localCom) {
+        userID.setText(String.valueOf(localCom.getUserID()));
+        EmailID.setText(String.valueOf(localCom.getEmail()));
+        PasswordID.setText(localCom.getPwd());
+        FnameID.setText(localCom.getFname());
+        LnameID.setText(localCom.getLname());
+        PhoneID.setText(String.valueOf(localCom.getPhone()));
+        AvailabilityID.setText(localCom.getAvailability());
     }
 
     public void Modify(ActionEvent actionEvent) throws SQLException {
-        Tourist modifiedTourist = creteModifiedTourist();
-        if (modifiedTourist != null) {
-            su.update(modifiedTourist);
+        LocalCom modifiiedLocal = createModifiedLocal();
+        if (modifiiedLocal != null) {
+            su.update(modifiiedLocal);
             Stage currentStage = (Stage) FnameID.getScene().getWindow();
             currentStage.close();
 
@@ -100,6 +87,4 @@ public class updateTourist {
         }
     }
 
-
-
-    }
+}

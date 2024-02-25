@@ -91,7 +91,7 @@ public  class UserService implements  IUser<User> {
                     user = new Admin(UserID, Email, pwd);
                 } else if ("tourist".equals(role)) {
                     user = new Tourist(UserID, Email, pwd, rs.getString("Fname"), rs.getString("Lname"), rs.getInt("phone"), rs.getString("Bio"), rs.getString("Preferences"));
-                } else if ("localcom".equals(role)) {
+                } else if ("localCom".equals(role)) {
                     user = new LocalCom(UserID, Email, pwd, rs.getString("Fname"), rs.getString("Lname"), rs.getInt("phone"), rs.getString("Availability"));
                 } else {
                     throw new IllegalArgumentException("Invalid user type: " + role);
@@ -138,12 +138,11 @@ public  class UserService implements  IUser<User> {
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1, user.getEmail());
                 stmt.setString(2, user.getPwd());
-                stmt.setString(3, user.getEmail());
-                stmt.setString(4, localCom.getFname());
-                stmt.setString(5, localCom.getLname());
-                stmt.setInt(6, localCom.getPhone());
-                stmt.setString(7, localCom.getAvailability());
-                stmt.setInt(8, localCom.getUserID());
+                stmt.setString(3, localCom.getFname());
+                stmt.setString(4, localCom.getLname());
+                stmt.setInt(5, localCom.getPhone());
+                stmt.setString(6, localCom.getAvailability());
+                stmt.setInt(7, localCom.getUserID());
                 stmt.executeUpdate();
                 System.out.printf("LocalCom %d updated\n", user.getUserID());
             }
@@ -177,7 +176,7 @@ public  class UserService implements  IUser<User> {
                         case "tourist" ->
                                 new Tourist(id, email, password, rs.getString("Fname"), rs.getString("Lname"), rs.getInt("phone"), rs.getString("Bio"),rs.getString("Preferences"));
 
-                        case "localcom" -> new LocalCom(id, email, password, rs.getString("Fname"), rs.getString("Lname"), rs.getInt("phone"),
+                        case "localCom" -> new LocalCom(id, email, password, rs.getString("Fname"), rs.getString("Lname"), rs.getInt("phone"),
                                 rs.getString("availability"));
 
                         default -> throw new IllegalArgumentException("Invalid user type: " + role);

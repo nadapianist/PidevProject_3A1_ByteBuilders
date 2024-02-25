@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tn.esprit.entities.LocalCom;
 import tn.esprit.entities.Tourist;
 import tn.esprit.entities.User;
 import tn.esprit.services.*;
@@ -180,14 +181,14 @@ public class LocalComSignUpController {
     }
 
     public void SignUPLoc(javafx.event.ActionEvent actionEvent) throws SQLException {
-        Tourist user = new Tourist();
+        LocalCom user = new LocalCom();
         boolean allValidationsPassed = false; // Variable to track validation status
 
         if (this.CheckLogin() && this.VerifUserChamps() &&
                 this.validatePhoneNumber() && this.ValidateEmail() &&
                 this.restrictSpacesInFnameName() && this.allowOnlyLettersInField(FnameID, "First Name") &&
                 this.allowOnlyLettersInField(LnameID, "Last Name") &&
-                this.allowOnlyLettersInField(AvailabilityID, "Specialization") && this.validatePhoneNumber()) {
+                this.allowOnlyLettersInField(AvailabilityID, "Availability") && this.validatePhoneNumber()) {
             allValidationsPassed = true; // Set to true if all validations pass
 
             user.setEmail(this.EmailID.getText());
@@ -195,7 +196,7 @@ public class LocalComSignUpController {
             user.setFname(this.FnameID.getText());
             user.setLname(this.LnameID.getText());
             user.setPhone(Integer.parseInt(this.PhoneID.getText()));
-            user.setBio(this.AvailabilityID.getText());
+            user.setAvailability(this.AvailabilityID.getText());
 
             this.UserService.add(user);
             Alert resAlert = new Alert(AlertType.INFORMATION);

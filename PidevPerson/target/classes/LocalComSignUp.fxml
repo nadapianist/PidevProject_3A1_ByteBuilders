@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="526.0" prefWidth="388.0" style="-fx-background-color: #00aebd;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.LocalComSignUpController">
    <children>
-      <AnchorPane layoutX="34.0" layoutY="35.0" prefHeight="444.0" prefWidth="316.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@Style/design.css">
+      <AnchorPane layoutX="36.0" layoutY="35.0" prefHeight="444.0" prefWidth="316.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@Style/design.css">
          <children>
             <FontAwesomeIconView glyphName="USER" layoutX="55.0" layoutY="78.0" size="50" text="" />
             <Label alignment="CENTER" layoutX="98.0" layoutY="53.0" prefHeight="18.0" prefWidth="147.0" text="Local Committee Sign Up" />

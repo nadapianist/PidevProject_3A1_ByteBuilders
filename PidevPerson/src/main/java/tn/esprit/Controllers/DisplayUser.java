@@ -64,7 +64,7 @@ public class DisplayUser {
     private TableColumn<?, ?> colpnT;
 
     @FXML
-    private TableColumn<?, ?> colprefL;
+    private TableColumn<?, ?> availL;
 
     @FXML
     private TableColumn<?, ?> colprefT;
@@ -89,15 +89,8 @@ public class DisplayUser {
     private tn.esprit.entities.Admin Admin;
 
 
-    @FXML
-    void updateL(ActionEvent event) {
 
-    }
 
-    @FXML
-    void updateT(ActionEvent event) {
-
-    }
     private final UserService ser=new UserService();
 
 
@@ -107,11 +100,11 @@ public class DisplayUser {
         try {
             List<User> allUsers = ser.listAll();
             ObservableList<User> allUsersData = FXCollections.observableArrayList(allUsers);
-            // Créez des FilteredList pour Admin et Citoyen respectivement
+
             FilteredList<User> adminFilteredList = new FilteredList<>(allUsersData, user -> user instanceof Admin);
             FilteredList<User> touristFilteredList = new FilteredList<>(allUsersData, user -> user instanceof Tourist);
             FilteredList<User> localcomFilteredList = new FilteredList<>(allUsersData, user -> user instanceof LocalCom);
-            // Attachez les FilteredList aux TableView
+
             tableA.setItems(adminFilteredList);
             tabeT.setItems(touristFilteredList);
             tableL.setItems(localcomFilteredList);
@@ -144,13 +137,13 @@ public class DisplayUser {
     }
 
     private void configuretableL() {
-        colidT.setCellValueFactory(new PropertyValueFactory<>("UserID"));
-        colemailT.setCellValueFactory(new PropertyValueFactory<>("Email"));
-        colpwdT.setCellValueFactory(new PropertyValueFactory<>("pwd"));
-        colfnT.setCellValueFactory(new PropertyValueFactory<>("Fname"));
-        collnT.setCellValueFactory(new PropertyValueFactory<>("Lname"));
-        colpnT.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        colprefL.setCellValueFactory(new PropertyValueFactory<>("Availability"));
+        colidL.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        colemailL.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        colpwdL.setCellValueFactory(new PropertyValueFactory<>("pwd"));
+        colfnL.setCellValueFactory(new PropertyValueFactory<>("Fname"));
+        collnL.setCellValueFactory(new PropertyValueFactory<>("Lname"));
+        colpnL.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        availL.setCellValueFactory(new PropertyValueFactory<>("Availability"));
 
     }
 
@@ -169,7 +162,7 @@ public class DisplayUser {
 
     @FXML
     void deleteA(ActionEvent event) throws SQLException {
-        User adminselec = tableA.getSelectionModel().getSelectedItem();
+        User adminselec = tableL.getSelectionModel().getSelectedItem();
         if (adminselec != null) {
             ser.delete(adminselec.getUserID());
 
@@ -184,7 +177,7 @@ public class DisplayUser {
     @FXML
     void deleteL(ActionEvent event)throws SQLException {
 
-        User localselec = tableA.getSelectionModel().getSelectedItem();
+        User localselec = tableL.getSelectionModel().getSelectedItem();
         if (localselec != null) {
             ser.delete(localselec.getUserID());
 
@@ -243,6 +236,58 @@ public class DisplayUser {
             e.printStackTrace();
         }
     }
+
+    public void updateL(ActionEvent actionEvent) {
+        LocalCom localSelected = (LocalCom) tableL.getSelectionModel().getSelectedItem();
+        if (localSelected != null) {
+            closewindow(actionEvent);
+            openupdateLocal(localSelected);
+        } else {
+            System.out.println("You must select a local committee");
+        }
+    }
+
+    private void openupdateLocal(LocalCom localCom) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateLocalCom.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            updateLocalCom modifiedLocal = loader.getController();
+            modifiedLocal.initDonneesLocal(localCom);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateT(ActionEvent actionEvent) {
+        Tourist touristSelected = (Tourist) tabeT.getSelectionModel().getSelectedItem();
+        if (touristSelected != null) {
+            closewindow(actionEvent);
+            openupdateLocal(touristSelected);
+        } else {
+            System.out.println("You must select a tourist");
+        }
+    }
+
+    private void openupdateLocal(Tourist tourist) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateTourist.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+            updateTourist modifiedLocal = loader.getController();
+            modifiedLocal.initDonneesTourist(tourist);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 }

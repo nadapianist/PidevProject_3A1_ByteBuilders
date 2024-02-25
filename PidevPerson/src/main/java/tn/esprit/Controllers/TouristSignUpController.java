@@ -196,9 +196,18 @@ public class TouristSignUpController {
                 this.validatePhoneNumber() && this.ValidateEmail() &&
                 this.restrictSpacesInFnameName() && this.allowOnlyLettersInField(FnameID, "First Name") &&
                 this.allowOnlyLettersInField(LnameID, "Last Name") &&
-                this.allowOnlyLettersInField(PreferencesID, "Specialization") && this.validatePassword()) {
+                this.allowOnlyLettersInField(PreferencesID, "Preferences") && this.validatePassword()) {
 
             // Set user properties
+            user.setPwd(this.su.encrypt(this.PasswordID.getText()));
+            user.setEmail(this.EmailID.getText());
+            user.setFname(this.FnameID.getText());
+            user.setLname(this.LnameID.getText());
+            user.setPhone(Integer.parseInt(this.PhoneID.getText()));
+            user.setBio(this.BioID.getText());
+            user.setPreferences(this.PreferencesID.getText());
+
+
 
             this.UserService.add(user);
             Alert resAlert = new Alert(AlertType.INFORMATION);

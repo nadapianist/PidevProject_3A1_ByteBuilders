@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="526.0" prefWidth="388.0" style="-fx-background-color: #00aebd;" stylesheets="@Style/design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.updateTourist">
+<AnchorPane prefHeight="526.0" prefWidth="388.0" style="-fx-background-color: #00aebd;" stylesheets="@Style/design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.updateLocalCom">
     <children>
         <AnchorPane layoutX="36.0" layoutY="34.0" prefHeight="458.0" prefWidth="316.0" style="-fx-background-radius: 20; -fx-background-color: white;" stylesheets="@/Style/design.css">
             <children>
@@ -18,14 +18,13 @@
                         <Font name="Gill Sans MT Bold" size="12.0" />
                     </font></Label>
                 <TextField fx:id="FnameID" alignment="CENTER" layoutX="73.0" layoutY="203.0" promptText="First Name" style="-fx-background-radius: 55;" />
-                <TextField fx:id="BioID" alignment="CENTER" layoutX="76.0" layoutY="331.0" promptText="Bio" style="-fx-background-radius: 55;" />
                 <TextField fx:id="LnameID" alignment="CENTER" layoutX="74.0" layoutY="248.0" promptText="Last Name" style="-fx-background-radius: 55;" />
                 <TextField fx:id="PhoneID" alignment="CENTER" layoutX="74.0" layoutY="290.0" promptText="Phone Number" style="-fx-background-radius: 55;" />
                 <TextField fx:id="EmailID" alignment="CENTER" layoutX="76.0" layoutY="117.0" promptText="Email" style="-fx-background-radius: 55;" />
-                <TextField fx:id="PreferencesID" alignment="CENTER" layoutX="76.0" layoutY="372.0" promptText="Preferences" style="-fx-background-radius: 55;" />
+                <TextField fx:id="AvailabilityID" alignment="CENTER" layoutX="76.0" layoutY="336.0" promptText="Availability" style="-fx-background-radius: 55;" />
                 <PasswordField fx:id="PasswordID" alignment="CENTER" layoutX="74.0" layoutY="158.0" promptText="Password" style="-fx-background-radius: 55;" />
-                <Button layoutX="127.0" layoutY="414.0" mnemonicParsing="false" onAction="#Modify" style="-fx-background-color: #fba819; -fx-background-radius: 55;" text="Modify" />
-            <TextField fx:id="userID" alignment="CENTER" layoutX="76.0" layoutY="76.0" promptText="TouristID" style="-fx-background-radius: 55;" />
+                <Button layoutX="127.0" layoutY="382.0" mnemonicParsing="false" onAction="#Modify" style="-fx-background-color: #fba819; -fx-background-radius: 55;" text="Modify" />
+                <TextField fx:id="userID" alignment="CENTER" layoutX="76.0" layoutY="76.0" promptText="LocalComID" style="-fx-background-radius: 55;" />
             </children>
         </AnchorPane>
     </children>
