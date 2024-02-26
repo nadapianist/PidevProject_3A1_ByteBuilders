@@ -12,7 +12,7 @@ public interface IService<T> {
     void update(T t) throws SQLException;
 
     void delete(int t) throws SQLException;
-
+List<T> SortForum(String t) throws SQLException;
    List<T> displayList() throws SQLException;
     List<T> SearchByContent(String t) throws SQLException;
 }

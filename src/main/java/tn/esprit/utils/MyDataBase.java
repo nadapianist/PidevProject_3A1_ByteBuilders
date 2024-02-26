@@ -17,8 +17,8 @@ public class MyDataBase {
     public static MyDataBase instance;
     private MyDataBase() {
         try {
-          //  this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
-            con= DriverManager.getConnection(URL,USERNAME,PWD);
+            this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
+            //con= DriverManager.getConnection(URL,USERNAME,PWD);
 
             System.out.println("Connected!");
         } catch (SQLException var2) {

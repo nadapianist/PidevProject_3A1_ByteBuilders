@@ -104,6 +104,11 @@ public postService(){
     public List<post> SearchByContent(String t) throws SQLException {
         return null;
     }
+    @Override
+    public List<post> SortForum(String t) throws SQLException {
+        return null;
+    }
+
 
 
 }

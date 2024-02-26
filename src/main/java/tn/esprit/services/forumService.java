@@ -1,4 +1,5 @@
 package tn.esprit.services;
+import jdk.jfr.Category;
 import tn.esprit.entities.forum;
 import tn.esprit.utils.MyDataBase;
 
@@ -101,25 +102,26 @@ public class forumService implements IService<forum>{
 
         return forums;
     }
-    public forum getForumById(int forumId) throws SQLException {
-        String query = "SELECT * FROM forum WHERE IDForum = ?";
+    @Override
+    public List<forum> SortForum(String selectedCategory) throws SQLException {
+        String query = "SELECT * FROM `forum` WHERE `Category`=?";
         try (Connection con = MyDataBase.instance.getCon();
              PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setInt(1, forumId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return new forum(
-                            rs.getInt("IDForum"),
-                            rs.getString("ContentForum"),
-                            rs.getInt("NB_posts"),
-                            rs.getString("Category")
-                    );
-                }
+            ps.setString(1, selectedCategory);
+            System.out.println("SQL Query: " + ps.toString());
+            ResultSet res = ps.executeQuery();
+            List<forum> forums = new ArrayList<>();
+            while (res.next()) {
+                forum f = new forum(
+                        res.getInt("IDForum"),
+                        res.getString("ContentForum"),
+                        res.getInt("NB_posts"),
+                        res.getString("Category"));
+
+                forums.add(f);
             }
-        }
-        return null; // Return null if no forum with the given ID is found
-    }
-    public List<String> getAllCategories() throws SQLException {
+            return forums;}}
+    /*public List<String> getAllCategories() throws SQLException {
         List<String> categories = new ArrayList<>();
 
         // Assuming there is a method in your DAO or somewhere to retrieve unique categories
@@ -129,8 +131,19 @@ public class forumService implements IService<forum>{
 
 
         return categories;
+    }*/
+    public List<String> getAllCategories() throws SQLException {
+        List<String> categories = new ArrayList<>();
+        try (Connection con = MyDataBase.instance.getCon();
+             Statement statement = con.createStatement()) {
+            // Fetch categories and populate the list
+            ResultSet resultSet = statement.executeQuery("SELECT Category FROM forum");
+            while (resultSet.next()) {
+                categories.add(resultSet.getString("Category"));
+            }
+        }
+        return categories;
     }
-
 
 
 

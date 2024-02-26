@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.ForumManagement">
     <children>
-        <TableView fx:id="ForumList" layoutX="753.0" layoutY="171.0" prefHeight="200.0" prefWidth="374.0">
+        <TableView fx:id="ForumList" layoutX="753.0" layoutY="171.0" prefHeight="200.0" prefWidth="374.0" stylesheets="@design.css">
             <columns>
                 <TableColumn fx:id="IDForum" prefWidth="92.0" text=" IDForum" />
                 <TableColumn fx:id="ContentForum" prefWidth="112.0" text=" ContentForum" />
@@ -63,9 +62,9 @@
                 <TextField fx:id="ContentForumid" layoutX="124.0" layoutY="84.0" prefHeight="26.0" prefWidth="133.0" />
                 <TextField fx:id="NB_postsid" layoutX="124.0" layoutY="132.0" prefHeight="26.0" prefWidth="134.0" />
                 <TextField fx:id="Categoryid" layoutX="124.0" layoutY="187.0" prefHeight="26.0" prefWidth="134.0" />
-                <Button fx:id="AddButton" layoutX="64.0" layoutY="336.0" mnemonicParsing="false" onAction="#AddNewForum" text=" Add " />
-                <Button fx:id="EditButton" layoutX="236.0" layoutY="336.0" mnemonicParsing="false" onAction="#SaveChanges" text="Save" />
-                <Button fx:id="DeleteLocButton" layoutX="141.0" layoutY="336.0" mnemonicParsing="false" onAction="#DeleteForumById" text=" Delete " />
+                <Button fx:id="AddButton" layoutX="64.0" layoutY="336.0" mnemonicParsing="false" onAction="#AddNewForum" styleClass="btn" stylesheets="@design.css" text=" Add " />
+                <Button fx:id="EditButton" layoutX="236.0" layoutY="336.0" mnemonicParsing="false" onAction="#SaveChanges" styleClass="btn" stylesheets="@design.css" text="Save" />
+                <Button fx:id="DeleteLocButton" layoutX="141.0" layoutY="336.0" mnemonicParsing="false" onAction="#DeleteForumById" styleClass="btn" stylesheets="@design.css" text=" Delete " />
                 <Label layoutX="16.0" layoutY="87.0" text="ContentForum" textFill="#f7f7f7">
                     <font>
                         <Font name="System Bold" size="14.0" />
@@ -84,15 +83,12 @@
             </children>
         </AnchorPane>
 
-        <TextField fx:id="ContentSearchField" layoutX="913.0" layoutY="136.0" promptText="SearchContent" onKeyReleased="#SearchByContent" />
-
-        <RadioButton fx:id="SortButton" layoutX="814.0" layoutY="140.0" mnemonicParsing="false" onAction="#FilterByCategory" text="Category" />
-        <Text layoutX="753.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter By:" />
-        <TableView fx:id="PostsList" layoutX="671.0" layoutY="439.0" prefHeight="200.0" prefWidth="535.0">
+        <TextField fx:id="ContentSearchField" layoutX="866.0" layoutY="140.0" onKeyReleased="#SearchByContent" promptText="SearchContent" stylesheets="@design.css" />
+        <TableView fx:id="PostsList" layoutX="671.0" layoutY="439.0" prefHeight="200.0" prefWidth="535.0" stylesheets="@design.css">
             <columns>
                 <TableColumn fx:id="IDPost" prefWidth="75.0" text="IDPost" />
                 <TableColumn fx:id="ContentPost" prefWidth="75.0" text=" ContentPost" />
-                <TableColumn fx:id="PhotoPost" text=" PhotoPost" >
+                <TableColumn fx:id="PhotoPost" text=" PhotoPost">
 
                 </TableColumn>
                 <TableColumn fx:id="DatePost" prefWidth="103.0" text="DatePost" />
@@ -100,12 +96,18 @@
                 <TableColumn fx:id="CategoryPost" prefWidth="103.0" text="CategoryPost" />
             </columns>
         </TableView>
-        <Label layoutX="866.0" layoutY="399.0" text="Posts for each category:" textFill="#2d0565">
+        <Label layoutX="690.0" layoutY="399.0" text="Posts for each category:" textFill="#2d0565">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
-        <Button fx:id="DeletePostAD" layoutX="676.0" layoutY="655.0" mnemonicParsing="false" onAction="#DeletePostAD" text="DeletePost" />
+        <Button fx:id="DeletePostAD" layoutX="676.0" layoutY="655.0" mnemonicParsing="false" onAction="#DeletePostAD" styleClass="btn" stylesheets="@design.css" text="DeletePost" />
+      <ComboBox fx:id="comboBox" layoutX="935.0" layoutY="396.0" onAction="#SortForum" prefHeight="25.0" prefWidth="111.0" promptText="Category" styleClass="close" stylesheets="@design.css" />
+      <Label layoutX="866.0" layoutY="400.0" stylesheets="@design.css" text="Filter By:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
 
     </children>
 

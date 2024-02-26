@@ -24,9 +24,11 @@ import tn.esprit.services.postService;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class ForumManagement {
@@ -57,6 +59,8 @@ public class ForumManagement {
 
     @FXML
     private TableColumn<post, Date> DatePost;
+    @FXML
+    private ComboBox<String> comboBox;
 
     @FXML
     private Button DeleteLocButton;
@@ -97,8 +101,6 @@ public class ForumManagement {
     @FXML
     private Button SearchButton;
 
-    @FXML
-    private RadioButton SortButton;
 
     @FXML
     private TableColumn<post, Integer> UserID;
@@ -107,6 +109,7 @@ public class ForumManagement {
 
     @FXML
     void initialize() {
+
         try {
             ForumList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
@@ -124,12 +127,28 @@ public class ForumManagement {
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
             initpost();
+           // initcat();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }}
+    @FXML
+    void initcat() {
+        try {
+            // Fetch categories from the database
+            List<String> categories = fs.getAllCategories();
+            // If you have any default values, add them
+            categories.add(0, "pick category!");
+            // Set the ComboBox items
+            comboBox.setItems(FXCollections.observableArrayList(categories));
+            comboBox.setValue(categories.get(0)); // Set a default value if needed
+        } catch (SQLException e) {
+            // Handle the exception
+            e.printStackTrace();
+        }}
+
     @FXML
 void initpost(){
         try{
@@ -138,29 +157,6 @@ void initpost(){
     PostsList.setItems(observableListt);
     IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
     ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
-          /*  PhotoPost.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPhotoPost()));
-            PhotoPost.setCellFactory(param -> new TableCell<>() {
-                private final ImageView imageView = new ImageView();
-                {
-                    // Set dimensions for the image view as needed
-                    imageView.setFitWidth(50);
-                    imageView.setFitHeight(50);
-                }
-                @Override
-                protected void updateItem(String imagePath, boolean empty) {
-                    super.updateItem(imagePath, empty);
-
-                    if (empty || imagePath == null) {
-                        setGraphic(null);
-                    } else {
-                        // Assuming imagePath is a valid file path
-                        Image image = new Image(new File(imagePath).toURI().toString());
-                        imageView.setImage(image);
-                        setGraphic(imageView);
-                    }
-                }
-            });*/
-           // PhotoPost.setCellValueFactory(new PropertyValueFactory<>("PhotoPost"));
 PhotoPost.setCellFactory(column -> {
     return new TableCell<post,String>() {
         private final ImageView imageView = new ImageView();
@@ -170,7 +166,6 @@ PhotoPost.setCellFactory(column -> {
             imageView.setFitHeight(130);
             setGraphic(imageView);
         }
-
         @Override
         protected void updateItem(String imagePath, boolean empty) {
 
@@ -379,6 +374,26 @@ PhotoPost.setCellFactory(column -> {
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+    public void SortForum(ActionEvent actionEvent) {
+        try {
+String selectedCategory=comboBox.getValue();
+            List<forum> SearchResults = fs.SortForum(selectedCategory);
+            ObservableList<forum> observableList= FXCollections.observableList(SearchResults);
+            ForumList.setItems(observableList);
+
+            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
+            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
+            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
+            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
+
+
+        }catch(SQLException e){
+            Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
