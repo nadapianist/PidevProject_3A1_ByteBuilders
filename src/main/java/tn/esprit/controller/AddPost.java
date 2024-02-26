@@ -63,11 +63,10 @@ public class AddPost implements Initializable {
 
         try {
             // Fetch categories from the database
-            List<String> categories = fs.getAllCategories();
 
+            List<String> categories = fs.getAllCategories();
             // If you have any default values, add them
             categories.add(0, "pick category!");
-
             // Set the ComboBox items
             CategoryPost.setItems(FXCollections.observableArrayList(categories));
             CategoryPost.setValue(categories.get(0)); // Set a default value if needed
@@ -76,11 +75,12 @@ public class AddPost implements Initializable {
             e.printStackTrace();
         }
 
-       // CategoryPost.setValue("Location");
-       // CategoryPost.setItems(categoryPostList);
+        // CategoryPost.setValue("Location");
+        // CategoryPost.setItems(categoryPostList);
 
 
     }
+
 
 
     @FXML
@@ -94,13 +94,13 @@ public class AddPost implements Initializable {
 
         if ( file!= null) {
 
-                Image image = new Image(file.toURI().toString());
-                PhotoPost.setImage(image);
-                String selectedImagePath=file.getAbsolutePath();
+            Image image = new Image(file.toURI().toString());
+            PhotoPost.setImage(image);
+            String selectedImagePath=file.getAbsolutePath();
 
         }}
 
-   @FXML
+    @FXML
     void AddNewPost(ActionEvent event){
 
         try {

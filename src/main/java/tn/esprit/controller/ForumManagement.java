@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import tn.esprit.Exception.InvalidLengthException;
 import tn.esprit.entities.forum;
 import tn.esprit.entities.post;
 import tn.esprit.services.forumService;
@@ -106,6 +107,7 @@ public class ForumManagement {
     private TableColumn<post, Integer> UserID;
     private final postService ps=new postService();
     private final forumService fs=new forumService();
+    public final int MAXLENGTH=10;
 
     @FXML
     void initialize() {
@@ -152,6 +154,7 @@ public class ForumManagement {
     @FXML
 void initpost(){
         try{
+
     List<post> posts=ps.displayList();
     ObservableList<post> observableListt= FXCollections.observableList(posts);
     PostsList.setItems(observableListt);
@@ -205,6 +208,7 @@ PhotoPost.setCellFactory(column -> {
     @FXML
     void AddNewForum(ActionEvent event)  {
         try{
+            validateStringLength(ContentForum.getText(), MAXLENGTH);
             forum f=new forum();
             //f.setIDForum(Integer.parseInt(IDForumid.getText()));
             f.setContentForum((ContentForumid.getText()));
@@ -223,9 +227,19 @@ PhotoPost.setCellFactory(column -> {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+        catch(InvalidLengthException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Content must not exceed 30 characters");
+            alert.showAndWait();
+        }
     }
 
-
+    public static void validateStringLength(String str, int maxLength) throws InvalidLengthException {
+        if (str.length() > maxLength) {
+            throw new InvalidLengthException("The given string must not exceed " + maxLength + " characters.");
+        }
+    }
 
 
 

@@ -6,7 +6,7 @@ import tn.esprit.utils.MyDataBase;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import tn.esprit.controller.ForumDao;
+
 
 
 public class forumService implements IService<forum>{
@@ -14,6 +14,7 @@ public class forumService implements IService<forum>{
     Statement stm;
 
     public forumService(){con= MyDataBase.getInstance().getCon();}
+
     @Override
     public void add(forum f) throws SQLException {
         String query = "INSERT INTO `forum`(`ContentForum`, `NB_posts`, `Category`) VALUES (?, ?, ?)";
@@ -132,7 +133,7 @@ public class forumService implements IService<forum>{
 
         return categories;
     }*/
-    public List<String> getAllCategories() throws SQLException {
+    /*public List<String> getAllCategories() throws SQLException {
         List<String> categories = new ArrayList<>();
         try (Connection con = MyDataBase.instance.getCon();
              Statement statement = con.createStatement()) {
@@ -143,7 +144,39 @@ public class forumService implements IService<forum>{
             }
         }
         return categories;
+    }*/
+  /*  public List<String> getAllCategories() throws SQLException {
+        List<String> categories = new ArrayList<>();
+        try (Connection con = MyDataBase.instance.reconnect();
+             Statement statement = con.createStatement()) {
+            // Fetch categories and populate the list
+            ResultSet resultSet = statement.executeQuery("SELECT Category FROM forum");
+            while (resultSet.next()) {
+                categories.add(resultSet.getString("Category"));
+            }
+        }
+        return categories;
+    }*/
+    @Override
+    public List<String> getAllCategories() throws SQLException {
+        String query;
+        PreparedStatement ps;
+         query = "SELECT DISTINCT Category FROM forum";
+        ps = this.con.prepareStatement(query);
+        List<String> categories = new ArrayList<>();
+        ResultSet rs = ps.executeQuery();
+
+
+            // PreparedStatement ps = con.prepareStatement("SELECT DISTINCT Category FROM forum")
+
+            while (rs.next()) {
+                categories.add(rs.getString("Category"));
+            }
+
+
+        return categories;
     }
+
 
 
 
