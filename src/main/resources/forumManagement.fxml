@@ -14,14 +14,14 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.ForumManagement">
     <children>
         <TableView fx:id="ForumList" layoutX="753.0" layoutY="171.0" prefHeight="200.0" prefWidth="374.0">
-        <columns>
-            <TableColumn fx:id="IDForum" prefWidth="92.0" text=" IDForum" />
-            <TableColumn fx:id="ContentForum" prefWidth="112.0" text=" ContentForum" />
-            <TableColumn fx:id="NB_posts" prefWidth="60.0" text=" NB_posts" />
-            <TableColumn fx:id="Category" prefWidth="109.0" text="Category" />
-        </columns>
+            <columns>
+                <TableColumn fx:id="IDForum" prefWidth="92.0" text=" IDForum" />
+                <TableColumn fx:id="ContentForum" prefWidth="112.0" text=" ContentForum" />
+                <TableColumn fx:id="NB_posts" prefWidth="60.0" text=" NB_posts" />
+                <TableColumn fx:id="Category" prefWidth="109.0" text="Category" />
+            </columns>
 
-    </TableView>
+        </TableView>
         <AnchorPane layoutY="94.0" prefHeight="648.0" prefWidth="222.0" styleClass="main-bg" stylesheets="@design.css">
             <children>
                 <Button layoutX="14.0" layoutY="146.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="User Management" />
@@ -92,7 +92,9 @@
             <columns>
                 <TableColumn fx:id="IDPost" prefWidth="75.0" text="IDPost" />
                 <TableColumn fx:id="ContentPost" prefWidth="75.0" text=" ContentPost" />
-                <TableColumn fx:id="PhotoPost" text=" PhotoPost" />
+                <TableColumn fx:id="PhotoPost" text=" PhotoPost" >
+
+                </TableColumn>
                 <TableColumn fx:id="DatePost" prefWidth="103.0" text="DatePost" />
                 <TableColumn fx:id="UserID" prefWidth="103.0" text="UserID" />
                 <TableColumn fx:id="CategoryPost" prefWidth="103.0" text="CategoryPost" />
@@ -103,7 +105,7 @@
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Label>
-      <Button fx:id="DeletePostAD" layoutX="676.0" layoutY="655.0" mnemonicParsing="false" onAction="#DeletePostAD" text="DeletePost" />
+        <Button fx:id="DeletePostAD" layoutX="676.0" layoutY="655.0" mnemonicParsing="false" onAction="#DeletePostAD" text="DeletePost" />
 
     </children>
 

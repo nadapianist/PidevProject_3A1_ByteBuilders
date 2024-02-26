@@ -1,12 +1,15 @@
 package tn.esprit.controller;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
+import javafx.util.Callback;
+import javafx.scene.control.TableCell;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -135,7 +138,7 @@ void initpost(){
     PostsList.setItems(observableListt);
     IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
     ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
-            PhotoPost.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPhotoPost()));
+          /*  PhotoPost.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPhotoPost()));
             PhotoPost.setCellFactory(param -> new TableCell<>() {
                 private final ImageView imageView = new ImageView();
                 {
@@ -156,7 +159,40 @@ void initpost(){
                         setGraphic(imageView);
                     }
                 }
-            });
+            });*/
+           // PhotoPost.setCellValueFactory(new PropertyValueFactory<>("PhotoPost"));
+PhotoPost.setCellFactory(column -> {
+    return new TableCell<post,String>() {
+        private final ImageView imageView = new ImageView();
+
+        {
+            imageView.setFitWidth(150);
+            imageView.setFitHeight(130);
+            setGraphic(imageView);
+        }
+
+        @Override
+        protected void updateItem(String imagePath, boolean empty) {
+
+            super.updateItem(imagePath, empty);
+            if (imagePath == null || empty) {
+                imageView.setImage(null);
+            } else {
+                try {
+                    Image image = new Image(new File(imagePath).toURI().toString());
+                    imageView.setImage(image);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    };
+});
+
+
+
 
     DatePost.setCellValueFactory(new PropertyValueFactory<>("DatePost"));
     UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
@@ -350,3 +386,4 @@ void initpost(){
     }
 
 }
+
