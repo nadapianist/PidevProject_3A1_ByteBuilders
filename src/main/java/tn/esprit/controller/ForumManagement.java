@@ -1,18 +1,26 @@
 package tn.esprit.controller;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import tn.esprit.entities.forum;
 import tn.esprit.entities.post;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -119,6 +127,7 @@ public class ForumManagement {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }}
+    @FXML
 void initpost(){
         try{
     List<post> posts=ps.displayList();
@@ -126,7 +135,29 @@ void initpost(){
     PostsList.setItems(observableListt);
     IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
     ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
-    PhotoPost.setCellValueFactory(new PropertyValueFactory<>("PhotoPost"));
+            PhotoPost.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPhotoPost()));
+            PhotoPost.setCellFactory(param -> new TableCell<>() {
+                private final ImageView imageView = new ImageView();
+                {
+                    // Set dimensions for the image view as needed
+                    imageView.setFitWidth(50);
+                    imageView.setFitHeight(50);
+                }
+                @Override
+                protected void updateItem(String imagePath, boolean empty) {
+                    super.updateItem(imagePath, empty);
+
+                    if (empty || imagePath == null) {
+                        setGraphic(null);
+                    } else {
+                        // Assuming imagePath is a valid file path
+                        Image image = new Image(new File(imagePath).toURI().toString());
+                        imageView.setImage(image);
+                        setGraphic(imageView);
+                    }
+                }
+            });
+
     DatePost.setCellValueFactory(new PropertyValueFactory<>("DatePost"));
     UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
     CategoryPost.setCellValueFactory(new PropertyValueFactory<>("CategoryPost"));}
