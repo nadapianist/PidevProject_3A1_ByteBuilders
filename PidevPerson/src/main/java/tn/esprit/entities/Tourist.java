@@ -25,7 +25,8 @@ final public class Tourist extends User {
 
     }
 
-
+    public Tourist(int id, String fname, String lname, String email, String password, int phone, String role, String bio, String preferences) {
+    }
 
 
     public String getFname(){return Fname;}

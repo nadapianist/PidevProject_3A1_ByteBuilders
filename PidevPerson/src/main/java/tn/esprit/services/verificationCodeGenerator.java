@@ -4,6 +4,8 @@ import tn.esprit.entities.User;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
+
 public class verificationCodeGenerator {
     public static String generateVerificationCode(User user) {
         // Generate a hash code based on the user information
@@ -19,16 +21,15 @@ public class verificationCodeGenerator {
         String hashedString = hashString(combinedString);
 
         // Extract a subset of the hash value as the verification code
-
         return hashedString.substring(0, 6);
     }
 
     private static String generateRandomSalt() {
-        // Generate a random salt using SecureRandom
+        // Generate a random salt using SecureRandom and encode it using Base64
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
-        return new String(salt);
+        return Base64.getEncoder().encodeToString(salt);
     }
 
     private static String hashString(String input) {
@@ -50,5 +51,4 @@ public class verificationCodeGenerator {
             return null;
         }
     }
-
 }

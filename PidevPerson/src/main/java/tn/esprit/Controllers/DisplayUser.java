@@ -237,23 +237,10 @@ public class DisplayUser {
         }
     }
 
-    public void updateL(ActionEvent actionEvent) {
-        LocalCom localSelected = (LocalCom) tableL.getSelectionModel().getSelectedItem();
-        if (localSelected != null) {
-            closewindow(actionEvent);
-            openupdateLocal(localSelected);
-        } else {
-            System.out.println("You must select a local committee");
-        }
-    }
-
-    private void openupdateLocal(LocalCom localCom) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateLocalCom.fxml"));
-        Parent root;
+    public void displayUsers(ActionEvent actionEvent) {
         try {
-            root = loader.load();
-            updateLocalCom modifiedLocal = loader.getController();
-            modifiedLocal.initDonneesLocal(localCom);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/displayUsers.fxml"));
+            Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -262,7 +249,22 @@ public class DisplayUser {
         }
     }
 
+    public void logOut(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }
 
 
-}
 

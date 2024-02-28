@@ -24,8 +24,8 @@ sealed abstract public class User permits Tourist,Admin,LocalCom{
         return verifcode;
     }
 
-    public void setVerifcode(String verifcode) {
-        this.verifcode = verifcode;
+    public void setVerification_code(String verificationCode) {
+        this.verifcode = verificationCode;
     }
 
     @Override
@@ -82,6 +82,5 @@ sealed abstract public class User permits Tourist,Admin,LocalCom{
     }
 
 
-    public void setVerification_code(String verificationCode) {
-    }
+
 }

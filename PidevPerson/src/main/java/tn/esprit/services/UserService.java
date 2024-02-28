@@ -2,9 +2,8 @@ package tn.esprit.services;
 import tn.esprit.entities.User;
 import tn.esprit.utils.MyDatabase;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
+
 import tn.esprit.entities.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -240,13 +239,18 @@ public  class UserService implements  IUser<User> {
                     String verifcode = res.getString(11);
 
                     if ("tourist".equals(role)) {
-                        ur = new Tourist( UserID,Email, pwd, Fname, Lname,phone,  Bio,  Preferences);
+                        ur = new Tourist(UserID, Email, pwd, Fname, Lname, phone, Bio, Preferences);
                     } else if ("admin".equals(role)) {
                         ur = new Admin(UserID, Email, pwd, role);
                     } else if ("localCom".equals(role)) {
-                        ur = new LocalCom( UserID, Email, pwd, Fname, Lname, phone,Availability);
+                        ur = new LocalCom(UserID, Email, pwd, Fname, Lname, phone, Availability);
                     } else {
                         throw new IllegalArgumentException("Invalid user type: " + role);
+                    }
+
+                    // Check for null and assign an empty string if needed
+                    if (verifcode != null) {
+                        ur.setVerification_code(verifcode);
                     }
                 }
             }
@@ -254,4 +258,93 @@ public  class UserService implements  IUser<User> {
 
         return ur;
     }
+
+
+    public List<User> searchByName(String nom) throws SQLException {
+        List<User> resultats = new ArrayList<>();
+
+        final String query = "SELECT * FROM user WHERE Email LIKE ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, "%" + nom + "%");  // Utilisation de LIKE pour rechercher partiellement
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("UserID");
+                    final String email = rs.getString("Email");
+                    final String password = rs.getString("pwd");
+                    final String role = rs.getString("role");
+
+                    final User utilisateur = switch (role) {
+                        case "admin" -> new Admin(id, email, password);
+                        case "tourist" -> new Tourist(id,rs.getString("Fname"),  rs.getString("Lname"),email, password, rs.getInt("phone"),role,rs.getString("Bio"),rs.getString("Preferences"));
+                        case "localCom" -> new Tourist(id,rs.getString("Fname"),  rs.getString("Lname"),email, password, rs.getInt("phone"),
+                                role,rs.getString("Availability"));
+                        default -> throw new IllegalArgumentException("Invalid user type: " + role);
+                    };
+
+                    resultats.add(utilisateur);
+                }
+            }
+        }
+
+        return resultats;
+    }
+
+    public List<User> diplayListsortedbymail() throws SQLException {
+        List<User> sortedUsers = this.listAll();
+        Collections.sort(sortedUsers, Comparator.comparing(User::getEmail));
+        return sortedUsers;
+    }
+
+    public void updatePassword(int userId, String newPassword) throws SQLException {
+        String query = "UPDATE user SET pwd = ? WHERE UserID = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, newPassword);
+            stmt.setInt(2, userId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void updateVerificationCode(int userId, String verificationCode) throws SQLException {
+        String query = "UPDATE user SET verifcode = ? WHERE UserID = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, verificationCode);
+            stmt.setInt(2, userId);
+            stmt.executeUpdate();
+        }
+    }
+    public String getVerificationCodeByUserId(int userId) throws SQLException {
+        String query = "SELECT verifcode FROM User WHERE UserID = ?";
+        String verifcode = null;
+
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, userId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    verifcode = resultSet.getString("verifcode");
+                }
+            }
+        }
+
+        return verifcode;
+    }
+
+    public String getEmailByUserId(int userId) throws SQLException {
+        String query = "SELECT Email FROM User WHERE UserID = ?";
+        String email = null;
+
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, userId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    email = resultSet.getString("Email");
+                }
+            }
+        }
+
+        return email;
+    }
+
 }

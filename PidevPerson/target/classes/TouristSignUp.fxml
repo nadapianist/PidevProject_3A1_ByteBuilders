@@ -13,10 +13,10 @@
    <children>
       <AnchorPane layoutX="30.0" layoutY="35.0" prefHeight="458.0" prefWidth="438.0" style="-fx-background-radius: 20; -fx-background-color: white;" stylesheets="@/Style/design.css">
          <children>
-            <FontAwesomeIconView glyphName="USER" layoutX="133.0" layoutY="69.0" size="50" />
-            <Label alignment="CENTER" layoutX="173.0" layoutY="42.0" prefHeight="18.0" prefWidth="99.0" text="Tourist Sign Up" textAlignment="RIGHT">
+            <FontAwesomeIconView glyphName="USER" layoutX="110.0" layoutY="69.0" size="50" />
+            <Label alignment="CENTER" layoutX="139.0" layoutY="39.0" prefHeight="24.0" prefWidth="178.0" text="Tourist Sign Up" textAlignment="RIGHT">
                <font>
-                  <Font name="Gill Sans MT Bold" size="12.0" />
+                  <Font name="Gill Sans MT Bold" size="20.0" />
                </font></Label>
             <TextField fx:id="FnameID" alignment="CENTER" layoutX="40.0" layoutY="136.0" promptText="First Name" style="-fx-background-radius: 55;" />
             <TextField fx:id="BioID" alignment="CENTER" layoutX="239.0" layoutY="177.0" promptText="Bio" style="-fx-background-radius: 55;" />
@@ -25,10 +25,14 @@
             <TextField fx:id="EmailID" alignment="CENTER" layoutX="39.0" layoutY="91.0" promptText="Email" style="-fx-background-radius: 55;" />
             <TextField fx:id="PreferencesID" alignment="CENTER" layoutX="40.0" layoutY="229.0" promptText="Preferences" style="-fx-background-radius: 55;" />
             <PasswordField fx:id="PasswordID" alignment="CENTER" layoutX="238.0" layoutY="87.0" promptText="Password" style="-fx-background-radius: 55;" />
-            <Button layoutX="260.0" layoutY="367.0" mnemonicParsing="false" onAction="#signup" style="-fx-background-color: #fba819; -fx-background-radius: 55;" text="Sign Up" />
+            <Button layoutX="260.0" layoutY="367.0" mnemonicParsing="false" onAction="#signup" style="-fx-background-color: #fba819; -fx-background-radius: 55;" text="Sign Up">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
             <TextField fx:id="txtcaptcha" alignment="CENTER" layoutX="240.0" layoutY="229.0" promptText="Captcha Code" style="-fx-background-radius: 55;" />
-            <Button alignment="CENTER" layoutX="345.0" layoutY="367.0" mnemonicParsing="false" onAction="#regenerate" style="-fx-background-color: #fba819; -fx-background-radius: 55;" stylesheets="@Style/design.css" text="Regenerate" />
+            <Button alignment="CENTER" layoutX="345.0" layoutY="367.0" mnemonicParsing="false" onAction="#regenerate" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #fba819; -fx-background-radius: 55;" stylesheets="@Style/design.css" />
             <ImageView fx:id="captchaimg" fitHeight="90.0" fitWidth="150.0" layoutX="243.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
+            <FontAwesomeIconView glyphName="REFRESH" layoutX="371.0" layoutY="387.0" size="20" />
          </children>
       </AnchorPane>
    </children>
