@@ -12,6 +12,8 @@ public class post {
     private int  IDPost, UserID;
    private String categoryPost,ContentPost	,PhotoPost;
     private Date DatePost;
+    private String photoPath;
+
 
 
     public post(int IDPost, String contentPost,String photoPost,   Date datePost,int userID, String categoryPost) {
@@ -122,6 +124,13 @@ public class post {
                 '}';
     }
 
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
 
     public void setPostData(post p) {
     }

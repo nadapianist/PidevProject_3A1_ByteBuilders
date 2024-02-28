@@ -93,35 +93,32 @@ public class AddPost implements Initializable  {
         }}
 
     @FXML
-    void AddNewPost(ActionEvent event){
-
+    void AddNewPost(ActionEvent event) {
         try {
             String content = ContentPost.getText().trim();
             String category = categoryPost.getValue();
-            if (content.isEmpty() || category == null || category.equals("pick category!")){
+            String imagePath = (PhotoPost.getImage() != null) ? PhotoPost.getImage().getUrl() : null;
+
+            if (content.isEmpty() || category == null || category.equals("pick category!")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setContentText("Content and Category are mandatory fields");
                 alert.showAndWait();
-            }else{
-            ps.add(new post(
-                    ContentPost.getText()
-                    , PhotoPost.getId()
-                    , (String) categoryPost.getValue(),123
-            ));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Confirmation");
-            alert.setContentText("A post is added");
-            alert.showAndWait();}
+            } else {
+                post newPost = new post(content, imagePath, category, 123);
+                ps.add(newPost);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Confirmation");
+                alert.setContentText("A post is added");
+                alert.showAndWait();
+            }
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-
         }
-
-
     }
 
 

@@ -85,7 +85,7 @@ public class ForumManagement {
     @FXML
     private TableColumn<post, Integer> NB_posts;
 
-   // @FXML
+    // @FXML
     //private TextField NB_postsid;
 
     @FXML
@@ -113,7 +113,7 @@ public class ForumManagement {
                 if (newSelection != null) {
                     // Update text fields with the selected forum's data
                     ContentForumid.setText(newSelection.getContentForum());
-                  // NB_postsid.setText(String.valueOf(newSelection.getNB_posts()));
+                    // NB_postsid.setText(String.valueOf(newSelection.getNB_posts()));
                     Categoryid.setText(newSelection.getCategory());
 
                 }
@@ -127,7 +127,7 @@ public class ForumManagement {
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
             initpost();
-        // initcat();
+            // initcat();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -144,63 +144,60 @@ public class ForumManagement {
             // Set the ComboBox items
             comboBox.setItems(FXCollections.observableArrayList(categories));
             comboBox.setValue(categories.get(0)); // Set a default value if needed
-     }catch(SQLException e){
+        }catch(SQLException e){
             e.printStackTrace();
         }
     }
 
     @FXML
-void initpost(){
+    void initpost(){
         try{
 
-    List<post> posts=ps.displayList();
-    ObservableList<post> observableListt= FXCollections.observableList(posts);
-    PostsList.setItems(observableListt);
-    IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
-    ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
-PhotoPost.setCellFactory(column -> {
-    return new TableCell<post,String>() {
-        private final ImageView imageView = new ImageView();
+            List<post> posts=ps.displayList();
+            ObservableList<post> observableListt= FXCollections.observableList(posts);
+            PostsList.setItems(observableListt);
+            IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
+            ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
+            PhotoPost.setCellFactory(column -> {
+                return new TableCell<post,String>() {
+                    private final ImageView imageView = new ImageView();
 
-        {
-            imageView.setFitWidth(150);
-            imageView.setFitHeight(130);
-            setGraphic(imageView);
-        }
-        @Override
-        protected void updateItem(String imagePath, boolean empty) {
+                    {
+                        imageView.setFitWidth(150);
+                        imageView.setFitHeight(130);
+                        setGraphic(imageView);
+                    }
+                    @Override
+                    protected void updateItem(String imagePath, boolean empty) {
 
-            super.updateItem(imagePath, empty);
-            if (imagePath == null || empty) {
-                imageView.setImage(null);
-            } else {
-                try {
-                    Image image = new Image(new File(imagePath).toURI().toString());
-                    imageView.setImage(image);
+                        super.updateItem(imagePath, empty);
+                        if (imagePath == null || empty) {
+                            imageView.setImage(null);
+                        } else {
+                            try {
+                                Image image = new Image(new File(imagePath).toURI().toString());
+                                imageView.setImage(image);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
-            }
-        }
-    };
-});
+                        }
+                    }
+                };
+            });
 
-
-
-
-    DatePost.setCellValueFactory(new PropertyValueFactory<>("DatePost"));
-    UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
-    CategoryPost.setCellValueFactory(new PropertyValueFactory<>("CategoryPost"));}
+            DatePost.setCellValueFactory(new PropertyValueFactory<>("DatePost"));
+            UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+            CategoryPost.setCellValueFactory(new PropertyValueFactory<>("CategoryPost"));}
         catch (SQLException e){
-        Alert alert= new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("ERROR");
-        alert.setContentText(e.getMessage());
-        alert.showAndWait();
+            Alert alert= new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
 
+        }
     }
-}
 
 
     @FXML
@@ -222,20 +219,20 @@ PhotoPost.setCellFactory(column -> {
                 alert.showAndWait();}
 
             else{
-            forum f=new forum();
-            //f.setIDForum(Integer.parseInt(IDForumid.getText()));
-            f.setContentForum((ContentForumid.getText()));
-           // f.setNB_posts(Integer.parseInt(NB_postsid.getText()));
-            f.setCategory(Categoryid.getText());
-            fs.add(f);
-            initialize();
-               // fs.updateForumPostCount(f.getCategory());
+                forum f=new forum();
+                //f.setIDForum(Integer.parseInt(IDForumid.getText()));
+                f.setContentForum((ContentForumid.getText()));
+                // f.setNB_posts(Integer.parseInt(NB_postsid.getText()));
+                f.setCategory(Categoryid.getText());
+                fs.add(f);
+                initialize();
+                // fs.updateForumPostCount(f.getCategory());
 
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Confirmation");
-            alert.setContentText("A new forum is added");
-            alert.showAndWait();}
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Confirmation");
+                alert.setContentText("A new forum is added");
+                alert.showAndWait();}
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -296,7 +293,7 @@ PhotoPost.setCellFactory(column -> {
             try {
                 // Update the selected forum with the values from the text fields
                 selectedForum.setContentForum(ContentForumid.getText());
-               // selectedForum.setNB_posts(Integer.parseInt(NB_postsid.getText()));
+                // selectedForum.setNB_posts(Integer.parseInt(NB_postsid.getText()));
                 selectedForum.setCategory(Categoryid.getText());
 
                 // Call your service method to update the forum
@@ -332,7 +329,7 @@ PhotoPost.setCellFactory(column -> {
             try {
                 // Call your service method to delete the forum
                 ps.delete(selectedPost.getIDPost());
-               // ForumList.refresh();
+                // ForumList.refresh();
                 List<forum> forums = fs.displayList();
                 ObservableList<forum> observableList = FXCollections.observableList(forums);
                 ForumList.setItems(observableList);
@@ -367,7 +364,7 @@ PhotoPost.setCellFactory(column -> {
     }
     public void SortForum(ActionEvent actionEvent) {
         try {
-String selectedCategory=comboBox.getValue();
+            String selectedCategory=comboBox.getValue();
             List<forum> SearchResults = fs.SortForum(selectedCategory);
             ObservableList<forum> observableList= FXCollections.observableList(SearchResults);
             ForumList.setItems(observableList);
@@ -387,4 +384,3 @@ String selectedCategory=comboBox.getValue();
     }
 
 }
-
