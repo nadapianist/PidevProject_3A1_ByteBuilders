@@ -1,5 +1,8 @@
 package tn.esprit.Controller;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,18 +13,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import tn.esprit.Entity.Location;
 import tn.esprit.Entity.Transport;
 import tn.esprit.Exception.InvalidLengthException;
 import tn.esprit.Services.TransportService;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
+import com.google.zxing.client.j2se.MatrixToImageWriter;
 public class ShowTransports {
     public final int  MAXLENGTH=10;
+    @FXML
+    private Button generateButton;
+    @FXML
+    private ImageView QrView;
     @FXML
     private TextField SearchField;
     @FXML
@@ -99,7 +111,24 @@ public class ShowTransports {
         ManageLocationsButton.getScene().setRoot(root);
         System.out.println("moved");
     }
+    public void generateQRCodeForSelectedTransport() {
+        Transport selectedTransport = TransportList.getSelectionModel().getSelectedItem();
 
+        if (selectedTransport != null) {
+            String transportData = selectedTransport.toString(); // Convert transport data to string for QR code generation
+            System.out.println(transportData);
+            try {
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                BitMatrix bitMatrix = new MultiFormatWriter().encode(transportData, BarcodeFormat.QR_CODE, 200, 200);
+                MatrixToImageWriter.writeToStream(bitMatrix, "PNG", out);
+                byte[] qrCodeBytes = out.toByteArray();
+                Image qrCodeImage = new Image(new ByteArrayInputStream(qrCodeBytes));
+                QrView.setImage(qrCodeImage); // Display QR code in ImageView
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void AddNewTransport(ActionEvent actionEvent) {
 
         try{
@@ -228,5 +257,9 @@ public class ShowTransports {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }
+
+    public void generateQr(MouseEvent mouseEvent) {
+        generateQRCodeForSelectedTransport();
     }
 }
