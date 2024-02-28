@@ -41,7 +41,7 @@ public class AddPost implements Initializable {
     private Button CancelAddingButton;
 
     @FXML
-    private ComboBox <String> CategoryPost;
+    private ComboBox <String> categoryPost;
 
     @FXML
     private TextArea ContentPost;
@@ -68,8 +68,8 @@ public class AddPost implements Initializable {
             // If you have any default values, add them
             categories.add(0, "pick category!");
             // Set the ComboBox items
-            CategoryPost.setItems(FXCollections.observableArrayList(categories));
-            CategoryPost.setValue(categories.get(0)); // Set a default value if needed
+            categoryPost.setItems(FXCollections.observableArrayList(categories));
+            categoryPost.setValue(categories.get(0)); // Set a default value if needed
         } catch (SQLException e) {
             // Handle the exception
             e.printStackTrace();
@@ -104,15 +104,23 @@ public class AddPost implements Initializable {
     void AddNewPost(ActionEvent event){
 
         try {
+            String content = ContentPost.getText().trim();
+            String category = categoryPost.getValue();
+            if (content.isEmpty() || category == null || category.equals("pick category!")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText("Content and Category are mandatory fields");
+                alert.showAndWait();
+            }else{
             ps.add(new post(
                     ContentPost.getText()
                     , PhotoPost.getId()
-                    , (String) CategoryPost.getValue(),123
+                    , (String) categoryPost.getValue(),123
             ));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Confirmation");
             alert.setContentText("A post is added");
-            alert.showAndWait();
+            alert.showAndWait();}
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");

@@ -90,8 +90,8 @@ public class ForumManagement {
     @FXML
     private TableColumn<post, Integer> NB_posts;
 
-    @FXML
-    private TextField NB_postsid;
+   // @FXML
+    //private TextField NB_postsid;
 
     @FXML
     private TableColumn<post, String > PhotoPost;
@@ -107,7 +107,7 @@ public class ForumManagement {
     private TableColumn<post, Integer> UserID;
     private final postService ps=new postService();
     private final forumService fs=new forumService();
-    public final int MAXLENGTH=10;
+    public final int MAXLENGTH=15;
 
     @FXML
     void initialize() {
@@ -117,7 +117,7 @@ public class ForumManagement {
                 if (newSelection != null) {
                     // Update text fields with the selected forum's data
                     ContentForumid.setText(newSelection.getContentForum());
-                   NB_postsid.setText(String.valueOf(newSelection.getNB_posts()));
+                  // NB_postsid.setText(String.valueOf(newSelection.getNB_posts()));
                     Categoryid.setText(newSelection.getCategory());
                 }
             });
@@ -129,7 +129,7 @@ public class ForumManagement {
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
             initpost();
-           // initcat();
+          // initcat();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -209,18 +209,35 @@ PhotoPost.setCellFactory(column -> {
     void AddNewForum(ActionEvent event)  {
         try{
             validateStringLength(ContentForum.getText(), MAXLENGTH);
+
+            if (Categoryid.getText().trim().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText("Category must be filled");
+                alert.showAndWait();}
+
+            else if  (fs.isCategoryExists(Categoryid.getText())) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText("Category already exists");
+                alert.showAndWait();}
+
+            else{
             forum f=new forum();
             //f.setIDForum(Integer.parseInt(IDForumid.getText()));
             f.setContentForum((ContentForumid.getText()));
-            f.setNB_posts(Integer.parseInt(NB_postsid.getText()));
+           // f.setNB_posts(Integer.parseInt(NB_postsid.getText()));
             f.setCategory(Categoryid.getText());
             fs.add(f);
             initialize();
+               // fs.updateForumPostCount(f.getCategory());
+
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Confirmation");
             alert.setContentText("A new forum is added");
-            alert.showAndWait();
+            alert.showAndWait();}
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -234,6 +251,7 @@ PhotoPost.setCellFactory(column -> {
             alert.showAndWait();
         }
     }
+
 
     public static void validateStringLength(String str, int maxLength) throws InvalidLengthException {
         if (str.length() > maxLength) {
@@ -276,7 +294,7 @@ PhotoPost.setCellFactory(column -> {
             try {
                 // Update the selected forum with the values from the text fields
                 selectedForum.setContentForum(ContentForumid.getText());
-                selectedForum.setNB_posts(Integer.parseInt(NB_postsid.getText()));
+               // selectedForum.setNB_posts(Integer.parseInt(NB_postsid.getText()));
                 selectedForum.setCategory(Categoryid.getText());
 
                 // Call your service method to update the forum
@@ -292,58 +310,6 @@ PhotoPost.setCellFactory(column -> {
             }
         }
     }
-
-
-
-
-    /*@FXML
-    void SearchByContent(ActionEvent event) {
-        try {
-            String content = ContentSearchField.getText();
-            List<forum> SearchResults = fs.SearchByContent(content);
-            ObservableList<forum> observableList= FXCollections.observableList(SearchResults);
-            ForumList.setItems(observableList);
-            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
-            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
-            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
-            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
-
-
-        }catch(SQLException e){
-            Alert alert= new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
-
-    }*/
-    /*@FXML
-    void SearchByContent(KeyEvent event) {
-        try {
-            String content = ContentSearchField.getText();
-            List<forum> SearchResults;
-
-
-            if (content.isEmpty()) {
-                // If the search field is empty, display all forums
-                SearchResults = fs.displayList();
-            } else {
-                // Use a service method to search by content dynamically
-                SearchResults = fs.SearchByContent(content);            }
-
-            ObservableList<forum> observableList = FXCollections.observableList(SearchResults);
-            ForumList.setItems(observableList);
-            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
-            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
-            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
-            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
-    }*/
 
 
     @FXML
@@ -386,6 +352,7 @@ PhotoPost.setCellFactory(column -> {
             ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
+
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");

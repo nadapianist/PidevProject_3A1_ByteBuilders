@@ -60,17 +60,11 @@
                     </font>
                 </Label>
                 <TextField fx:id="ContentForumid" layoutX="124.0" layoutY="84.0" prefHeight="26.0" prefWidth="133.0" />
-                <TextField fx:id="NB_postsid" layoutX="124.0" layoutY="132.0" prefHeight="26.0" prefWidth="134.0" />
                 <TextField fx:id="Categoryid" layoutX="124.0" layoutY="187.0" prefHeight="26.0" prefWidth="134.0" />
                 <Button fx:id="AddButton" layoutX="64.0" layoutY="336.0" mnemonicParsing="false" onAction="#AddNewForum" styleClass="btn" stylesheets="@design.css" text=" Add " />
                 <Button fx:id="EditButton" layoutX="236.0" layoutY="336.0" mnemonicParsing="false" onAction="#SaveChanges" styleClass="btn" stylesheets="@design.css" text="Save" />
                 <Button fx:id="DeleteLocButton" layoutX="141.0" layoutY="336.0" mnemonicParsing="false" onAction="#DeleteForumById" styleClass="btn" stylesheets="@design.css" text=" Delete " />
                 <Label layoutX="16.0" layoutY="87.0" text="ContentForum" textFill="#f7f7f7">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-                <Label layoutX="9.0" layoutY="135.0" text="Number of posts" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>

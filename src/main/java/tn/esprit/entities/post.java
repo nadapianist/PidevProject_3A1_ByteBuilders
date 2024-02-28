@@ -38,8 +38,8 @@ public class post {
         ContentPost = contentPost;
         PhotoPost = photoPost;
     }
-    public post(String ContentPost, String PhotoPost, String CategoryPost, int UserID) {
-        this.categoryPost = CategoryPost;
+    public post(String ContentPost, String PhotoPost, String categoryPost, int UserID) {
+        this.categoryPost = categoryPost;
         this.ContentPost = ContentPost;
         this.PhotoPost = PhotoPost;
         this.UserID=UserID;

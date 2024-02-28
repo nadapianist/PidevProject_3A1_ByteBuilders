@@ -63,7 +63,9 @@ public class forumService implements IService<forum>{
                     res.getInt("IDForum"),
                     res.getString("ContentForum"),
                     res.getInt("NB_posts"),
-                    res.getString("Category"));
+                    res.getString("Category"),
+                    res.getInt("IDPost")
+                    );
 
             forums.add(f);
         }
@@ -96,7 +98,8 @@ public class forumService implements IService<forum>{
                     res.getInt("IDForum"),
                     res.getString("ContentForum"),
                     res.getInt("NB_posts"),
-                    res.getString("Category"));
+                    res.getString("Category"),
+            res.getInt("IDPost"));
 
             forums.add(f);
         }
@@ -117,7 +120,8 @@ public class forumService implements IService<forum>{
                         res.getInt("IDForum"),
                         res.getString("ContentForum"),
                         res.getInt("NB_posts"),
-                        res.getString("Category"));
+                        res.getString("Category"),
+                        res.getInt("IDPost"));
 
                 forums.add(f);
             }
@@ -176,6 +180,29 @@ public class forumService implements IService<forum>{
 
         return categories;
     }
+    public boolean isCategoryExists(String category) throws SQLException {
+        String query = "SELECT COUNT(*) FROM forum WHERE Category = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, category);
+            ResultSet resultSet = ps.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
+            return count > 0;
+        }
+    }
+
+   /* public void updateForumPostCount(String category) throws SQLException {
+        String query = "UPDATE `forum` SET `NB_posts` = (SELECT COUNT(*) FROM `post` WHERE `categoryPost` = ?) WHERE `Category` = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, category);
+            ps.setString(2, category);
+            ps.executeUpdate();
+            System.out.println("Forum post count updated!");
+        }
+    }*/
+
+
+
 
 
 
