@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="447.0" prefWidth="602.0" style="-fx-background-color: #00aebd;" stylesheets="@Style/design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.Login">
+<AnchorPane prefHeight="450.0" prefWidth="602.0" style="-fx-background-color: #00aebd;" stylesheets="@Style/design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.Login">
    <children>
       <AnchorPane layoutX="276.0" prefHeight="447.0" prefWidth="326.0" style="-fx-background-color: white;">
          <children>
@@ -27,7 +27,7 @@
             <Label layoutX="70.0" layoutY="316.0" text="Dont't have an account? Sign Up " />
             <Button layoutX="81.0" layoutY="341.0" mnemonicParsing="false" onAction="#Tourist" style="-fx-background-radius: 55; -fx-background-color: #fba819;" text="Tourist" />
             <Button layoutX="156.0" layoutY="341.0" mnemonicParsing="false" onAction="#Local" style="-fx-background-radius: 55; -fx-background-color: #fba819;" text="Local committee" />
-            <Hyperlink layoutX="93.0" layoutY="258.0" text="Forgot you password?" />
+            <Hyperlink layoutX="93.0" layoutY="258.0" onAction="#RedirectToReset" text="Forgot your password?" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="84.0" fitWidth="82.0" layoutX="43.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">

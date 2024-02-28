@@ -5,9 +5,40 @@ sealed abstract public class User permits Tourist,Admin,LocalCom{
     protected int UserID;
     private String Email;
     private String pwd;
+    private String verifcode;
 
+    public User(int userID, String email, String pwd, String verifcode) {
+        UserID = userID;
+        Email = email;
+        this.pwd = pwd;
+        this.verifcode = verifcode;
+    }
 
-    protected User( String Email, String pwd) {
+    public User(String email, String pwd, String verifcode) {
+        Email = email;
+        this.pwd = pwd;
+        this.verifcode = verifcode;
+    }
+
+    public String getVerifcode() {
+        return verifcode;
+    }
+
+    public void setVerifcode(String verifcode) {
+        this.verifcode = verifcode;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "UserID=" + UserID +
+                ", Email='" + Email + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", verifcode='" + verifcode + '\'' +
+                '}';
+    }
+
+    protected User(String Email, String pwd) {
 
         this.Email = Email;
         this.pwd = pwd;
@@ -45,21 +76,12 @@ sealed abstract public class User permits Tourist,Admin,LocalCom{
     }
 
 
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userID=" + UserID +
-                ", email='" + Email + '\'' +
-                ", pwd='" + pwd + '\'' +
-
-                '}';
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(UserID, Email, pwd);
     }
 
 
+    public void setVerification_code(String verificationCode) {
+    }
 }

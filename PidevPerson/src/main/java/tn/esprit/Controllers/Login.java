@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import tn.esprit.entities.Admin;
 import tn.esprit.entities.LocalCom;
@@ -72,8 +73,13 @@ public class Login {
         }
 
     }
-    UserService UserService = new UserService();
+    UserService userService = new UserService();
+
     UserService su = new UserService();
+    private static Tourist connectedTourist;
+    public static Tourist getConnectedTourist() {
+        return connectedTourist;
+    }
 
     @FXML
     void SignIn(ActionEvent event) throws SQLException {
@@ -103,8 +109,23 @@ public class Login {
                 e.printStackTrace();
             }
         } else if (user instanceof Tourist) {
-            Tourist tourist = (Tourist) user;
-            System.out.println("tourist");
+            connectedTourist = (Tourist) user;
+
+            // Redirect to TouristAccount screen
+            try {
+                Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                loginStage.close();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/TouristAccount.fxml"));
+                Parent root = loader.load();
+                TouristAccount touristAccountController = loader.getController();
+                touristAccountController.initialize();  // Initialize tourist data
+                Stage touristAccountStage = new Stage();
+                touristAccountStage.setScene(new Scene(root));
+                touristAccountStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else if (user instanceof LocalCom) {
             LocalCom localcom = (LocalCom) user;
             System.out.println("localCom");
@@ -144,7 +165,29 @@ public class Login {
             return false;
         }
     }
+    @FXML
+    void RedirectToReset(ActionEvent event) throws IOException {
+        // Get the current stage (the login window)
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Load the Forgot Password FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resetPwd.fxml"));
+        Parent root = loader.load();
+
+        // Create a new stage for the forgot password window
+        Stage forgotPasswordStage = new Stage();
+        forgotPasswordStage.setScene(new Scene(root));
+
+        // Close the login window
+        currentStage.close();
+
+        // Show the forgot password window
+        forgotPasswordStage.show();
+    }
+
 
     }
+
+
 
 

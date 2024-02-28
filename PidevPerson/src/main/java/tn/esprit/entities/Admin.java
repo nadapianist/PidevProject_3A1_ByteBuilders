@@ -17,6 +17,9 @@ final public class Admin extends User {
 
     }
 
+    public Admin(int userID, String email, String pwd, String role) {
+    }
+
 
     @Override
     public String toString() {

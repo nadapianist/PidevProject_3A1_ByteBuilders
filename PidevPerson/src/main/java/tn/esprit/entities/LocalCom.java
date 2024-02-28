@@ -30,6 +30,9 @@ final public class LocalCom extends User {
         this.Availability=Availability;
 
     }
+
+
+
     public String getFname(){return Fname;}
     public void setFname(String Fname){this.Fname=Fname;}
 

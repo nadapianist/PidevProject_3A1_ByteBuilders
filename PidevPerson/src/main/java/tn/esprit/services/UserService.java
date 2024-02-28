@@ -189,4 +189,69 @@ public  class UserService implements  IUser<User> {
         }
 
     }
+
+    public boolean doesEmailExist(String email) throws SQLException {
+        String query = "SELECT COUNT(*) FROM User WHERE Email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, email);
+            try (ResultSet resultSet = ps.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0; // Return true if count is greater than 0, indicating the email exists
+                }
+            }
+        }
+        return false; // Return false if an exception occurs or no rows are found
+    }
+
+    public int getUidByEmail(String email) throws SQLException {
+        String query = "SELECT UserID FROM User WHERE Email = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("UserID");
+                } else {
+                    // Email not found
+                    return -1;
+                }
+            }
+        }
+    }
+
+    public User searchByUid(int UserID) throws SQLException {
+        String query = "SELECT * FROM User WHERE UserID = ?";
+        User ur = null;
+
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, UserID);
+
+            try (ResultSet res = statement.executeQuery()) {
+                if (res.next()) {
+                    String Fname = res.getString(2);
+                    String Lname = res.getString(3);
+                    String Email = res.getString(4);
+                    String pwd = res.getString(5);
+                    int phone = res.getInt(6);
+                    String role = res.getString(7);
+                    String Bio = res.getString(8);
+                    String Preferences = res.getString(9);
+                    String Availability = res.getString(10);
+                    String verifcode = res.getString(11);
+
+                    if ("tourist".equals(role)) {
+                        ur = new Tourist( UserID,Email, pwd, Fname, Lname,phone,  Bio,  Preferences);
+                    } else if ("admin".equals(role)) {
+                        ur = new Admin(UserID, Email, pwd, role);
+                    } else if ("localCom".equals(role)) {
+                        ur = new LocalCom( UserID, Email, pwd, Fname, Lname, phone,Availability);
+                    } else {
+                        throw new IllegalArgumentException("Invalid user type: " + role);
+                    }
+                }
+            }
+        }
+
+        return ur;
+    }
 }

@@ -5,21 +5,25 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="526.0" prefWidth="388.0" style="-fx-background-color: #00aebd;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.LocalComSignUpController">
+<AnchorPane prefHeight="532.0" prefWidth="500.0" style="-fx-background-color: #00aebd;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.LocalComSignUpController">
    <children>
-      <AnchorPane layoutX="36.0" layoutY="35.0" prefHeight="444.0" prefWidth="316.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@Style/design.css">
+      <AnchorPane layoutX="36.0" layoutY="35.0" prefHeight="458.0" prefWidth="438.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@Style/design.css">
          <children>
-            <FontAwesomeIconView glyphName="USER" layoutX="55.0" layoutY="78.0" size="50" text="" />
-            <Label alignment="CENTER" layoutX="98.0" layoutY="53.0" prefHeight="18.0" prefWidth="147.0" text="Local Committee Sign Up" />
-            <TextField fx:id="EmailID" alignment="CENTER" layoutX="89.0" layoutY="106.0" promptText="Email" />
-            <TextField fx:id="FnameID" alignment="CENTER" layoutX="89.0" layoutY="191.0" promptText="FirstName" />
-            <TextField fx:id="AvailabilityID" alignment="CENTER" layoutX="89.0" layoutY="309.0" promptText="Availability" />
-            <TextField fx:id="PhoneID" alignment="CENTER" layoutX="89.0" layoutY="272.0" promptText="Phone Number" />
-            <TextField fx:id="LnameID" alignment="CENTER" layoutX="89.0" layoutY="234.0" promptText="LastName" />
-            <PasswordField fx:id="PwdID" alignment="CENTER" layoutX="90.0" layoutY="150.0" promptText="Password" />
-            <Button layoutX="135.0" layoutY="370.0" mnemonicParsing="false" onAction="#SignUPLoc" text="Sign Up" />
+            <FontAwesomeIconView glyphName="USER" layoutX="109.0" layoutY="78.0" size="50" text="" />
+            <Label alignment="CENTER" layoutX="145.0" layoutY="51.0" prefHeight="18.0" prefWidth="147.0" text="Local Committee Sign Up" />
+            <TextField fx:id="EmailID" alignment="CENTER" layoutX="43.0" layoutY="104.0" promptText="Email" style="-fx-background-radius: 55;" />
+            <TextField fx:id="FnameID" alignment="CENTER" layoutX="43.0" layoutY="153.0" promptText="FirstName" style="-fx-background-radius: 55;" />
+            <TextField fx:id="AvailabilityID" alignment="CENTER" layoutX="231.0" layoutY="200.0" promptText="Availability" style="-fx-background-radius: 55;" />
+            <TextField fx:id="PhoneID" alignment="CENTER" layoutX="43.0" layoutY="200.0" promptText="Phone Number" style="-fx-background-radius: 55;" />
+            <TextField fx:id="LnameID" alignment="CENTER" layoutX="231.0" layoutY="153.0" promptText="LastName" style="-fx-background-radius: 55;" />
+            <PasswordField fx:id="PwdID" alignment="CENTER" layoutX="231.0" layoutY="104.0" promptText="Password" style="-fx-background-radius: 55;" />
+            <Button layoutX="244.0" layoutY="387.0" mnemonicParsing="false" onAction="#SignUPLoc" style="-fx-background-radius: 55; -fx-background-color: #fba819;" text="Sign Up" />
+            <TextField fx:id="txtcaptcha" alignment="CENTER" layoutX="232.0" layoutY="253.0" promptText="Captcha Code" style="-fx-background-radius: 55;" />
+            <ImageView fx:id="captchaimg" fitHeight="90.0" fitWidth="150.0" layoutX="232.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="323.0" layoutY="387.0" mnemonicParsing="false" onAction="#regenerate" style="-fx-background-radius: 55; -fx-background-color: #fba819;" text="Regenerate" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

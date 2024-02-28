@@ -1,4 +1,5 @@
 package tn.esprit.Controllers;
+import com.github.cage.Cage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,7 +32,7 @@ public class TouristSignUpController {
 
     @FXML
     private TextField EmailID;
-
+    private String captchaText;
     @FXML
     private TextField FnameID;
 
@@ -43,6 +47,13 @@ public class TouristSignUpController {
 
     @FXML
     private TextField PreferencesID;
+    @FXML
+    private ImageView captchaimg;
+
+    @FXML
+    private TextField txtcaptcha;
+
+
 
     //Empty Fields
     public Boolean VerifUserChamps() {
@@ -192,6 +203,18 @@ public class TouristSignUpController {
     }
     public void signup(javafx.event.ActionEvent actionEvent) throws SQLException {
         Tourist user = new Tourist();
+        String enteredCaptcha = txtcaptcha.getText();
+
+        // Validate captcha
+        if (!enteredCaptcha.equalsIgnoreCase(captchaText)) {
+            // Captcha is incorrect, show an error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Captcha Incorrect.");
+            alert.showAndWait();
+            return; // Exit the method if captcha is incorrect
+        }
         if (this.CheckLogin() && this.VerifUserChamps() &&
                 this.validatePhoneNumber() && this.ValidateEmail() &&
                 this.restrictSpacesInFnameName() && this.allowOnlyLettersInField(FnameID, "First Name") &&
@@ -231,6 +254,33 @@ public class TouristSignUpController {
             }
         }
     }
+    @FXML
+    public void initialize() {
+        updateCaptcha();
+    }
+
+
+    public void regenerate(ActionEvent actionEvent) {
+        updateCaptcha();
+    }
+
+    private void updateCaptcha() {
+        Cage cage = new Cage();
+        String captchaText = cage.getTokenGenerator().next();
+
+        // Generate captcha image data
+        byte[] imageData = cage.draw(captchaText);
+
+        // Create Image object from byte array
+        javafx.scene.image.Image captchaImageSrc = new javafx.scene.image.Image(new ByteArrayInputStream(imageData));
+
+        // Set the Image object to the ImageView
+        captchaimg.setImage(captchaImageSrc);
+
+        // Store captcha text somewhere to validate later
+        this.captchaText = captchaText;
+    }
+
 
 }
 

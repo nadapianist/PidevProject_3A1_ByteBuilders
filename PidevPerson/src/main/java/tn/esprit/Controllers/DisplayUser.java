@@ -162,7 +162,7 @@ public class DisplayUser {
 
     @FXML
     void deleteA(ActionEvent event) throws SQLException {
-        User adminselec = tableL.getSelectionModel().getSelectedItem();
+        User adminselec = tableA.getSelectionModel().getSelectedItem();
         if (adminselec != null) {
             ser.delete(adminselec.getUserID());
 
@@ -261,32 +261,6 @@ public class DisplayUser {
             e.printStackTrace();
         }
     }
-
-    public void updateT(ActionEvent actionEvent) {
-        Tourist touristSelected = (Tourist) tabeT.getSelectionModel().getSelectedItem();
-        if (touristSelected != null) {
-            closewindow(actionEvent);
-            openupdateLocal(touristSelected);
-        } else {
-            System.out.println("You must select a tourist");
-        }
-    }
-
-    private void openupdateLocal(Tourist tourist) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/updateTourist.fxml"));
-        Parent root;
-        try {
-            root = loader.load();
-            updateTourist modifiedLocal = loader.getController();
-            modifiedLocal.initDonneesTourist(tourist);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 
 

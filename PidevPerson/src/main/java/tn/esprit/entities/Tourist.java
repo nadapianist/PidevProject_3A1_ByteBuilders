@@ -1,11 +1,12 @@
 package tn.esprit.entities;
-import tn.esprit.entities.User;
+
 final public class Tourist extends User {
     private String Fname;
     private String Lname;
     private int phone;
     private String Bio;
     private String Preferences;
+
 
 
     public Tourist(int UserID,String  Email, String pwd, String Fname, String Lname, int phone, String Bio, String Preferences) {
@@ -16,6 +17,7 @@ final public class Tourist extends User {
         this.phone = phone;
         this.Bio = Bio;
         this.Preferences=Preferences;
+
     }
 
     public Tourist()
@@ -23,14 +25,8 @@ final public class Tourist extends User {
 
     }
 
-    public Tourist(String  Email, String pwd, String Fname, String Lname, int phone, String Bio, String Preferences) {
-        super(Email,pwd);
-        this.Fname=Fname;
-        this.Lname=Lname;
-       this.phone=phone;
-        this.Bio = Bio;
-        this.Preferences = Preferences;
-    }
+
+
 
     public String getFname(){return Fname;}
     public void setFname(String Fname){this.Fname=Fname;}
@@ -51,6 +47,9 @@ public int getPhone(){return phone;}
     }
 
 
+
+
+
     public String getPreferences() {
         return Preferences;
     }
@@ -67,6 +66,7 @@ public int getPhone(){return phone;}
                 ", phone='" + phone + '\'' +
                 ", Bio='" + Bio + '\'' +
                 ", Preferences='" + Preferences + '\'' +
+
 
                 "} " + super.toString();
     }
