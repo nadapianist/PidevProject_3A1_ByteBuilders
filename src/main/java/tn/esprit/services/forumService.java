@@ -126,41 +126,7 @@ public class forumService implements IService<forum>{
                 forums.add(f);
             }
             return forums;}}
-    /*public List<String> getAllCategories() throws SQLException {
-        List<String> categories = new ArrayList<>();
 
-        // Assuming there is a method in your DAO or somewhere to retrieve unique categories
-        // Replace 'yourForumDao' with the actual instance of your DAO class
-        // Replace 'getUniqueCategories()' with the actual method to get unique categories
-        categories = ForumDao.getUniqueCategories();
-
-
-        return categories;
-    }*/
-    /*public List<String> getAllCategories() throws SQLException {
-        List<String> categories = new ArrayList<>();
-        try (Connection con = MyDataBase.instance.getCon();
-             Statement statement = con.createStatement()) {
-            // Fetch categories and populate the list
-            ResultSet resultSet = statement.executeQuery("SELECT Category FROM forum");
-            while (resultSet.next()) {
-                categories.add(resultSet.getString("Category"));
-            }
-        }
-        return categories;
-    }*/
-  /*  public List<String> getAllCategories() throws SQLException {
-        List<String> categories = new ArrayList<>();
-        try (Connection con = MyDataBase.instance.reconnect();
-             Statement statement = con.createStatement()) {
-            // Fetch categories and populate the list
-            ResultSet resultSet = statement.executeQuery("SELECT Category FROM forum");
-            while (resultSet.next()) {
-                categories.add(resultSet.getString("Category"));
-            }
-        }
-        return categories;
-    }*/
     @Override
     public List<String> getAllCategories() throws SQLException {
         String query;
@@ -190,21 +156,6 @@ public class forumService implements IService<forum>{
             return count > 0;
         }
     }
-
-   /* public void updateForumPostCount(String category) throws SQLException {
-        String query = "UPDATE `forum` SET `NB_posts` = (SELECT COUNT(*) FROM `post` WHERE `categoryPost` = ?) WHERE `Category` = ?";
-        try (PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setString(1, category);
-            ps.setString(2, category);
-            ps.executeUpdate();
-            System.out.println("Forum post count updated!");
-        }
-    }*/
-
-
-
-
-
 
 
 }

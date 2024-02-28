@@ -1,16 +1,10 @@
 package tn.esprit.controller;
-
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
-import javafx.util.Callback;
 import javafx.scene.control.TableCell;
-
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -22,17 +16,18 @@ import tn.esprit.entities.post;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
+
+
 import java.io.File;
-import java.net.URL;
+
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
+
 
 
 public class ForumManagement {
+
 
     @FXML
     private Button AddButton;
@@ -99,6 +94,7 @@ public class ForumManagement {
     @FXML
     private TableView<post> PostsList;
 
+
     @FXML
     private Button SearchButton;
 
@@ -119,9 +115,11 @@ public class ForumManagement {
                     ContentForumid.setText(newSelection.getContentForum());
                   // NB_postsid.setText(String.valueOf(newSelection.getNB_posts()));
                     Categoryid.setText(newSelection.getCategory());
+
                 }
             });
             List<forum> forums=fs.displayList();
+            ForumList.refresh();
             ObservableList<forum> observableList= FXCollections.observableList(forums);
             ForumList.setItems(observableList);
             IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
@@ -129,27 +127,27 @@ public class ForumManagement {
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
             initpost();
-          // initcat();
+        // initcat();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-        }}
+        }
+    }
     @FXML
     void initcat() {
-        try {
-            // Fetch categories from the database
+        try{
             List<String> categories = fs.getAllCategories();
             // If you have any default values, add them
             categories.add(0, "pick category!");
             // Set the ComboBox items
             comboBox.setItems(FXCollections.observableArrayList(categories));
             comboBox.setValue(categories.get(0)); // Set a default value if needed
-        } catch (SQLException e) {
-            // Handle the exception
+     }catch(SQLException e){
             e.printStackTrace();
-        }}
+        }
+    }
 
     @FXML
 void initpost(){
@@ -273,6 +271,10 @@ PhotoPost.setCellFactory(column -> {
 
                 // Remove the selected forum from the TableView
                 ForumList.getItems().remove(selectedForum);
+                List<forum> forums = fs.displayList();
+                ObservableList<forum> observableList = FXCollections.observableList(forums);
+                ForumList.setItems(observableList);
+
             } catch (SQLException e) {
                 // Handle any SQL exception
                 e.printStackTrace();
@@ -330,6 +332,10 @@ PhotoPost.setCellFactory(column -> {
             try {
                 // Call your service method to delete the forum
                 ps.delete(selectedPost.getIDPost());
+               // ForumList.refresh();
+                List<forum> forums = fs.displayList();
+                ObservableList<forum> observableList = FXCollections.observableList(forums);
+                ForumList.setItems(observableList);
 
                 // Remove the selected forum from the TableView
                 PostsList.getItems().remove(selectedPost);
@@ -340,7 +346,6 @@ PhotoPost.setCellFactory(column -> {
         }
 
     }
-
     public void SearchByContent(javafx.scene.input.KeyEvent keyEvent) {
         try {
             String content = ContentSearchField.getText();

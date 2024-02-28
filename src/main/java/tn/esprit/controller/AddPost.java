@@ -27,8 +27,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
-public class AddPost implements Initializable {
+public class AddPost implements Initializable  {
 
     @FXML
     private Button AddImage;
@@ -59,11 +58,9 @@ public class AddPost implements Initializable {
     //ObservableList<String> categoryPostList= FXCollections.observableArrayList("Activity","Challenge");
 
     @FXML
-    public void initialize(URL url, ResourceBundle resourceBundle){
-
+    public void initialize(URL url , ResourceBundle resourceBundle){
         try {
             // Fetch categories from the database
-
             List<String> categories = fs.getAllCategories();
             // If you have any default values, add them
             categories.add(0, "pick category!");
@@ -74,11 +71,6 @@ public class AddPost implements Initializable {
             // Handle the exception
             e.printStackTrace();
         }
-
-        // CategoryPost.setValue("Location");
-        // CategoryPost.setItems(categoryPostList);
-
-
     }
 
 
