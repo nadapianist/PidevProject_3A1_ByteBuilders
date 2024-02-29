@@ -18,7 +18,24 @@ public class postService implements IService<post> {
         con = MyDataBase.getInstance().getCon();
     }
 
+    public List<String> getImagePaths() throws SQLException {
+        List<String> imagePaths = new ArrayList<>();
 
+        try (
+             PreparedStatement statement = con.prepareStatement("SELECT PhotoPost FROM post")) {
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    String imagePath = resultSet.getString("PhotoPost");
+                    if (imagePath != null && !imagePath.isEmpty()) {
+                        imagePaths.add(imagePath);
+                    }
+                }
+            }
+        }
+
+        return imagePaths;
+    }
     @Override
     public void add(post p) throws SQLException {
         String query = "INSERT INTO `post`(`ContentPost`, `PhotoPost`, `DatePost`, `UserID`, `categoryPost`) VALUES (?, ?, ?, ?, ?)";

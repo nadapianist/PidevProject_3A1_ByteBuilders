@@ -15,7 +15,11 @@ public class post {
     private String photoPath;
 
 
-
+public post(String contentPost, String categoryPost,int userID){
+    this.ContentPost =contentPost;
+    this.categoryPost = categoryPost;
+    this.UserID = userID;
+}
     public post(int IDPost, String contentPost,String photoPost,   Date datePost,int userID, String categoryPost) {
         this.IDPost = IDPost;
         this.ContentPost =contentPost;
