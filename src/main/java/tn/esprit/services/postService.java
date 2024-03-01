@@ -79,6 +79,8 @@ public class postService implements IService<post> {
         System.out.println("post deleted!");
     }
 
+
+
     private post ResultPosts(ResultSet res) throws SQLException {
         return new post(
                 res.getInt("IDPost"),
@@ -197,6 +199,8 @@ public class postService implements IService<post> {
         }
 
     }
+
+
 }
 
 

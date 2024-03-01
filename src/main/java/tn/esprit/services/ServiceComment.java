@@ -22,9 +22,6 @@ public class ServiceComment {
     Statement stm;
     public ServiceComment(){con= MyDataBase.getInstance().getCon();}
 
-
-
-
     public void addComment(Comment comment) throws SQLException {
         String query = "INSERT INTO comment (user_id, post_id, commentt) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
@@ -35,7 +32,6 @@ public class ServiceComment {
             System.out.println("comment added!");
         }
     }
-
         public void update(Comment t) {
             try {
 
