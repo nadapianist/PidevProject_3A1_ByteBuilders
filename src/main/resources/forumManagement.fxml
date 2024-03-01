@@ -29,9 +29,8 @@
                 <Button layoutX="13.0" layoutY="295.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Challenge Management" />
                 <Button layoutX="12.0" layoutY="394.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Hostel Management" />
                 <Button layoutX="13.0" layoutY="444.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Reservation Management" />
-                <Button fx:id="ManagePostsButton" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#ToPostsPage" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Post Management" />
-                <Button fx:id="ManageForumButton" layoutX="12.0" layoutY="542.0" mnemonicParsing="false" onAction="#ToForumPage" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Forum Management" />
-                <Button layoutX="13.0" layoutY="591.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Transport Management" />
+                <Button fx:id="ManagePostsButton" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#ToPostsPage" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Forum &amp; Posts Management" />
+                <Button layoutX="14.0" layoutY="543.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Transport Management" />
                 <Button layoutX="13.0" layoutY="342.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" styleClass="nav-btn" stylesheets="@design.css" text="Review Management" />
                 <Line endX="100.0" layoutX="112.0" layoutY="116.0" startX="-100.0" />
                 <Label layoutX="47.0" layoutY="77.0" text="Welcome,Admin" textFill="WHITE">

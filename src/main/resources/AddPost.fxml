@@ -29,17 +29,17 @@
             <Button fx:id="AddPostButton" layoutX="508.0" layoutY="423.0" mnemonicParsing="false" onAction="#AddNewPost" styleClass="btn" stylesheets="@design.css" text=" Add Post" />
 
             <Button fx:id="CancelAddingButton" layoutX="516.0" layoutY="466.0" mnemonicParsing="false" onAction="#Backtoposts" styleClass="btn" text=" Cancel" />
-         <TextArea fx:id="ContentPost" layoutX="186.0" layoutY="73.0" prefHeight="90.0" prefWidth="322.0" />
-         <ImageView fx:id="PhotoPost" fitHeight="224.0" fitWidth="243.0" layoutX="225.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true" />
-         <Button fx:id="AddImage" layoutX="293.0" layoutY="239.0" mnemonicParsing="false" onAction="#AddImage" styleClass="btn" stylesheets="@design.css" text="Select Photo:" />
-         <ComboBox fx:id="categoryPost" layoutX="272.0" layoutY="198.0" onAction="#handleCategorySelection" prefWidth="150.0" stylesheets="@design.css" />
+            <TextArea fx:id="ContentPost" layoutX="186.0" layoutY="73.0" prefHeight="90.0" prefWidth="322.0" />
+            <ImageView fx:id="PhotoPost" fitHeight="224.0" fitWidth="243.0" layoutX="225.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="AddImage" layoutX="293.0" layoutY="239.0" mnemonicParsing="false" onAction="#AddImage" styleClass="btn" stylesheets="@design.css" text="Select Photo:" />
+            <ComboBox fx:id="categoryPost" layoutX="272.0" layoutY="198.0" onAction="#handleCategorySelection" prefWidth="150.0" stylesheets="@design.css" />
 
 
 
 
 
 
-            
+
         </children>
     </AnchorPane>
 </AnchorPane>

@@ -39,6 +39,7 @@ public post(String contentPost, String categoryPost,int userID){
         this.categoryPost = categoryPost;
     }
 
+
     public post(String categoryPost, String contentPost, String photoPost) {
         this.categoryPost = categoryPost;
         ContentPost = contentPost;

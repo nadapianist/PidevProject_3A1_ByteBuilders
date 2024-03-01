@@ -1,5 +1,7 @@
 package tn.esprit.services;
 import javafx.collections.ObservableList;
+import tn.esprit.entities.Tourist;
+import tn.esprit.entities.User;
 import tn.esprit.entities.forum;
 import tn.esprit.entities.post;
 import tn.esprit.utils.MyDataBase;
@@ -113,6 +115,56 @@ public class postService implements IService<post> {
         }
 
         return posts;
+    }
+    public List<post> updated() {
+        List<post> posts = new ArrayList<>();
+        try {
+            String req = "SELECT  * FROM `post` ORDER BY DatePost DESC";
+            Statement st = con.createStatement();
+            ResultSet res = st.executeQuery(req);
+
+            while (res.next()) {
+                post p = new post(
+
+                res.getInt("IDPost"),
+                        res.getString("ContentPost"),
+                        res.getString("PhotoPost"),
+                        res.getDate("DatePost"),
+                        res.getInt("UserID"),
+                        res.getString("categoryPost"));
+                forumService fs = new forumService();
+                //forum forumData = fs.getForumById(res.getInt("IDForum"));
+                //p.setForumCategory(forumData.getCategory());
+                // post p=ResultPosts(res);
+                // forumService fs = new forumService();
+
+                posts.add(p);
+            }
+            System.out.print(posts);
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return posts;
+    }
+    public Tourist OneUser(int idu) {
+        Tourist u = new Tourist();
+        try {
+            String req = "select * from user where id= "+idu;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                u.setFname(rs.getString("Fname"));
+                u.setLname(rs.getString("Lname"));
+                u.setUserID(idu);
+                System.out.println(u);
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return u ;
     }
 
     @Override

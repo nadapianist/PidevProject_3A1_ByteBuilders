@@ -3,9 +3,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
-import java.io.File;
 
 import javafx.scene.control.TableCell;
 import javafx.scene.control.*;
@@ -13,14 +14,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+
 import tn.esprit.Exception.InvalidLengthException;
 import tn.esprit.entities.forum;
 import tn.esprit.entities.post;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
 
-import java.net.URL;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -119,7 +120,7 @@ public class ForumManagement  {
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
             initpost();
-            initcat();
+///initcat();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -275,16 +276,17 @@ public class ForumManagement  {
             }
         }
     }
-    @FXML
-    void ToForumPage(ActionEvent event) {
 
-    }
 
     @FXML
-    void ToPostsPage(ActionEvent event) {
+    void ToPostsPage(ActionEvent event) throws IOException {
+            Parent root= FXMLLoader.load(getClass().getResource("/forumManagement.fxml"));
+        ManagePostsButton.getScene().setRoot(root);
+            System.out.println("moved");
+        }
 
-    }
-    public void DeletePostAD(ActionEvent actionEvent) {
+
+  /*  public void DeletePostAD(ActionEvent actionEvent) {
         post selectedPost = PostsList.getSelectionModel().getSelectedItem();
 
         if (selectedPost != null) {
@@ -303,7 +305,29 @@ public class ForumManagement  {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
+  public void DeletePostAD(ActionEvent actionEvent) {
+      post selectedPost = PostsList.getSelectionModel().getSelectedItem();
+
+      if (selectedPost != null) {
+          try {
+              // Call your service method to delete the post
+              ps.delete(selectedPost.getIDPost());
+
+              // Remove the selected post from the TableView
+              PostsList.getItems().remove(selectedPost);
+
+              // Refresh the ForumList to reflect the changes
+              List<forum> forums = fs.displayList();
+              ObservableList<forum> observableList = FXCollections.observableList(forums);
+              ForumList.setItems(observableList);
+          } catch (SQLException e) {
+              // Handle any SQL exception
+              e.printStackTrace();
+          }
+      }
+  }
+
     public void SearchByContent(javafx.scene.input.KeyEvent keyEvent) {
         try {
             String content = ContentSearchField.getText();

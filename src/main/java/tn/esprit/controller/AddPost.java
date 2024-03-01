@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import tn.esprit.entities.User;
 
 
 import javafx.fxml.Initializable;
@@ -122,20 +123,11 @@ private String selectedImagePath;
 
     @FXML
     void Backtoposts(ActionEvent event) throws IOException {
-        Parent root= FXMLLoader.load(getClass().getResource("/UserPost.fxml"));
+        Parent root= FXMLLoader.load(getClass().getResource("/Posts.fxml"));
         CancelAddingButton.getScene().setRoot(root);
         System.out.println("moved");
     }
 
-    @FXML
-    void ToForumPage(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ToPostsPage(ActionEvent event) {
-
-    }
 
     public void handleCategorySelection(ActionEvent actionEvent) {
     }
