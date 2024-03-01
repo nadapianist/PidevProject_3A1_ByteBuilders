@@ -109,7 +109,7 @@ public class forumService implements IService<forum>{
     @Override
     public List<forum> SortForum(String selectedCategory) throws SQLException {
         String query = "SELECT * FROM `forum` WHERE `Category`=?";
-        try (Connection con = MyDataBase.instance.getCon();
+        try (
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, selectedCategory);
             System.out.println("SQL Query: " + ps.toString());

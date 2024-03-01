@@ -45,6 +45,14 @@
     -fx-border-color: #ccc; /* Set border color */
     -fx-border-width: 1px; /* Set border width */
 }
+/* styles.css */
+.post-box {
+    -fx-border-color: #000000; /* Black border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius for rounded corners */
+    -fx-background-color: #c8f8c0;
+    -fx-padding: 10px;
+}
 
 .comment-button {
     -fx-font-family: 'Arial', sans-serif; /* Set font family */

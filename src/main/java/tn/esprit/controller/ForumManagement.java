@@ -120,7 +120,7 @@ public class ForumManagement  {
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
             initpost();
-///initcat();
+         initcat();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -249,6 +249,7 @@ public class ForumManagement  {
                 List<forum> forums = fs.displayList();
                 ObservableList<forum> observableList = FXCollections.observableList(forums);
                 ForumList.setItems(observableList);
+                initcat();
             } catch (SQLException e) {
                 // Handle any SQL exception
                 e.printStackTrace();
@@ -269,6 +270,7 @@ public class ForumManagement  {
                 fs.update(selectedForum);
                 // Refresh the TableView to reflect the changes
                 ForumList.refresh();
+                initcat();
                 System.out.println("Forum updated!");
             } catch (SQLException | NumberFormatException e) {
                 // Handle any SQL exception or number format exception
@@ -347,7 +349,7 @@ public class ForumManagement  {
             alert.showAndWait();
         }
     }
-    public void SortForum(ActionEvent actionEvent) {
+    /*public void SortForum(ActionEvent actionEvent) {
         try {
             String selectedCategory=comboBox.getValue();
             List<forum> SearchResults = fs.SortForum(selectedCategory);
@@ -365,5 +367,35 @@ public class ForumManagement  {
             alert.showAndWait();
         }
     }
+*/
+    public void SortForum(ActionEvent actionEvent) {
+        try {
+            String selectedCategory = comboBox.getValue();
+
+            // Check if "pick category" is selected
+            if (selectedCategory == null || selectedCategory.equals("pick category!")) {
+                // Get all forums
+                List<forum> SearchResults = fs.displayList();
+                ObservableList<forum> observableList = FXCollections.observableList(SearchResults);
+                ForumList.setItems(observableList);
+            } else {
+                // Get forums based on the selected category
+                List<forum> SearchResults = fs.SortForum(selectedCategory);
+                ObservableList<forum> observableList = FXCollections.observableList(SearchResults);
+                ForumList.setItems(observableList);
+            }
+
+            IDForum.setCellValueFactory(new PropertyValueFactory<>("IDForum"));
+            ContentForum.setCellValueFactory(new PropertyValueFactory<>("ContentForum"));
+            NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
+            Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
 
 }

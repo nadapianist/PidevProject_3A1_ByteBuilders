@@ -10,6 +10,9 @@
 .menu-bar {
     -fx-background-color: #b3efff; /* Dark background color */
 }
+/* styles.css */
+
+
 .menu-button {
     -fx-text-fill: #1f4277; /* Dark text color */
     -fx-background-color: transparent; /* Transparent background */

@@ -47,7 +47,7 @@
                     </font></Label>
             </children>
         </AnchorPane>
-        <Label layoutX="454.0" layoutY="90.0" prefHeight="40.0" prefWidth="222.0" text="Forum Management" underline="true">
+        <Label layoutX="627.0" layoutY="94.0" prefHeight="40.0" prefWidth="222.0" text="Forum Management" underline="true">
             <font>
                 <Font name="Microsoft Himalaya" size="32.0" />
             </font></Label>
@@ -76,7 +76,7 @@
             </children>
         </AnchorPane>
 
-        <TextField fx:id="ContentSearchField" layoutX="866.0" layoutY="140.0" onKeyReleased="#SearchByContent" promptText="SearchContent" stylesheets="@design.css" />
+        <TextField fx:id="ContentSearchField" layoutX="991.0" layoutY="140.0" onKeyReleased="#SearchByContent" promptText="SearchContent" stylesheets="@design.css" />
         <TableView fx:id="PostsList" layoutX="671.0" layoutY="439.0" prefHeight="200.0" prefWidth="535.0" stylesheets="@design.css">
             <columns>
                 <TableColumn fx:id="IDPost" prefWidth="75.0" text="IDPost" />
@@ -95,8 +95,8 @@
             </font>
         </Label>
         <Button fx:id="DeletePostAD" layoutX="676.0" layoutY="655.0" mnemonicParsing="false" onAction="#DeletePostAD" styleClass="btn" stylesheets="@design.css" text="DeletePost" />
-      <ComboBox fx:id="comboBox" layoutX="935.0" layoutY="396.0" onAction="#SortForum" prefHeight="25.0" prefWidth="111.0" promptText="Category" styleClass="close" stylesheets="@design.css" />
-      <Label layoutX="866.0" layoutY="400.0" stylesheets="@design.css" text="Filter By:">
+      <ComboBox fx:id="comboBox" layoutX="780.0" layoutY="140.0" onAction="#SortForum" prefHeight="25.0" prefWidth="111.0" promptText="Category" styleClass="close" stylesheets="@design.css" />
+      <Label layoutX="709.0" layoutY="143.0" stylesheets="@design.css" text="Filter By:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

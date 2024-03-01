@@ -70,6 +70,8 @@ public class Posts implements Initializable  {
     @FXML
     public void initialize(URL url , ResourceBundle resourceBundle) {
         loadPosts();
+        String cssFile = getClass().getResource("/styles.css").toExternalForm();
+        tfpostlist.getStylesheets().add(cssFile);
 
 
 
@@ -164,6 +166,8 @@ public class Posts implements Initializable  {
 
                    // Create a VBox for each post
                    VBox postBox = new VBox();
+                   postBox.getStyleClass().add("post-box");
+
                    ImageView photoImageView = new ImageView(new Image(p.getPhotoPost()));
                    photoImageView.setFitWidth(100);
                    photoImageView.setPreserveRatio(true);
