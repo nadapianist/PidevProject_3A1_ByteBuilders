@@ -2,6 +2,7 @@ package tn.esprit.entities;
 
 public class postlike {
     int id,	post_idd	,user_idd;
+public postlike(){}
 
 
     public postlike(int id, int post_idd, int user_idd) {

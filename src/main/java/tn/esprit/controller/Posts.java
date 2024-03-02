@@ -6,6 +6,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -15,24 +16,23 @@ import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
+import tn.esprit.entities.*;
 import tn.esprit.services.ServiceComment;
 import javafx.fxml.Initializable;
-import tn.esprit.entities.Comment;
-import tn.esprit.entities.User;
-import tn.esprit.entities.Tourist;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import tn.esprit.entities.post;
 import tn.esprit.services.ServiceComment;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBox;
+
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -79,77 +79,8 @@ public class Posts implements Initializable  {
 
 
 
-
     }
-   /* private void loadPosts() {
-        try {
 
-            List<post> posts = ps.displayList();
-            for (post p : posts) {
-
-                HBox postBox = new HBox();
-
-                ImageView photoImageView = new ImageView(new Image(p.getPhotoPost()));
-                photoImageView.setFitWidth(100);
-                photoImageView.setPreserveRatio(true);
-
-                Label contentLabel = new Label(p.getContentPost());
-                contentLabel.getStyleClass().add("post-content");
-                contentLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #333;");
-
-                TextField newCommentField = new TextField();
-                newCommentField.textProperty().addListener((observable, oldValue, newValue) -> {
-                    // Call the findAndReplaceProfanity method to detect and replace profanity in TextArea
-                    String   text= findProfanity(newValue);
-                    deleteString(newValue,text,newCommentField);
-                });
-                newCommentField.setStyle("-fx-font-size: 14px;");
-
-                Button addCommentButton = new Button("Add Comment");
-                addCommentButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
-
-                VBox commentsContainer = new VBox();
-                commentsContainer.setSpacing(6); // Adjust spacing as needed
-                VBox.setVgrow(commentsContainer, Priority.ALWAYS);
-
-
-                addCommentButton.setOnAction(event -> {
-                    Comment newComment = new Comment(
-                            123, // Replace with the actual user ID of the logged-in user
-                            p.getIDPost(),
-                            newCommentField.getText()
-                    );
-
-                    try {
-                        serviceComment.addComment(newComment);
-                        showNotification("success","comment added");
-
-                        // Update the timestamp of the new comment
-                        newComment.setDate_c(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
-                        VBox commentBox = createCommentBox(newComment);
-                        commentsContainer.getChildren().add(commentBox);
-
-                        // Clear the comment field after adding the comment
-                        newCommentField.clear();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        throw new RuntimeException(e);
-                    }
-                });
-
-                loadComments(p.getIDPost(), commentsContainer);
-
-
-                // Add the components to the postBox in the desired order
-                postBox.getChildren().addAll(photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer);
-                tfpostlist.getChildren().add(postBox);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }*/
    private void loadPosts() {
        try {
            List<post> posts = ps.displayList();
@@ -170,6 +101,7 @@ public class Posts implements Initializable  {
                    // Create a VBox for each post
                    VBox postBox = new VBox();
                    postBox.getStyleClass().add("post-box");
+
                    // Add the delete button (supp)
                    FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH_ALT);
                    deleteIcon.setFill(Color.RED);
@@ -180,6 +112,7 @@ public class Posts implements Initializable  {
                        deletePost(p);
                        // Optionally, you can refresh the UI after deletion
                    });
+
                    ImageView photoImageView = new ImageView(new Image(p.getPhotoPost()));
                    photoImageView.setFitWidth(100);
                    photoImageView.setPreserveRatio(true);
@@ -229,6 +162,8 @@ public class Posts implements Initializable  {
            e.printStackTrace();
            throw new RuntimeException(e);
        }
+
+
    }
    private void deletePost(post selectedPost) {
         try {
@@ -390,10 +325,10 @@ public class Posts implements Initializable  {
     }
 
     @FXML
-    void forum(ActionEvent event) {
-
+    void forum(ActionEvent event) throws IOException {
+        Parent root= FXMLLoader.load(getClass().getResource("/forumuser.fxml"));
+        ADDPOST.getScene().setRoot(root);
     }
-
     @FXML
     void home(ActionEvent event) {
 
@@ -421,5 +356,8 @@ public class Posts implements Initializable  {
                 .owner(stage) // Set the owner window
                 .showInformation();
     }
+
+
+
 
 }

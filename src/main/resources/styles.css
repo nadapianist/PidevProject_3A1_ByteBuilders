@@ -53,6 +53,32 @@
     -fx-background-color: #c8f8c0;
     -fx-padding: 10px;
 }
+/* styles.css */
+
+.forum-box {
+    -fx-padding: 10px;
+    -fx-background-color: #c8f8c0; /* Background color for each forum box */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 5px;
+    -fx-border-color: #000000; /* Border color for each forum box */
+}
+
+.forum-category {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Text color for category label */
+}
+
+.forum-content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666; /* Text color for content label */
+}
+
+.forum-nb-posts {
+    -fx-font-size: 12px;
+    -fx-text-fill: #999; /* Text color for number of posts label */
+}
+
 
 .comment-button {
     -fx-font-family: 'Arial', sans-serif; /* Set font family */
