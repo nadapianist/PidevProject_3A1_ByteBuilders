@@ -70,6 +70,10 @@ public class post {
         DatePost = datePost;
     }
 
+    public post() {
+
+    }
+
     public int getIDForum() {
         return IDForum;
     }

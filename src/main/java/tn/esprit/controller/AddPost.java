@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
+import tn.esprit.services.ImageAPI;
 import javafx.stage.Stage;
 import tn.esprit.entities.User;
 
@@ -19,9 +20,23 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import tn.esprit.entities.post;
+import tn.esprit.services.ImageAPI;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.sql.SQLException;
+import java.util.List;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
+import java.util.function.UnaryOperator;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -58,6 +73,11 @@ public class AddPost implements Initializable  {
     private final forumService fs = new forumService();
     //ObservableList<String> categoryPostList= FXCollections.observableArrayList("Activity","Challenge");
     private String selectedImagePath;
+    private final ImageAPI imageAPI = new ImageAPI();
+
+    private int getLoggedInUserId() {
+        return 123; // Replace 1 with the actual ID
+    }
     @FXML
     public void initialize(URL url , ResourceBundle resourceBundle){
         try {
@@ -73,9 +93,6 @@ public class AddPost implements Initializable  {
             e.printStackTrace();
         }
     }
-
-
-
     @FXML
     void AddImage(ActionEvent event) {
 
@@ -87,14 +104,20 @@ public class AddPost implements Initializable  {
 
         if ( file!= null) {
 
-            Image image = new Image(file.toURI().toString());
+          /*  Image image = new Image(file.toURI().toString());
             PhotoPost.setImage(image);
-            selectedImagePath="file:/"+file.getAbsolutePath();
+            selectedImagePath="file:/"+file.getAbsolutePath();*/
+            selectedImagePath = file.getAbsolutePath();
+            Image image = new Image("file:" + selectedImagePath);
+           PhotoPost.setImage(image);
+
+            // Upload image to Cloudinary and get the secure URL
+            String cloudinaryUrl = ImageAPI.uploadImage(selectedImagePath);
 
         }}
 
-    @FXML
-    void AddNewPost(ActionEvent event) {
+    //@FXML
+    /*void AddNewPost(ActionEvent event) {
         try {
             String content = ContentPost.getText().trim();
             String category = categoryPost.getValue();
@@ -119,7 +142,44 @@ public class AddPost implements Initializable  {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }*/
+
+    @FXML
+    void AddNewPost(ActionEvent event) {
+        try {
+
+           // p.setContentPost(ContentPost.getText().trim());
+            //p.setCategoryPost(categoryPost.getValue());
+            String content = ContentPost.getText().trim();
+            String category = categoryPost.getValue();
+            int idForum= fs.getIdForum(category);
+
+            post p=new post(
+                    content,selectedImagePath,category,123,idForum
+            );
+            // Set the Cloudinary URL obtained after image upload
+            String cloudinaryUrl = ImageAPI.uploadImage(selectedImagePath);
+            p.setPhotoPost(cloudinaryUrl);
+
+            p.setUserID(getLoggedInUserId());
+
+
+            ps.add(p);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Confirmation");
+            alert.setContentText("A new item is added");
+            alert.showAndWait();
+
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
+
+
 
 
     @FXML
