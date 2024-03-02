@@ -1,5 +1,6 @@
 package tn.esprit.services;
 import javafx.collections.ObservableList;
+import jdk.jfr.Category;
 import tn.esprit.entities.*;
 import tn.esprit.utils.MyDataBase;
 import tn.esprit.services.forumService;
@@ -236,39 +237,36 @@ public class postService implements IService<post> {
 
 
 
-    public List<post> getPostsByCategory(String category) {
-        try {
-            String query = "SELECT * FROM post WHERE categoryPost = ?";
-            List<post> posts = new ArrayList<>();
+    public List<post> getPostsByCategory(String Category) throws SQLException {
+        String query = "SELECT * FROM post WHERE categoryPost = ?";
+        List<post> posts = new ArrayList<>();
 
-            try (PreparedStatement ps = con.prepareStatement(query)) {
-                ps.setString(1, category);
 
-                try (ResultSet res = ps.executeQuery()) {
-                    while (res.next()) {
-                        post p = new post(
-                                res.getInt("IDPost"),
-                                res.getString("ContentPost"),
-                                res.getString("PhotoPost"),
-                                res.getDate("DatePost"),
-                                res.getInt("UserID"),
-                                res.getString("categoryPost"));
+        try (PreparedStatement ps = this.con.prepareStatement(query)) {
+            ps.setString(1, Category);
 
-                        // Assuming you have a 'forumCategory' attribute in your 'post' class
-                        p.setForumCategory(category);
+            try (ResultSet res = ps.executeQuery()) {
+                while (res.next()) {
+                    post p = new post(
+                            res.getInt("IDPost"),
+                            res.getString("ContentPost"),
+                            res.getString("PhotoPost"),
+                            res.getDate("DatePost"),
+                            res.getInt("UserID"),
+                            res.getString("categoryPost")
+                    );
 
-                        posts.add(p);
-                    }
+                    posts.add(p);
                 }
             }
-
-            return posts;
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            e.printStackTrace(); // Print the exception details for debugging
+            throw e; // Re-throw the exception to notify the caller
         }
-    }
-}
+
+        return posts;
+    }}
+
 
 
 

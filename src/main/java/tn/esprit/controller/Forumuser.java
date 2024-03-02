@@ -4,6 +4,9 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.Parent;
 
 import javafx.scene.control.Button;
@@ -14,13 +17,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;  // Make sure to import the correct Text class
+import javafx.stage.Stage;
 import tn.esprit.entities.forum;
 import tn.esprit.entities.post;
 import tn.esprit.services.forumService;
 import javafx.event.ActionEvent;
 import tn.esprit.services.postService;
+import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 public class Forumuser {
@@ -37,9 +43,16 @@ public class Forumuser {
 
     @FXML
     private HBox tfforumlist;
+    @FXML
+    private VBox postsContainer;  // Assuming you have a container in your FXML file to display posts
     private final forumService fs = new forumService();
     private final postService ps = new postService();
 
+
+    Connection con;
+    public Forumuser() {
+        con = MyDataBase.getInstance().getCon();
+    }
 
     @FXML
     void initialize() {
@@ -51,6 +64,7 @@ public class Forumuser {
 
     private void loadForums() {
         try {
+
             List<forum> forums = fs.displayList(); /* Call your method to get the list of forums from the database */
             ;
 
@@ -83,23 +97,14 @@ public class Forumuser {
                     contentLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #333;");
 
                     Label nbPostsLabel = new Label("Number of Posts: " + f.getNB_posts());
-                    nbPostsLabel.getStyleClass().add("forum-nb-posts");
-                    nbPostsLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #333;");
-
-
+                    nbPostsLabel.getStyleClass().add("forum-nb-posts-link");
+                    nbPostsLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #0073e6;");
                     // Add labels to the forumBox
                     forumBox.getChildren().addAll(categoryLabel, contentLabel, nbPostsLabel);
                     forumBox.setOnMouseClicked(event -> {
                         try {
-                            // Load postcategory.fxml when a forumBox is clicked
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/postcategory.fxml"));
-                            Parent root = loader.load();
-                            Postcategory controller = loader.getController();
-                            // Pass any data you need to the controller
-                          // Assuming you have an initData method in PostCategoryController
-
-                            tfforumlist.getScene().setRoot(root);
-                        } catch (IOException e) {
+                            navigateToPostsPage(f.getCategory());
+                        } catch (SQLException | IOException e) {
                             e.printStackTrace();
                             throw new RuntimeException(e);
                         }
@@ -109,19 +114,36 @@ public class Forumuser {
 
                 forumsContainer.getChildren().add(rowBox);
             }
+
             tfforumlist.getChildren().add(forumsContainer);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
+    public void setPosts(List<post> posts) {
+        // Clear existing content in the container
+       postsContainer.getChildren().clear();
+      //VBox postsContainer = new VBox();
+        // Iterate through the posts and display them
+        for (post p : posts) {
+            // Create a Node (e.g., a Label) for each post and add it to the container
+            Label postLabel = new Label(p.getContentPost());
+            postLabel.getStyleClass().add("post-label");  // You can add CSS styling if needed
+            postsContainer.getChildren().add(postLabel);
 
-
+        }
+    }
 
     @FXML
     void ADDPOST(ActionEvent event) throws IOException {
         Parent root= FXMLLoader.load(getClass().getResource("/AddPost.fxml"));
         ADDPOST.getScene().setRoot(root);
+    }
+    private void navigateToPostsPage(String Category) throws SQLException, IOException {
+        Parent root= FXMLLoader.load(getClass().getResource("/Posts.fxml"));
+        ADDPOST.getScene().setRoot(root);
+
     }
 
     @FXML

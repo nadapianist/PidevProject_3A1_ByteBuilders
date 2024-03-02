@@ -156,6 +156,7 @@ public class Posts implements Initializable  {
                }
 
                postsContainer.getChildren().add(rowBox);
+
            }
            tfpostlist.getChildren().add(postsContainer);
        } catch (SQLException e) {
@@ -356,7 +357,6 @@ public class Posts implements Initializable  {
                 .owner(stage) // Set the owner window
                 .showInformation();
     }
-
 
 
 

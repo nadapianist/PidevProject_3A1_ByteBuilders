@@ -1,26 +1,58 @@
 package tn.esprit.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class Postcategory {
-    public void home(ActionEvent actionEvent) {
+
+    @FXML
+    private Button ADDPOST;
+
+    @FXML
+    private ImageView logoo;
+
+    @FXML
+    private ImageView logooo;
+
+    @FXML
+    private HBox tfpostlist;
+
+    @FXML
+    void ADDPOST(ActionEvent event) {
+
     }
 
-    public void locations(ActionEvent actionEvent) {
+    @FXML
+    void Dashboard(ActionEvent event) {
+
     }
 
-    public void achievements(ActionEvent actionEvent) {
+    @FXML
+    void achievements(ActionEvent event) {
+
     }
 
-    public void services(ActionEvent actionEvent) {
+    @FXML
+    void forum(ActionEvent event) {
+
     }
 
-    public void forum(ActionEvent actionEvent) {
+    @FXML
+    void home(ActionEvent event) {
+
     }
 
-    public void Dashboard(ActionEvent actionEvent) {
+    @FXML
+    void locations(ActionEvent event) {
+
     }
 
-    public void ADDPOST(ActionEvent actionEvent) {
+    @FXML
+    void services(ActionEvent event) {
+
     }
+
 }
