@@ -8,49 +8,35 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.Priority;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import org.controlsfx.control.Notifications;
-import tn.esprit.services.ServiceComment;
-import javafx.fxml.Initializable;
-import tn.esprit.entities.Comment;
-import tn.esprit.entities.User;
-import tn.esprit.entities.Tourist;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
+import tn.esprit.entities.Comment;
 import tn.esprit.entities.post;
 import tn.esprit.services.ServiceComment;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
 
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-
-public class Posts implements Initializable  {
+public class Postsgategory {
     @FXML
     private Button ADDPOST;
 
@@ -70,12 +56,21 @@ public class Posts implements Initializable  {
     ServiceComment serviceComment = new ServiceComment();
     private ProfanityFilter profanityFilter = new ProfanityFilter();
 
+    int idForum;
 
-    @FXML
-    public void initialize(URL url , ResourceBundle resourceBundle) {
+    public void setIdForum(int id)
+    {
+        idForum=id;
+        initialize();
+
+    }
+@FXML
+    public void initialize() {
         loadPosts();
         String cssFile = getClass().getResource("/styles.css").toExternalForm();
         tfpostlist.getStylesheets().add(cssFile);
+
+
     }
     /* private void loadPosts() {
          try {
@@ -148,7 +143,89 @@ public class Posts implements Initializable  {
      }*/
     private void loadPosts() {
         try {
-            List<post> posts = ps.displayList();
+            Forumuser u=new Forumuser();
+
+            List<post> posts = ps.displayListForum(idForum);
+            // Create a VBox to hold all the rows of posts
+            VBox postsContainer = new VBox();
+            // postsContainer.setSpacing(20); // Adjust the spacing between rows
+
+            // Iterate through the posts
+            for (int i = 0; i < posts.size(); i += 3) {
+                // Create an HBox for each row of posts
+                HBox rowBox = new HBox();
+                rowBox.setSpacing(200); // Adjust the spacing between posts in a row
+
+                // Add up to three posts to the current row
+                for (int j = i; j < Math.min(i + 3, posts.size()); j++) {
+                    post p = posts.get(j);
+                    // Create a VBox for each post
+                    VBox postBox = new VBox();
+                    postBox.getStyleClass().add("post-box");
+                    // Add the delete button (supp)
+                    FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH_ALT);
+                    deleteIcon.setFill(Color.RED);
+                    deleteIcon.setGlyphSize(25);
+                    deleteIcon.setCursor(Cursor.HAND);
+                    deleteIcon.setOnMouseClicked(event -> {
+                        // Handle delete post action
+                        deletePost(p);
+                        // Optionally, you can refresh the UI after deletion
+                    });
+                    ImageView photoImageView = new ImageView(new Image(p.getPhotoPost()));
+
+                    photoImageView.setFitWidth(100);
+                    photoImageView.setPreserveRatio(true);
+                    Label contentLabel = new Label(p.getContentPost());
+                    contentLabel.getStyleClass().add("post-content");
+                    contentLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #333;");
+                    TextField newCommentField = new TextField();
+                    newCommentField.textProperty().addListener((observable, oldValue, newValue) -> {
+                        // Call the findAndReplaceProfanity method to detect and replace profanity in TextArea
+                        String   text= findProfanity(newValue);
+                        deleteString(newValue,text,newCommentField);
+                    });
+                    newCommentField.setStyle("-fx-font-size: 14px;");
+                    Button addCommentButton = new Button("Add Comment");
+                    addCommentButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+                    VBox commentsContainer = new VBox();
+                    commentsContainer.setSpacing(6); // Adjust spacing as needed
+                    VBox.setVgrow(commentsContainer, Priority.ALWAYS);
+                    addCommentButton.setOnAction(event -> {
+                        Comment newComment = new Comment(
+                                123, // Replace with the actual user ID of the logged-in user
+                                p.getIDPost(),
+                                newCommentField.getText()
+                        );
+                        try {
+                            serviceComment.addComment(newComment);
+                            showNotification("success","comment added");
+                            newComment.setDate_c(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                            VBox commentBox = createCommentBox(newComment);
+                            commentsContainer.getChildren().add(commentBox);
+                            newCommentField.clear();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            throw new RuntimeException(e);
+                        }
+                    });
+
+                    loadComments(p.getIDPost(), commentsContainer);
+                    postBox.getChildren().addAll(photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer, deleteIcon);
+                    rowBox.getChildren().add(postBox);
+                }
+
+                postsContainer.getChildren().add(rowBox);
+            }
+            tfpostlist.getChildren().add(postsContainer);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+    private void loadPostsForum() {
+        try {
+            List<post> posts = ps.displayListForum(idForum);
 
             // Create a VBox to hold all the rows of posts
             VBox postsContainer = new VBox();
@@ -227,7 +304,6 @@ public class Posts implements Initializable  {
             throw new RuntimeException(e);
         }
     }
-
     private void deletePost(post selectedPost) {
         try {
             ps.delete(selectedPost.getIDPost());
@@ -424,3 +500,4 @@ public class Posts implements Initializable  {
     }
 
 }
+

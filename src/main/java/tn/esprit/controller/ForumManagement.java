@@ -120,7 +120,7 @@ public class ForumManagement  {
             NB_posts.setCellValueFactory(new PropertyValueFactory<>("NB_posts"));
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
             initpost();
-         initcat();
+            initcat();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -282,53 +282,53 @@ public class ForumManagement  {
 
     @FXML
     void ToPostsPage(ActionEvent event) throws IOException {
-            Parent root= FXMLLoader.load(getClass().getResource("/forumManagement.fxml"));
+        Parent root= FXMLLoader.load(getClass().getResource("/forumManagement.fxml"));
         ManagePostsButton.getScene().setRoot(root);
-            System.out.println("moved");
-        }
+        System.out.println("moved");
+    }
 
 
-  /*  public void DeletePostAD(ActionEvent actionEvent) {
+    /*  public void DeletePostAD(ActionEvent actionEvent) {
+          post selectedPost = PostsList.getSelectionModel().getSelectedItem();
+
+          if (selectedPost != null) {
+              try {
+                  // Call your service method to delete the forum
+                  ps.delete(selectedPost.getIDPost());
+                  // ForumList.refresh();
+                  List<forum> forums = fs.displayList();
+                  ObservableList<forum> observableList = FXCollections.observableList(forums);
+                  ForumList.setItems(observableList);
+
+                  // Remove the selected forum from the TableView
+                  PostsList.getItems().remove(selectedPost);
+              } catch (SQLException e) {
+                  // Handle any SQL exception
+                  e.printStackTrace();
+              }
+          }
+      }*/
+    public void DeletePostAD(ActionEvent actionEvent) {
         post selectedPost = PostsList.getSelectionModel().getSelectedItem();
 
         if (selectedPost != null) {
             try {
-                // Call your service method to delete the forum
+                // Call your service method to delete the post
                 ps.delete(selectedPost.getIDPost());
-                // ForumList.refresh();
+
+                // Remove the selected post from the TableView
+                PostsList.getItems().remove(selectedPost);
+
+                // Refresh the ForumList to reflect the changes
                 List<forum> forums = fs.displayList();
                 ObservableList<forum> observableList = FXCollections.observableList(forums);
                 ForumList.setItems(observableList);
-
-                // Remove the selected forum from the TableView
-                PostsList.getItems().remove(selectedPost);
             } catch (SQLException e) {
                 // Handle any SQL exception
                 e.printStackTrace();
             }
         }
-    }*/
-  public void DeletePostAD(ActionEvent actionEvent) {
-      post selectedPost = PostsList.getSelectionModel().getSelectedItem();
-
-      if (selectedPost != null) {
-          try {
-              // Call your service method to delete the post
-              ps.delete(selectedPost.getIDPost());
-
-              // Remove the selected post from the TableView
-              PostsList.getItems().remove(selectedPost);
-
-              // Refresh the ForumList to reflect the changes
-              List<forum> forums = fs.displayList();
-              ObservableList<forum> observableList = FXCollections.observableList(forums);
-              ForumList.setItems(observableList);
-          } catch (SQLException e) {
-              // Handle any SQL exception
-              e.printStackTrace();
-          }
-      }
-  }
+    }
 
     public void SearchByContent(javafx.scene.input.KeyEvent keyEvent) {
         try {

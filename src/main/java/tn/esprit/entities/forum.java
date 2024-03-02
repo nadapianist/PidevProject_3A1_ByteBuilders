@@ -1,15 +1,14 @@
 package tn.esprit.entities;
 
 public class forum {
-    private int IDForum	,NB_posts, IDPost;
+    private int IDForum	,NB_posts;
     private String ContentForum,Category;
 
-    public forum(int IDForum , String ContentForum,int NB_posts,  String Category, int IDPost) {
+    public forum(int IDForum , String ContentForum,int NB_posts,  String Category) {
         this.IDForum = IDForum;
         this.ContentForum = ContentForum;
         this.NB_posts = NB_posts;
         this.Category = Category;
-        this.IDPost = IDPost;
     }
 
     public forum() {
@@ -51,13 +50,6 @@ public class forum {
         Category = category;
     }
 
-    public int getIDPost() {
-        return IDPost;
-    }
-
-    public void setIDPost(int IDPost) {
-        this.IDPost = IDPost;
-    }
 
     @Override
     public String toString() {

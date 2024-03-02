@@ -57,7 +57,7 @@ public class AddPost implements Initializable  {
     private final postService ps=new postService();
     private final forumService fs = new forumService();
     //ObservableList<String> categoryPostList= FXCollections.observableArrayList("Activity","Challenge");
-private String selectedImagePath;
+    private String selectedImagePath;
     @FXML
     public void initialize(URL url , ResourceBundle resourceBundle){
         try {
@@ -89,7 +89,7 @@ private String selectedImagePath;
 
             Image image = new Image(file.toURI().toString());
             PhotoPost.setImage(image);
-             selectedImagePath="file:/"+file.getAbsolutePath();
+            selectedImagePath="file:/"+file.getAbsolutePath();
 
         }}
 
@@ -98,13 +98,14 @@ private String selectedImagePath;
         try {
             String content = ContentPost.getText().trim();
             String category = categoryPost.getValue();
+            int idForum= fs.getIdForum(category);
             if (content.isEmpty() || category == null || category.equals("pick category!")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setContentText("Content and Category are mandatory fields");
                 alert.showAndWait();
             } else {
-                post newPost = new post(content,selectedImagePath,category,123);
+                post newPost = new post(content,selectedImagePath,category,123,idForum);
                 ps.add(newPost);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

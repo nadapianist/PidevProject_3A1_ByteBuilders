@@ -24,7 +24,7 @@ public class forumService implements IService<forum>{
             ps.setString(1, f.getContentForum());
             ps.setInt(2, f.getNB_posts());
             ps.setString(3, f.getCategory());
-           // ps.setInt(1, f.getIDForum());
+            // ps.setInt(1, f.getIDForum());
             ps.executeUpdate();
             System.out.println("forum added!");
         }
@@ -63,9 +63,7 @@ public class forumService implements IService<forum>{
                     res.getInt("IDForum"),
                     res.getString("ContentForum"),
                     res.getInt("NB_posts"),
-                    res.getString("Category"),
-                    res.getInt("IDPost")
-                    );
+                    res.getString("Category"));
 
             forums.add(f);
         }
@@ -86,7 +84,7 @@ public class forumService implements IService<forum>{
             // If search content is not empty, perform the search
             query = "SELECT * FROM `forum` WHERE `ContentForum` LIKE ?";
             ps = this.con.prepareStatement(query);
-                        ps.setString(1, "%" + ContentForum + "%");
+            ps.setString(1, "%" + ContentForum + "%");
 
         }
         System.out.println("SQL Query: " + ps.toString());
@@ -98,8 +96,7 @@ public class forumService implements IService<forum>{
                     res.getInt("IDForum"),
                     res.getString("ContentForum"),
                     res.getInt("NB_posts"),
-                    res.getString("Category"),
-            res.getInt("IDPost"));
+                    res.getString("Category"));
 
             forums.add(f);
         }
@@ -110,7 +107,7 @@ public class forumService implements IService<forum>{
     public List<forum> SortForum(String selectedCategory) throws SQLException {
         String query = "SELECT * FROM `forum` WHERE `Category`=?";
         try (
-             PreparedStatement ps = con.prepareStatement(query)) {
+                PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, selectedCategory);
             System.out.println("SQL Query: " + ps.toString());
             ResultSet res = ps.executeQuery();
@@ -120,8 +117,7 @@ public class forumService implements IService<forum>{
                         res.getInt("IDForum"),
                         res.getString("ContentForum"),
                         res.getInt("NB_posts"),
-                        res.getString("Category"),
-                        res.getInt("IDPost"));
+                        res.getString("Category"));
 
                 forums.add(f);
             }
@@ -131,17 +127,17 @@ public class forumService implements IService<forum>{
     public List<String> getAllCategories() throws SQLException {
         String query;
         PreparedStatement ps;
-         query = "SELECT DISTINCT Category FROM forum";
+        query = "SELECT DISTINCT Category FROM forum";
         ps = this.con.prepareStatement(query);
         List<String> categories = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
 
 
-            // PreparedStatement ps = con.prepareStatement("SELECT DISTINCT Category FROM forum")
+        // PreparedStatement ps = con.prepareStatement("SELECT DISTINCT Category FROM forum")
 
-            while (rs.next()) {
-                categories.add(rs.getString("Category"));
-            }
+        while (rs.next()) {
+            categories.add(rs.getString("Category"));
+        }
 
 
         return categories;
@@ -156,6 +152,17 @@ public class forumService implements IService<forum>{
             return count > 0;
         }
     }
+    public int getIdForum(String category) throws SQLException {
+       int id=0;
+        String query = "SELECT IDForum FROM forum WHERE Category = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, category);
+            ResultSet resultSet = ps.executeQuery();
+            resultSet.next();
+           id = resultSet.getInt(1);
 
+            return id;
+        }
+    }
 
 }

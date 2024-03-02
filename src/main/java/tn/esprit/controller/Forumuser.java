@@ -4,6 +4,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -47,7 +48,7 @@ public class Forumuser {
     private VBox postsContainer;  // Assuming you have a container in your FXML file to display posts
     private final forumService fs = new forumService();
     private final postService ps = new postService();
-
+int idForum;
 
     Connection con;
     public Forumuser() {
@@ -58,6 +59,7 @@ public class Forumuser {
     void initialize() {
         // Call the method to retrieve forums and update the UI
         loadForums();
+
         String cssFile = getClass().getResource("/styles.css").toExternalForm();
         tfforumlist.getStylesheets().add(cssFile);
     }
@@ -103,7 +105,11 @@ public class Forumuser {
                     forumBox.getChildren().addAll(categoryLabel, contentLabel, nbPostsLabel);
                     forumBox.setOnMouseClicked(event -> {
                         try {
-                            navigateToPostsPage(f.getCategory());
+
+                            idForum=f.getIDForum();
+
+                            navigateToPostsPage(idForum);
+                            //ps.displayListForum(f.getIDForum())
                         } catch (SQLException | IOException e) {
                             e.printStackTrace();
                             throw new RuntimeException(e);
@@ -121,10 +127,14 @@ public class Forumuser {
             throw new RuntimeException(e);
         }
     }
+    public int getIdForum()
+    {
+        return idForum;
+    }
     public void setPosts(List<post> posts) {
         // Clear existing content in the container
-       postsContainer.getChildren().clear();
-      //VBox postsContainer = new VBox();
+        postsContainer.getChildren().clear();
+        //VBox postsContainer = new VBox();
         // Iterate through the posts and display them
         for (post p : posts) {
             // Create a Node (e.g., a Label) for each post and add it to the container
@@ -140,18 +150,29 @@ public class Forumuser {
         Parent root= FXMLLoader.load(getClass().getResource("/AddPost.fxml"));
         ADDPOST.getScene().setRoot(root);
     }
-    private void navigateToPostsPage(String Category) throws SQLException, IOException {
-        Parent root= FXMLLoader.load(getClass().getResource("/Posts.fxml"));
-        ADDPOST.getScene().setRoot(root);
 
+    private void navigateToPostsPage(int idForum) throws SQLException, IOException {
+        // Load the FXML file and get the controller
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Postsgategory.fxml"));
+        Parent root = loader.load();
+        Postsgategory p = loader.getController();
+        p.setIdForum(idForum);
+Scene p1=new Scene(root);
+Stage Window = (Stage) ADDPOST.getScene().getWindow();
+Window.setScene(p1);
+Window.show();
     }
-
     @FXML
     void Dashboard(ActionEvent event) throws IOException {
         Parent root= FXMLLoader.load(getClass().getResource("/forumManagement.fxml"));
         ADDPOST.getScene().setRoot(root);
     }
+    @FXML
+    void VIEWALL(ActionEvent event) throws IOException {
+        Parent root= FXMLLoader.load(getClass().getResource("/Posts.fxml"));
+        ADDPOST.getScene().setRoot(root);
 
+    }
     @FXML
     void achievements(ActionEvent event) {
 

@@ -1,7 +1,7 @@
 package tn.esprit.entities;
 
 public class Comment {
-int id , user_id, post_id;
+    int id , user_id, post_id;
     String commentt;
     String date_c;
 

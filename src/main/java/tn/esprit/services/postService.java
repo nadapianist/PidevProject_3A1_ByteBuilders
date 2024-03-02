@@ -1,7 +1,9 @@
 package tn.esprit.services;
 import javafx.collections.ObservableList;
-import jdk.jfr.Category;
-import tn.esprit.entities.*;
+import tn.esprit.entities.Tourist;
+import tn.esprit.entities.User;
+import tn.esprit.entities.forum;
+import tn.esprit.entities.post;
 import tn.esprit.utils.MyDataBase;
 import tn.esprit.services.forumService;
 
@@ -18,48 +20,11 @@ public class postService implements IService<post> {
         con = MyDataBase.getInstance().getCon();
     }
 
-        public List<postlike> islikedbyuser(int postId, int userId) throws SQLException{
-            List<postlike> likes = new ArrayList<>();
-
-            try (PreparedStatement statement = con.prepareStatement("SELECT * FROM post_like WHERE post_id = ? AND user_id = ?")) {
-
-                statement.setInt(1, postId);
-                statement.setInt(2, userId);
-
-                try (ResultSet resultSet =statement.executeQuery()) {
-                    while (resultSet.next()) {
-                        // Assuming you have a PostLike class to represent the data
-                        postlike like = new postlike();
-                        like.setId(resultSet.getInt("id"));
-                        like.setPost_idd(resultSet.getInt("post_idd"));
-                        like.setUser_idd(resultSet.getInt("user_idd"));
-
-                        likes.add(like);
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Handle the exception appropriately, log it, or throw a custom exception
-            }
-
-            return likes;
-        }
-    public void addLike(int postId, int userId) throws SQLException {
-        String query = "INSERT INTO post_like (post_idd, user_idd) VALUES (?, ?)";
-
-        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-            preparedStatement.setInt(1, 123);
-            preparedStatement.setInt(2, 123);
-
-            preparedStatement.executeUpdate();
-        }
-    }
-
     public List<String> getImagePaths() throws SQLException {
         List<String> imagePaths = new ArrayList<>();
 
         try (
-             PreparedStatement statement = con.prepareStatement("SELECT PhotoPost FROM post")) {
+                PreparedStatement statement = con.prepareStatement("SELECT PhotoPost FROM post")) {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -75,7 +40,7 @@ public class postService implements IService<post> {
     }
     @Override
     public void add(post p) throws SQLException {
-        String query = "INSERT INTO `post`(`ContentPost`, `PhotoPost`, `DatePost`, `UserID`, `categoryPost`) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO `post`(`ContentPost`, `PhotoPost`, `DatePost`, `UserID`, `categoryPost`,`IDForum`) VALUES (?, ?, ?, ?, ?,?)";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, p.getContentPost());
             ps.setString(2, p.getPhotoPost());
@@ -83,6 +48,7 @@ public class postService implements IService<post> {
             ps.setDate(3, new java.sql.Date(p.getDatePost().getTime()));
             ps.setInt(4, p.getUserID());
             ps.setString(5, p.getCategoryPost());
+            ps.setInt(6, p.getIDForum());
 
             ps.executeUpdate();
             System.out.println("post added!");
@@ -90,7 +56,7 @@ public class postService implements IService<post> {
     }
 
     public void update(post p) throws SQLException {
-        String query = "UPDATE `post` SET ContentPost=?,PhotoPost=?,DatePost=?,categoryPost=?,UserID=? WHERE IDPost=?";
+        String query = "UPDATE `post` SET ContentPost=?,PhotoPost=?,DatePost=?,categoryPost=?,UserID=?,IDForum=? WHERE IDPost=?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, p.getContentPost());
             ps.setString(2, p.getPhotoPost());
@@ -99,6 +65,7 @@ public class postService implements IService<post> {
             ps.setString(5, p.getCategoryPost());
             // Assuming there is an 'IDPost' field in your 'post' table
             ps.setInt(6, p.getIDPost());
+            ps.setInt(7, p.getIDForum());
 
 
             ps.executeUpdate();
@@ -137,12 +104,40 @@ public class postService implements IService<post> {
         while (res.next()) {
             post p = new post(
                     res.getInt("IDPost"),
+                    res.getInt("UserID"),
+                    res.getString("categoryPost"),
+
+                    res.getString("ContentPost"),
+                    res.getString("PhotoPost"),
+                    res.getDate("DatePost"),
+            res.getInt("IDForum"));
+            forumService fs = new forumService();
+            //forum forumData = fs.getForumById(res.getInt("IDForum"));
+            //p.setForumCategory(forumData.getCategory());
+            // post p=ResultPosts(res);
+            // forumService fs = new forumService();
+
+            posts.add(p);
+        }
+
+        return posts;
+    }
+    public List<post> displayListForum(int id) throws SQLException {
+        String query = "SELECT  * FROM `post` WHERE IDForum=?";
+        PreparedStatement ps = this.con.prepareStatement(query);
+        ps.setInt(1, id);
+
+        ResultSet res = ps.executeQuery();
+        List<post> posts = new ArrayList<>();
+
+        while (res.next()) {
+            post p = new post(
+                    res.getInt("IDPost"),
                     res.getString("ContentPost"),
                     res.getString("PhotoPost"),
                     res.getDate("DatePost"),
                     res.getInt("UserID"),
                     res.getString("categoryPost"));
-            forumService fs = new forumService();
             //forum forumData = fs.getForumById(res.getInt("IDForum"));
             //p.setForumCategory(forumData.getCategory());
             // post p=ResultPosts(res);
@@ -163,7 +158,7 @@ public class postService implements IService<post> {
             while (res.next()) {
                 post p = new post(
 
-                res.getInt("IDPost"),
+                        res.getInt("IDPost"),
                         res.getString("ContentPost"),
                         res.getString("PhotoPost"),
                         res.getDate("DatePost"),
@@ -236,37 +231,7 @@ public class postService implements IService<post> {
     }
 
 
-
-    public List<post> getPostsByCategory(String Category) throws SQLException {
-        String query = "SELECT * FROM post WHERE categoryPost = ?";
-        List<post> posts = new ArrayList<>();
-
-
-        try (PreparedStatement ps = this.con.prepareStatement(query)) {
-            ps.setString(1, Category);
-
-            try (ResultSet res = ps.executeQuery()) {
-                while (res.next()) {
-                    post p = new post(
-                            res.getInt("IDPost"),
-                            res.getString("ContentPost"),
-                            res.getString("PhotoPost"),
-                            res.getDate("DatePost"),
-                            res.getInt("UserID"),
-                            res.getString("categoryPost")
-                    );
-
-                    posts.add(p);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Print the exception details for debugging
-            throw e; // Re-throw the exception to notify the caller
-        }
-
-        return posts;
-    }}
-
+}
 
 
 

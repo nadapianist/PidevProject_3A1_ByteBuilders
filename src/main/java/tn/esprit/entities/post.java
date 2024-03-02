@@ -9,17 +9,17 @@ import javafx.beans.property.*;
 public class post {
     private String ForumCategory;
 
-    private int  IDPost, UserID;
-   private String categoryPost,ContentPost	,PhotoPost;
+    private int  IDPost, UserID,IDForum;
+    private String categoryPost,ContentPost	,PhotoPost;
     private Date DatePost;
     private String photoPath;
 
 
-public post(String contentPost, String categoryPost,int userID){
-    this.ContentPost =contentPost;
-    this.categoryPost = categoryPost;
-    this.UserID = userID;
-}
+    public post(String contentPost, String categoryPost,int userID){
+        this.ContentPost =contentPost;
+        this.categoryPost = categoryPost;
+        this.UserID = userID;
+    }
     public post(int IDPost, String contentPost,String photoPost,   Date datePost,int userID, String categoryPost) {
         this.IDPost = IDPost;
         this.ContentPost =contentPost;
@@ -50,6 +50,32 @@ public post(String contentPost, String categoryPost,int userID){
         this.ContentPost = ContentPost;
         this.PhotoPost = PhotoPost;
         this.UserID=UserID;
+    }
+
+    public post(  String contentPost,String photoPost,String categoryPost, int userID, int IDForum) {
+        UserID = userID;
+        this.IDForum = IDForum;
+        this.categoryPost = categoryPost;
+        ContentPost = contentPost;
+        PhotoPost = photoPost;
+    }
+
+    public post(int IDPost, int userID, String categoryPost, String contentPost, String photoPost, Date datePost, int IDForum) {
+        this.IDPost = IDPost;
+        UserID = userID;
+        this.IDForum = IDForum;
+        this.categoryPost = categoryPost;
+        ContentPost = contentPost;
+        PhotoPost = photoPost;
+        DatePost = datePost;
+    }
+
+    public int getIDForum() {
+        return IDForum;
+    }
+
+    public void setIDForum(int IDForum) {
+        this.IDForum = IDForum;
     }
 
     public int getIDPost() {
