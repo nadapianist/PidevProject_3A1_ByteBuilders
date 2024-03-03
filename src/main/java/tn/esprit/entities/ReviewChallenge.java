@@ -10,26 +10,33 @@ public class ReviewChallenge {
     private String Title_rev;
     private String nameActivity;
     private String nameChallenge;
+    private String image;
+
+
     public ReviewChallenge() {
 
     }
 
-    public ReviewChallenge(int IDActivity, int ID_challenge, String info, Date date_pub, String title_rev) {
+    public ReviewChallenge(int IDActivity, int ID_challenge, String info, Date date_pub, String title_rev,String image) {
         this.IDActivity = IDActivity;
         this.ID_challenge = ID_challenge;
         Info = info;
         Date_pub = date_pub;
         Title_rev = title_rev;
+        this.image=image;
+
     }
 
-    public ReviewChallenge(String info, Date date_pub, String title_rev) {
+    public ReviewChallenge(String info, Date date_pub, String title_rev,String image) {
         Info = info;
         Date_pub = date_pub;
         Title_rev = title_rev;
+        this.image=image;
+
     }
 
     // Constructor with nameActivity and nameChallenge
-    public ReviewChallenge(int IDActivity, int ID_challenge, String Info, java.util.Date Date_pub, String Title_rev, String nameActivity, String nameChallenge) {
+    public ReviewChallenge(int IDActivity, int ID_challenge, String Info, java.util.Date Date_pub, String Title_rev, String nameActivity, String nameChallenge,String image) {
         this.IDActivity = IDActivity;
         this.ID_challenge = ID_challenge;
         this.Info = Info;
@@ -37,6 +44,26 @@ public class ReviewChallenge {
         this.Title_rev = Title_rev;
         this.nameActivity = nameActivity;
         this.nameChallenge = nameChallenge;
+        this.image=image;
+
+    }
+
+    public ReviewChallenge(int idact, int idchall, String info, Date datePub, String titleRev, String activityName, String challengeName) {
+        this.IDActivity = IDActivity;
+        this.ID_challenge = ID_challenge;
+        this.Info = Info;
+        this.Date_pub = Date_pub;
+        this.Title_rev = Title_rev;
+        this.nameActivity = nameActivity;
+        this.nameChallenge = nameChallenge;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getIDActivity() {

@@ -1,0 +1,12 @@
+.activity-box {
+    -fx-background-color: lightblue; /* Light blue background color */
+    -fx-padding: 10px; /* Add padding */
+    -fx-spacing: 5px; /* Add spacing between labels */
+    -fx-border-color: #be4d4d; /* Border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 10px; /* Rounded corners */
+}
+
+.name-label, .description-label {
+    -fx-font-weight: bold; /* Bold font for name and description */
+}

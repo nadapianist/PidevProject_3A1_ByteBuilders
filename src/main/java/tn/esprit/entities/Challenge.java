@@ -9,18 +9,27 @@ public class Challenge {
     private String desc_ch;
     private int points;
 
-    public Challenge(int id_chall, String name_ch, String desc_ch, int points) {
-        this.id_chall = id_chall;
-        this.name_ch = name_ch;
-        this.desc_ch = desc_ch;
-        this.points = points;
-    }
+
 
     public Challenge(String name_ch, String desc_ch, int points) {
         this.name_ch = name_ch;
         this.desc_ch = desc_ch;
         this.points = points;
+
     }
+
+    public Challenge() {
+
+    }
+
+    public Challenge(int id_chall,String name_ch, String desc_ch, int points) {
+        this.id_chall = id_chall;
+        this.name_ch = name_ch;
+        this.desc_ch = desc_ch;
+        this.points = points;
+
+    }
+
 
     public int getId_chall() {
         return id_chall;
@@ -57,7 +66,7 @@ public class Challenge {
     @Override
     public String toString() {
         return "Challenge{" +
-                "id_chall=" + id_chall +
+                ", id_chall=" + id_chall +
                 ", name_ch='" + name_ch + '\'' +
                 ", desc_ch='" + desc_ch + '\'' +
                 ", points=" + points +

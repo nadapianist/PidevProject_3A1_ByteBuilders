@@ -1,0 +1,76 @@
+
+/* Style for dashboard button */
+.play-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/play.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+
+/* Underline effect when selected */
+.play-button:focused {
+    -fx-underline: true; /* Underline text when focused */
+}
+
+/* Color change on hover */
+.play-button:hover {
+    -fx-background-color: #90c4ff; /* Light gray background on hover */
+}
+
+/* Style for dashboard button */
+.pause-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/pause.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+
+/* Underline effect when selected */
+.pause-button:focused {
+    -fx-underline: true; /* Underline text when focused */
+}
+
+/* Color change on hover */
+.pause-button:hover {
+    -fx-background-color: #90c4ff; /* Light gray background on hover */
+}
+
+
+/* Style for dashboard button */
+.reset-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/reset.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+
+/* Underline effect when selected */
+.reset-button:focused {
+    -fx-underline: true; /* Underline text when focused */
+}
+
+/* Color change on hover */
+.reset-button:hover {
+    -fx-background-color: #90c4ff; /* Light gray background on hover */
+}

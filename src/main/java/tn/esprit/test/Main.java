@@ -1,4 +1,4 @@
-package tn.esprit;
+package tn.esprit.test;
 
 import tn.esprit.entities.Activity;
 import tn.esprit.entities.Challenge;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) {
 /////////////////////////////////////////////////////////CRUD *********************************************************
-        Activity a1 = new Activity(4, "hiking", Date.valueOf("2023-01-01"), "good to try");
+       // Activity a1 = new Activity(4, "hiking", Date.valueOf("2023-01-01"), "good to try");
         ActivityService as = new ActivityService();
 /*
         try {
@@ -22,7 +22,7 @@ public class Main {
             System.out.println(e.getMessage());;
         }
 */
-/*
+
         try {
             System.out.println(as.diplayList());
         } catch (SQLException e) {
@@ -30,7 +30,7 @@ public class Main {
         }
 
 
-        */
+
         /*
         Activity updatedActivity = new Activity(4, "swimming", Date.valueOf("2023-01-02"), "new description");
         try {
@@ -70,17 +70,17 @@ public class Main {
         */
 
 
-
+/*
         Challenge updatedChallenge2 = new Challenge(7,"pas ", "pas",50);
          try {
         cs.update(updatedChallenge2);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
         }
 ////////////////////////////////////reviews///////////////////////
         ReviewChallenge r1 = new ReviewChallenge(1,7,"the best expirience ever",Date.valueOf("2024-01-04"),"share");
         ReviewChallengeService rs = new ReviewChallengeService();
-
+*/
        /* try {
             rs.addd(r1);
         } catch (SQLException e) {
@@ -103,16 +103,16 @@ public class Main {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }*/
-        try {
+        /*try {
             rs.delete(r1);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());;
-        }
+            System.out.println(e.getMessage());
+        }*/
 
         /////////////////////////////////////////////////////////////////SIMPLE ADVANCED FEATURES //////////////////////////
 
 /////search BY date
-        try {
+      /*  try {
             System.out.println(as.SearchByDate(Date.valueOf("2024-02-06")));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -122,7 +122,7 @@ public class Main {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
+*/
 
     }
 }

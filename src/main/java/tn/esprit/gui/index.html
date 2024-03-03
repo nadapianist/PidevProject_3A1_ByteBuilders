@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Tutorial</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="index.css" />
+
+    <style>
+        #map{
+            height: 100vh;
+            width: 100%;
+        }
+
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+
+        .legend {
+            line-height: 18px;
+            color: #555;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+
+        /* Transparent Label CSS */
+        .leaflet-label {
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            padding: 4px;
+            border-radius: 4px;
+            border: 1px solid black;
+        }
+
+        /* Transparent Monument Label CSS */
+        .monument-label {
+            background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
+            border: none;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="loader">
+    <span class="lettre">T</span>
+    <span class="lettre">R</span>
+    <span class="lettre">I</span>
+    <span class="lettre">P</span>
+    <span class="lettre">&nbsp;</span>
+    <span class="lettre">T</span>
+    <span class="lettre">O</span>
+    <span class="lettre">&nbsp;</span>
+    <span class="lettre">D</span>
+    <span class="lettre">O</span>
+    <span class="lettre">&nbsp;</span>
+    <span class="lettre">m</span>
+    <span class="lettre">a</span>
+    <span class="lettre">p</span>
+
+</div>
+
+
+<div id="map"></div>
+</body>
+</html>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+<script>
+    const loader = document.querySelector('.loader');
+
+    window.addEventListener('load', () => {
+        loader.classList.add('fondu-out');
+    })
+
+    var map = L.map('map').setView([34, 9], 7); // Initial view focused on Tunisia
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map);
+
+    // Disable panning and zooming beyond Tunisia's boundaries
+    var southWest = L.latLng(30.0, 7.0),
+        northEast = L.latLng(38.0, 12.0),
+        bounds = L.latLngBounds(southWest, northEast);
+    map.setMaxBounds(bounds);
+    map.on('drag', function() {
+        map.panInsideBounds(bounds, { animate: false });
+    });
+
+    /* Monuments Data */
+    var monuments = [
+        { name: 'Carthage', location: [36.8588, 10.3307] },
+        { name: 'El Jem Amphitheatre', location: [35.3, 10.7167] },
+        { name: 'Dougga', location: [36.4167, 9.2175] },
+        { name: 'Bulla Regia', location: [37.1969, 9.8587] },
+        { name: 'Sbeitla', location: [35.2176, 9.1001] },
+        { name: 'Kairouan', location: [35.6782, 10.1016] },
+        { name: 'Medina of Tunis', location: [36.8065, 10.1735] },
+        { name: 'Sousse Medina', location: [35.8279, 10.6396] },
+        { name: 'Monastir Ribat', location: [35.7697, 10.8259] },
+        { name: 'Kerkouane', location: [37.9627, 10.7649] },
+        { name: 'Matmata', location: [33.5451, 9.9973] },
+        { name: 'Chott el Jerid', location: [33.7212, 8.4233] },
+        { name: 'Hammamet Medina', location: [36.4042, 10.6206] },
+        { name: 'Hammamet Beach', location: [36.4054, 10.6246] },
+        { name: 'Chott el Djerid', location: [33.8003, 8.4617] }
+    ];
+
+    /* Add Monuments to Map */
+    monuments.forEach(function(monument) {
+        L.marker(monument.location)
+            .addTo(map)
+            .bindPopup('<b>' + monument.name + '</b>');
+
+        // Add Monument Label
+        L.marker(monument.location, {
+            icon: L.divIcon({
+                className: 'monument-label',
+                html: monument.name
+            })
+        }).addTo(map);
+    });
+</script>

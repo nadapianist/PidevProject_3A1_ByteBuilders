@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1206.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.ShowTransports">
+    <children>
+        <TableView fx:id="TransportList" layoutX="569.0" layoutY="243.0" prefHeight="254.0" prefWidth="591.0">
+            <columns>
+                <TableColumn fx:id="brand" prefWidth="75.0" text="brand" />
+                <TableColumn fx:id="type" prefWidth="201.5999755859375" text=" type" />
+                <TableColumn fx:id="distance" prefWidth="136.0" text=" distance" />
+                <TableColumn fx:id="ChargingTime" prefWidth="85.60009765625" text="Charging Time" />
+                <TableColumn fx:id="IDtourist" prefWidth="93.5999755859375" text=" ID tourist" />
+            </columns>
+        </TableView>
+        <AnchorPane layoutY="78.0" prefHeight="796.0" prefWidth="210.0" styleClass="main-bg" stylesheets="@design.css">
+            <children>
+                <Button fx:id="userbtn" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#userBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="User Management" />
+                <Button fx:id="locationbtn" layoutX="30.0" layoutY="287.0" mnemonicParsing="false" onAction="#LocationBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Location Management" />
+                <Button fx:id="activitybtn" layoutX="30.0" layoutY="340.0" mnemonicParsing="false" onAction="#activityBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Activity Management" />
+                <Button fx:id="challengebtn" layoutX="30.0" layoutY="394.0" mnemonicParsing="false" onAction="#challengeBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Challenge Management" />
+                <Button fx:id="hostelbtn" layoutX="30.0" layoutY="500.0" mnemonicParsing="false" onAction="#hostelBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Hostel Management" />
+                <Button fx:id="reservationbtn" layoutX="30.0" layoutY="553.0" mnemonicParsing="false" onAction="#ReservationBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Reservation Management" />
+                <Button fx:id="forumbtnid" layoutX="30.0" layoutY="606.0" mnemonicParsing="false" onAction="#ForumBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Forum &amp; Posts Management" />
+                <Button fx:id="transportbtn" layoutX="30.0" layoutY="660.0" mnemonicParsing="false" onAction="#TransportBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Transport Management" />
+                <Button fx:id="reviewbtn" layoutX="30.0" layoutY="447.0" mnemonicParsing="false" onAction="#ReviewBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Review Management" />
+            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="70.0" layoutY="130.0" size="100" tabSize="25" />
+            <Label layoutX="50.0" layoutY="145.0" text="Welcome , Admin" textFill="#f2f2f2">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Line endX="73.59999084472656" layoutX="120.0" layoutY="180.0" startX="-100.0" stroke="WHITE" />
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="72.0" prefWidth="1206.0" styleClass="main" stylesheets="@design.css">
+            <children>
+                <Label layoutX="540.0" layoutY="19.0" text=" Tunism Desktop App" textFill="WHITE">
+                    <font>
+                        <Font size="24.0" />
+                    </font></Label>
+            <ImageView fitHeight="72.0" fitWidth="90.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Img/logo_tunism-removebg-preview.png" />
+               </image>
+            </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="250.0" layoutY="200.0" prefHeight="496.0" prefWidth="258.0" styleClass="AnchorPane" stylesheets="@design.css">
+            <children>
+
+                <Button fx:id="UpdateButton" layoutX="107.0" layoutY="417.0" mnemonicParsing="false" onAction="#SaveChanges" styleClass="update-button" stylesheets="@Front.css" />
+                <Button fx:id="DeleteButton" layoutX="183.0" layoutY="417.0" mnemonicParsing="false" onAction="#DeleteTransportById" styleClass="delete-button" stylesheets="@design.css" />
+                <Button fx:id="AddButton" layoutX="40.0" layoutY="417.0" mnemonicParsing="false" onAction="#AddNewTransport" styleClass="add-button" stylesheets="@design.css" />
+                <Label layoutX="17.0" layoutY="129.0" text="Transport ID" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="idTransportId" layoutX="9.0" layoutY="158.0" prefHeight="26.0" prefWidth="90.0" />
+                <TextField fx:id="brandTrId" layoutX="155.0" layoutY="154.0" prefHeight="26.0" prefWidth="90.0" />
+                <TextField fx:id="typeTrId" layoutX="156.0" layoutY="244.0" prefHeight="26.0" prefWidth="90.0" />
+                <TextField fx:id="distanceTrId" layoutX="14.0" layoutY="245.0" prefHeight="26.0" prefWidth="90.0" />
+                <TextField fx:id="chargeTimeTrId" layoutX="17.0" layoutY="329.0" prefHeight="26.0" prefWidth="90.0" />
+                <TextField fx:id="idtouristTrId" layoutX="155.0" layoutY="327.0" prefHeight="26.0" prefWidth="90.0" />
+                <Label layoutX="165.0" layoutY="127.0" text="Brand" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Label>
+                <Label layoutX="166.0" layoutY="218.0" text="type" textFill="#f8f4f4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+                <Label layoutX="25.0" layoutY="216.0" text="Range" textFill="#f5f2f2">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Label>
+                <Label layoutX="19.0" layoutY="300.0" text="Time to charge" textFill="#f5f4f4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+                <Label layoutX="161.0" layoutY="303.0" text="tourist ID" textFill="#ebeaea">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+            <Label layoutX="50.0" layoutY="56.0" prefHeight="35.0" prefWidth="175.0" text="Transport Form" textAlignment="CENTER" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+
+            </children>
+        </AnchorPane>
+        <Button fx:id="SearchButton" layoutX="926.0" layoutY="195.0" mnemonicParsing="false" onAction="#SearchBrand" styleClass="search-button" stylesheets="@Front.css" />
+        <TextField fx:id="SearchField" layoutX="965.0" layoutY="204.0" prefHeight="26.0" prefWidth="150.0" promptText="enter brand here.." />
+        <RadioButton fx:id="SortButton" layoutX="684.0" layoutY="208.0" mnemonicParsing="false" onAction="#SortByType" text="  type" />
+        <ImageView fx:id="QrView" fitHeight="286.0" fitWidth="267.0" layoutX="785.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true" />
+        <Button fx:id="generateButton" layoutX="1063.0" layoutY="542.0" mnemonicParsing="false" onMouseClicked="#generateQr" text="generate" />
+      <Label layoutX="520.0" layoutY="100.0" text="Transport Management" underline="true">
+         <font>
+            <Font name="Arial Narrow Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="603.0" layoutY="207.0" stylesheets="@design.css" text="Filter :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

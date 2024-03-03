@@ -1,0 +1,97 @@
+/* styles.css */
+.post-container {
+    -fx-background-color: #f0f0f0; /* Set background color */
+    -fx-border-color: #ddd; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+    -fx-padding: 10px; /* Add padding */
+    -fx-margin: 10px; /* Add margin */
+}
+
+.post-image {
+    -fx-fit-height: 100; /* Set image height */
+    -fx-fit-width: 150; /* Set image width */
+    -fx-margin-bottom: 10px; /* Add margin at the bottom of the image */
+}
+/* styles.css */
+.post-content, .post-category {
+    -fx-font-family: 'Arial', sans-serif; /* Set font family */
+}
+/* styles.css */
+.post-container:hover {
+    -fx-background-color: #e0e0e0; /* Change background color on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+
+
+
+/* styles.css */
+/* styles.css */
+.post-content {
+    -fx-font-size: 16px; /* Add px or pt */
+    -fx-text-fill: #333; /* Set text color */
+}
+
+.post-category {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555; /* Set text color */
+}
+/* styles.css */
+.comment-field {
+    -fx-font-family: 'Arial', sans-serif; /* Set font family */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-pref-height: 40px; /* Set preferred height */
+    -fx-padding: 5px; /* Add padding */
+    -fx-border-color: #ccc; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+}
+/* styles.css */
+.post-box {
+    -fx-border-color: #000000; /* Black border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius for rounded corners */
+    -fx-background-color: #c8f8c0;
+    -fx-padding: 10px;
+}
+/* styles.css */
+
+.forum-box {
+    -fx-padding: 10px;
+    -fx-background-color: #c8f8c0; /* Background color for each forum box */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-radius: 5px;
+    -fx-border-color: #000000; /* Border color for each forum box */
+}
+
+.forum-category {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Text color for category label */
+}
+
+.forum-content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666; /* Text color for content label */
+}
+
+.forum-nb-posts {
+    -fx-font-size: 12px;
+    -fx-text-fill: #999; /* Text color for number of posts label */
+}
+
+
+.comment-button {
+    -fx-font-family: 'Arial', sans-serif; /* Set font family */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-background-color: #4CAF50; /* Set background color */
+    -fx-text-fill: white; /* Set text color */
+    -fx-pref-height: 40px; /* Set preferred height */
+    -fx-pref-width: 120px; /* Set preferred width */
+    -fx-border-radius: 5px; /* Set border radius */
+}
+
+.comment-button:hover {
+    -fx-background-color: #45a049; /* Change background color on hover */
+    -fx-cursor: hand; /* Change cursor on hover */
+}
+

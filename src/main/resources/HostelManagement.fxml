@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.GlyphsStack?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1206.0" styleClass="white-bg" stylesheets="@design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.HostelManagement">
+    <children>
+        <TableView fx:id="ListHostel" layoutX="630.0" layoutY="292.0" prefHeight="367.0" prefWidth="526.0">
+            <columns>
+                <TableColumn fx:id="id_hostel" prefWidth="58.4000244140625" text="ID" />
+                <TableColumn fx:id="Name_Hostel" prefWidth="92.0" text="Name_Hostel" />
+                <TableColumn fx:id="NBstars" prefWidth="149.59991455078125" text="NB_Stars" />
+                <TableColumn fx:id="Info" prefWidth="225.60015869140625" text="Info" />
+            </columns>
+        </TableView>
+        <AnchorPane layoutY="78.0" prefHeight="796.0" prefWidth="210.0" styleClass="main-bg" stylesheets="@design.css">
+            <children>
+                <Button fx:id="userbtn" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#userBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="User Managment">
+                    <font>
+                        <Font size="14.0" />
+                    </font></Button>
+                <Label layoutX="100.0" layoutY="44.0" />
+                <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="70.0" layoutY="130.0" size="100" tabSize="25" />
+                <Label layoutX="50.0" layoutY="145.0" text="Welcome , Admin" textFill="#f2f2f2">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Button fx:id="locationbtn" layoutX="30.0" layoutY="287.0" mnemonicParsing="false" onAction="#LocationBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Location Management " />
+                <Button fx:id="reviewbtn" layoutX="30.0" layoutY="447.0" mnemonicParsing="false" onAction="#ReviewBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Review Management" />
+                <Button fx:id="activitybtn" layoutX="30.0" layoutY="341.0" mnemonicParsing="false" onAction="#activityBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Activity Management" />
+                <Button fx:id="hostelbtn" layoutX="30.0" layoutY="501.0" mnemonicParsing="false" onAction="#hostelBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Hostel Management" />
+                <Button fx:id="reservationbtn" layoutX="30.0" layoutY="555.0" mnemonicParsing="false" onAction="#ReservationBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" text="Reservation Management" />
+                <Button fx:id="forumbtnid" layoutX="30.0" layoutY="608.0" mnemonicParsing="false" onAction="#ForumBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Forum &amp; Posts Management" />
+                <Button fx:id="transportbtn" layoutX="30.0" layoutY="661.0" mnemonicParsing="false" onAction="#TransportBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Transport Management" />
+                <GlyphsStack />
+                <Label layoutX="23.0" layoutY="139.0" prefHeight="18.0" prefWidth="22.0" />
+                <Line endX="73.59999084472656" layoutX="120.0" layoutY="180.0" startX="-100.0" stroke="WHITE" />
+                <Button fx:id="challengebtn" layoutX="30.0" layoutY="394.0" mnemonicParsing="false" onAction="#challengeBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Challenge Management" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="-2.0" prefHeight="72.0" prefWidth="1206.0" styleClass="main-bg" stylesheets="@design.css">
+            <children>
+                <Label layoutX="540.0" layoutY="19.0" prefHeight="18.0" prefWidth="249.0" text="Tunism Desktop App" textFill="WHITE">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+                <Button layoutX="1154.0" layoutY="11.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="22.0" styleClass="close" stylesheets="@design.css" />
+                <FontAwesomeIconView glyphName="CLOSE" layoutX="1161.0" layoutY="27.0" />
+            <ImageView fitHeight="72.0" fitWidth="90.0" layoutX="8.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Img/logo_tunism-removebg-preview.png" />
+               </image>
+            </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="287.0" layoutY="282.0" prefHeight="387.0" prefWidth="250.0" styleClass="AnchorPane" stylesheets="@design.css">
+            <children>
+                <TextField fx:id="HID" layoutX="15.0" layoutY="133.0" prefHeight="26.0" prefWidth="90.0" promptText="ID_Hostel" />
+                <TextField fx:id="Name_hostelID" layoutX="135.0" layoutY="133.0" prefHeight="26.0" prefWidth="90.0" promptText="NameHostel" />
+                <TextField fx:id="NBstarsID" layoutX="15.0" layoutY="216.0" prefHeight="26.0" prefWidth="90.0" promptText="NBStars" />
+                <TextField fx:id="InfoID" layoutX="135.0" layoutY="214.0" prefHeight="26.0" prefWidth="90.0" promptText="Info" />
+                <Button layoutX="19.0" layoutY="296.0" mnemonicParsing="false" onAction="#AddHostel" prefHeight="26.0" prefWidth="50.0" styleClass="add-button" stylesheets="@design.css" />
+                <Button layoutX="97.0" layoutY="296.0" mnemonicParsing="false" onAction="#DeleteHostel" styleClass="delete-button" stylesheets="@design.css" />
+                <Button layoutX="167.0" layoutY="296.0" mnemonicParsing="false" onAction="#UpdateHostel" styleClass="update-button" stylesheets="@design.css" />
+                <Label layoutX="50.0" layoutY="30.0" prefHeight="35.0" prefWidth="175.0" text="Hostel Form" textAlignment="CENTER" textFill="WHITE" underline="true">
+                    <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="27.0" layoutY="103.0" text="ID Hostel" textAlignment="CENTER" textFill="#fafafa">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="141.0" layoutY="103.0" text="Name hostel" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="26.0" layoutY="185.0" text="nb stars" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+            <Label layoutX="145.0" layoutY="190.0" text="Info " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+        <Label layoutX="520.0" layoutY="100.0" text="Hostel Management" underline="true">
+            <font>
+                <Font name="Arial Narrow Bold" size="36.0" />
+            </font>
+        </Label>
+        <TextField fx:id="Search_field" layoutX="989.0" layoutY="253.0" prefHeight="26.0" prefWidth="150.0" promptText="Search" />
+        <Button layoutX="950.0" layoutY="243.0" mnemonicParsing="false" onAction="#SearchByName" prefHeight="45.0" prefWidth="22.0" styleClass="search-button" stylesheets="@Front.css" />
+        <Button layoutX="900.0" layoutY="254.0" mnemonicParsing="false" onAction="#FilterByNbs" text="Sort" />
+        <TextField fx:id="locationfield" layoutX="733.0" layoutY="254.0" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="649.0" layoutY="257.0" stylesheets="@design.css" text="Filter By:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+    </children>
+
+</AnchorPane>

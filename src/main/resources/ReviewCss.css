@@ -1,0 +1,122 @@
+.dark-background {
+    -fx-background-color: #107079; /* Changed to dark color */
+}
+
+.icon-button {
+    -fx-font-size: 32px;
+    -fx-text-fill: #FEA116; /* Changed to primary color */
+}
+
+.menu-bar {
+    -fx-background-color: #0F172B; /* Changed to dark color */
+}
+
+
+.menu-button:focused {
+    -fx-underline: true;
+}
+
+.menu-button:hover {
+    -fx-background-color: #1F4277; /* Changed to dark color on hover */
+}
+
+
+.dashboard-button:focused {
+    -fx-underline: true;
+}
+
+.dashboard-button:hover {
+    -fx-background-color: #1F4277; /* Changed to dark color on hover */
+}
+
+.dashboard-label {
+    -fx-text-fill: #FFFFFF; /* Changed to white color */
+    -fx-padding: 5px;
+    -fx-font-weight: bold;
+}
+
+.border-bottom {
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: #FEA116; /* Changed to primary color */
+}
+
+.scroll-pane {
+    -fx-background-color: #156d73;
+}
+
+.vbox-with-border {
+    -fx-border-color: #FEA116; /* Changed to primary color */
+    -fx-border-width: 9px;
+    -fx-border-radius: 10px;
+}
+.menu-button {
+    -fx-text-fill: #FEA116; /* Text color set to #FEA116 */
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+    -fx-font-size: 16px;
+    -fx-spacing: 50px;
+    -fx-margin-top: 200px;
+    -fx-padding: 25px 30px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+    -fx-font-weight: bold;
+    -fx-border-style: solid;
+    -fx-border-color: transparent transparent transparent #FEA116;
+}
+
+.dashboard-button {
+    -fx-text-fill: #FEA116; /* Text color set to #FEA116 */
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
+    -fx-font-size: 16px;
+    -fx-spacing: 50px;
+    -fx-margin-top: 200px;
+    -fx-padding: 25px 30px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+    -fx-graphic: url('Img/dashboard.png');
+    -fx-padding: 10px;
+    -fx-font-weight: bold;
+}
+/* CSS file */
+
+/* Styling for the ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent; /* Set background color of the ScrollPane to transparent */
+    -fx-background-radius: 20px; /* Set the background radius */
+    -fx-border-radius: 20px; /* Set the border radius */
+    -fx-border-color: #FEA116; /* Set the border color */
+    -fx-border-width: 6px; /* Set the border width */
+}
+
+/* Styling for the content inside the ScrollPane */
+.scroll-pane .content {
+    -fx-background-color: transparent; /* Set background color of the content area to transparent */
+    -fx-background-size: cover; /* Set background image size to cover */
+    -fx-background-repeat: no-repeat; /* Prevent background image from repeating */
+}
+
+/* Styling for the TextArea */
+.text-area {
+    -fx-control-inner-background: white; /* Set the background color of the TextArea to white */
+}
+
+
+/* Styling for the ScrollBar */
+.scroll-pane .scroll-bar {
+    -fx-background-color: #FFFFFF; /* Set background color of the ScrollBar */
+    -fx-background-insets: 0; /* Remove any background insets */
+    -fx-opacity: 0.7; /* Adjust opacity of the ScrollBar */
+}
+
+/* Styling for the ScrollBar thumb */
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: #FEA116; /* Set background color of the thumb */
+    -fx-background-insets: 0; /* Remove any background insets */
+}
+
+/* Styling for the ScrollBar track */
+.scroll-pane .scroll-bar .track {
+    -fx-background-color: transparent; /* Set background color of the track to transparent */
+}
+.scroll-pane .viewport {
+    -fx-background-color: transparent ; /* Set the background color of the ScrollPane's content area */
+}

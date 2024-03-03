@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.HostelFront">
+    <children>
+        <BorderPane layoutY="-6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="808.0" prefWidth="1200.0" styleClass="dark-background" stylesheets="@Front.css">
+            <top>
+                <HBox prefHeight="76.0" prefWidth="1128.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="106.0" prefWidth="214.0" stylesheets="@Front.css">
+                            <children>
+                                <ImageView fx:id="logo" fitHeight="103.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Img/logo_tunism-removebg-preview.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="103.0" prefWidth="694.0" styleClass="border-bottom" stylesheets="@Front.css">
+                            <children>
+                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@Front.css" text="Home">
+                                    <styleClass>
+                                        <String fx:value="menu-bar" />
+                                        <String fx:value="menu-button" />
+                                    </styleClass>
+                                    <effect>
+                                        <Blend />
+                                    </effect>
+                                    <font>
+                                        <Font size="36.0" />
+                                    </font>
+                                </Button>
+                                <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="142.0" styleClass="menu-button" stylesheets="@Front.css" text="Locations">
+                                    <font>
+                                        <Font size="36.0" />
+                                    </font>
+                                </Button>
+                                <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="182.0" styleClass="menu-button" stylesheets="@Front.css" text="Achievements">
+                                    <font>
+                                        <Font size="36.0" />
+                                    </font>
+                                </Button>
+                                <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="136.0" styleClass="menu-button" stylesheets="@Front.css" text="Services">
+                                    <font>
+                                        <Font size="36.0" />
+                                    </font>
+                                </Button>
+                                <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="122.0" styleClass="menu-button" stylesheets="@Front.css" text="Forum">
+                                    <font>
+                                        <Font size="36.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <VBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="159.0">
+                            <children>
+                                <Button fx:id="dashboard" mnemonicParsing="false" onAction="#Dashboard" prefHeight="78.0" prefWidth="87.0" styleClass="dashboard-button" stylesheets="@Front.css">
+                                    <graphic>
+                                        <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@Img/dashboard.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </top>
+            <center>
+                <VBox prefHeight="700.0" prefWidth="1087.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox prefHeight="226.0" prefWidth="1206.0">
+                            <children>
+                        <AnchorPane prefHeight="169.0" prefWidth="1202.0">
+                           <children>
+                                         <!-- <Button layoutX="867.0" onAction="#SearchByName" layoutY="172.0" mnemonicParsing="false" text="Search" />-->
+                                         <ComboBox fx:id="SortBox" layoutX="983.0" layoutY="145.0" onAction="#HandleSort" prefHeight="34.0" prefWidth="174.0" />
+                              <TextField fx:id="Search_field" layoutX="568.0" layoutY="140.0" onKeyTyped="#AutoSearch" prefHeight="35.0" prefWidth="338.0" />
+                              <Button layoutX="375.0" layoutY="150.0" mnemonicParsing="false" onAction="#Map" text="Map" />
+                           </children>
+                        </AnchorPane>
+                            </children>
+                        </HBox>
+                        <BorderPane prefHeight="499.0" prefWidth="1203.0">
+                            <center>
+                                <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <VBox fx:id="hostelBox" prefHeight="440.0" prefWidth="1203.0" BorderPane.alignment="CENTER" />
+                           </center>
+                                </BorderPane>
+                            </center>
+                        </BorderPane>
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+        <HBox layoutX="10.0" layoutY="2.0" prefHeight="95.0" prefWidth="957.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="95.0" prefWidth="224.0" stylesheets="@Front.css" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

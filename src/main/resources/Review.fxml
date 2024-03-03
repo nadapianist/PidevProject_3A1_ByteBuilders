@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.ReviewManagementFront">
+   <children>
+      <BorderPane layoutX="261.0" layoutY="138.0" prefHeight="700.0" prefWidth="1213.0" styleClass="dark-background" stylesheets="@ReviewCss.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="800.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="66.0" layoutY="195.0" prefHeight="510.0" prefWidth="441.0" stylesheets="@Front.css">
+                     <styleClass>
+                        <String fx:value="Label" />
+                        <String fx:value="content-wrapper" />
+                     </styleClass>
+                  </Label>
+                  <TextArea fx:id="infoid" layoutX="130.0" layoutY="286.0" prefHeight="142.0" prefWidth="294.0" style="-fx-background-radius: 20;" />
+                  <TextField fx:id="titleid" layoutX="140.0" layoutY="237.0" prefHeight="30.0" prefWidth="270.0" promptText="Title" />
+                  <Button alignment="CENTER" layoutX="242.0" layoutY="648.0" mnemonicParsing="false" onAction="#AddRev" prefHeight="38.0" prefWidth="69.0" style="-fx-background-color: #FEA116;" text="Add" />
+                  <Button layoutX="327.0" layoutY="648.0" mnemonicParsing="false" onAction="#UpdateRev" prefHeight="38.0" prefWidth="62.0" style="-fx-background-color: #FEA116;" text="Update" />
+                  <Button layoutX="443.0" layoutY="230.0" mnemonicParsing="false" onAction="#cam" styleClass="camera-button" stylesheets="@Front.css" />
+                  <Button layoutX="154.0" layoutY="647.0" mnemonicParsing="false" onAction="#importbtn" prefHeight="40.0" prefWidth="60.0" style="-fx-background-color: #FEA116;" text="Import" />
+                  <VBox layoutX="142.0" layoutY="441.0" prefHeight="184.0" prefWidth="266.0" style="-fx-background-color: white;">
+                     <children>
+                        <ImageView fx:id="imageView" fitHeight="186.0" fitWidth="266.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </VBox>
+                  <ScrollPane fx:id="scrollpane" layoutX="536.0" layoutY="306.0" prefHeight="346.0" prefWidth="618.0" styleClass="content" stylesheets="@ReviewCss.css">
+                     <content>
+                        <VBox prefHeight="279.0" prefWidth="592.0" />
+                     </content>
+                  </ScrollPane>
+                  <Label fx:id="label" layoutX="648.0" layoutY="140.0" prefHeight="145.0" prefWidth="171.0" />
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="1203.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="106.0" prefWidth="214.0" stylesheets="@Front.css">
+               <children>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="138.0" prefWidth="188.0">
+                     <children>
+                        <ImageView fx:id="logo" fitHeight="103.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Img/logo_tunism-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="103.0" prefWidth="694.0" styleClass="border-bottom" stylesheets="@ReviewCss.css">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#home" prefHeight="75.0" prefWidth="110.0" stylesheets="@ReviewCss.css" text="Home">
+                     <styleClass>
+                        <String fx:value="menu-bar" />
+                        <String fx:value="menu-button" />
+                     </styleClass>
+                     <effect>
+                        <Blend />
+                     </effect>
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#locations" prefHeight="75.0" prefWidth="142.0" styleClass="menu-button" stylesheets="@ReviewCss.css" text="Locations">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#achievements" prefHeight="75.0" prefWidth="182.0" styleClass="menu-button" stylesheets="@ReviewCss.css" text="Achievements">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#services" prefHeight="75.0" prefWidth="136.0" styleClass="menu-button" stylesheets="@ReviewCss.css" text="Services">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#forum" prefHeight="75.0" prefWidth="122.0" styleClass="menu-button" stylesheets="@ReviewCss.css" text="Forum">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="159.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#Dashboard" prefHeight="78.0" prefWidth="87.0" styleClass="dashboard-button" stylesheets="@ReviewCss.css">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Img/dashboard.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

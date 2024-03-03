@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="dark-background" stylesheets="@Front.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.ConsultActivities">
+   <top>
+      <HBox prefHeight="61.0" prefWidth="1203.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="106.0" prefWidth="214.0" stylesheets="@Front.css">
+               <children>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="138.0" prefWidth="188.0">
+                     <children>
+                        <ImageView fx:id="logo" fitHeight="103.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Img/logo_tunism-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                     </children></VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="103.0" prefWidth="694.0" styleClass="border-bottom" stylesheets="@Front.css">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#home" prefHeight="75.0" prefWidth="110.0" stylesheets="@Front.css" text="Home">
+                     <styleClass>
+                        <String fx:value="menu-bar" />
+                        <String fx:value="menu-button" />
+                     </styleClass>
+                     <effect>
+                        <Blend />
+                     </effect>
+                     <font>
+                        <Font size="36.0" />
+                     </font></Button>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#locations" prefHeight="75.0" prefWidth="142.0" styleClass="menu-button" stylesheets="@Front.css" text="Locations">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Button>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#achievements" prefHeight="75.0" prefWidth="182.0" styleClass="menu-button" stylesheets="@Front.css" text="Activity">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Button>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#services" prefHeight="75.0" prefWidth="136.0" styleClass="menu-button" stylesheets="@Front.css" text="Services">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Button>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#forum" prefHeight="75.0" prefWidth="122.0" styleClass="menu-button" stylesheets="@Front.css" text="Forum">
+                     <font>
+                        <Font size="36.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="159.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#Dashboard" prefHeight="78.0" prefWidth="87.0" styleClass="dashboard-button" stylesheets="@Front.css">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Img/dashboard.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="658.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="311.0" prefWidth="1206.0">
+               <children>
+                  <AnchorPane prefHeight="226.0" prefWidth="1202.0">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="156.0" mnemonicParsing="false" onAction="#Sort_activity" prefHeight="40.0" prefWidth="102.0" styleClass="sort-button" stylesheets="@Front.css">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Label alignment="BASELINE_LEFT" layoutX="209.0" prefHeight="55.0" prefWidth="182.0" text=" Activities" textFill="#087ea1">
+                           <font>
+                              <Font name="Brush Script MT Italic" size="40.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="searchid" alignment="BOTTOM_LEFT" layoutX="107.0" layoutY="154.0" prefHeight="38.0" prefWidth="176.0" promptText="Enter  your destination ">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </TextField>
+                        <Button alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="300.0" layoutY="155.0" mnemonicParsing="false" onAction="#Seach_activity" prefHeight="42.0" prefWidth="64.0" styleClass="search-button" stylesheets="@Front.css">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Label alignment="BOTTOM_RIGHT" layoutX="790.0" prefHeight="40.0" prefWidth="200.0" text=" Challenges" textFill="#087ea1">
+                           <font>
+                              <Font name="Brush Script MT Italic" size="40.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="search_challengeid" alignment="BOTTOM_LEFT" layoutX="717.0" layoutY="153.0" prefHeight="0.0" prefWidth="190.0" promptText="Search Challenge By Name">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </TextField>
+                        <Button layoutX="1081.0" layoutY="150.0" mnemonicParsing="false" onAction="#sort_challenge" prefHeight="42.0" prefWidth="66.0" styleClass="sort-button" stylesheets="@Front.css">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="890.0" layoutY="150.0" mnemonicParsing="false" onAction="#search_challenge" prefHeight="42.0" prefWidth="70.0" styleClass="search-button" stylesheets="@Front.css">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="530.0" layoutY="14.0" mnemonicParsing="false" onAction="#Validate" styleClass="rev_btn" stylesheets="@Front.css" text="Reviews Section" />
+                        <Button layoutX="631.0" layoutY="150.0" mnemonicParsing="false" onAction="#watch" prefHeight="45.0" prefWidth="81.0" styleClass="VideoPlayer-button" stylesheets="@Front.css" />
+                        <Button layoutX="419.0" layoutY="149.0" mnemonicParsing="false" onAction="#generate" prefHeight="54.0" prefWidth="61.0" styleClass="pdf-button" stylesheets="@Front.css" />
+                        <Button layoutX="1133.0" layoutY="154.0" mnemonicParsing="false" onAction="#calendar" styleClass="calendar-button" stylesheets="@Front.css" />
+                        <Button layoutX="43.0" layoutY="154.0" mnemonicParsing="false" onAction="#cam" styleClass="camera-button" stylesheets="@Front.css" />
+                        <ComboBox fx:id="combo_criteria" layoutX="939.0" layoutY="159.0" prefHeight="26.0" prefWidth="168.0" promptText="Select Sorting Criteria">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Name" />
+                                 <String fx:value="Description" />
+                                 <String fx:value="Points" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <ComboBox fx:id="combo_act_criteria" layoutX="481.0" layoutY="161.0" prefWidth="150.0" promptText="Select Sorting Criteria">
+                        <items>
+                           <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Name" />
+                              <String fx:value="Date_act" />
+                              <String fx:value="Description" />
+                           </FXCollections>
+                        </items>
+                        </ComboBox>
+                        <Label fx:id="touristNameLabel" layoutX="58.0" layoutY="69.0" prefHeight="43.0" prefWidth="188.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <BorderPane prefHeight="606.0" prefWidth="1206.0">
+               <center>
+                  <BorderPane prefHeight="453.0" prefWidth="1206.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <VBox prefHeight="563.0" prefWidth="602.0" styleClass="vbox-with-border" stylesheets="@Front.css" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" />
+                           </BorderPane.margin>
+                           <children>
+                              <BorderPane prefHeight="490.0" prefWidth="611.0">
+                                 <left>
+                                    <VBox prefHeight="454.0" prefWidth="178.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <ComboBox fx:id="combobox" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #087ea1;" />
+                                       </children>
+                                    </VBox>
+                                 </left>
+                                 <right>
+                                    <VBox fx:id="box" prefHeight="454.0" prefWidth="405.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <VBox alignment="BOTTOM_LEFT" prefHeight="138.0" prefWidth="277.0" />
+                                       </children></VBox>
+                                 </right>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </left>
+                     <right>
+                        <VBox prefHeight="472.0" prefWidth="604.0" styleClass="vbox-with-border" stylesheets="@Front.css" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" />
+                           </BorderPane.margin>
+                           <children>
+                              <BorderPane prefHeight="484.0" prefWidth="584.0">
+                                 <left>
+                                    <VBox prefHeight="454.0" prefWidth="178.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <ComboBox fx:id="combo_challenge" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #087ea1;" />
+                                       </children>
+                                    </VBox>
+                                 </left>
+                                 <center>
+                                    <VBox fx:id="vbox_challenge" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </right>
+                  </BorderPane>
+               </center>
+            </BorderPane>
+         </children></VBox>
+   </center>
+</BorderPane>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.GlyphsStack?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1206.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.DisplayUser">
+
+    <children>
+        <AnchorPane layoutX="-1.0" layoutY="-7.0" prefHeight="72.0" prefWidth="1206.0" styleClass="main-bg" stylesheets="@design.css">
+            <children>
+                <Label layoutX="540.0" layoutY="19.0" prefHeight="18.0" prefWidth="249.0" text="Tunism Desktop App" textFill="WHITE">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="72.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Img/logo_tunism-removebg-preview.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+
+        <AnchorPane layoutY="72.0" prefHeight="804.0" prefWidth="210.0" styleClass="main-bg" stylesheets="@design.css">
+            <children>
+                <Button fx:id="userbtn" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#userBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="User Managment">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="locationbtn" layoutX="30.0" layoutY="286.0" mnemonicParsing="false" onAction="#LocationBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Location Management " />
+                <Button fx:id="challengebtn" layoutX="30.0" layoutY="393.0" mnemonicParsing="false" onAction="#challengeBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Challenge Management" />
+                <Button fx:id="activitybtn" layoutX="30.0" layoutY="340.0" mnemonicParsing="false" onAction="#activityBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Activity Management" />
+                <Button fx:id="hostelbtn" layoutX="30.0" layoutY="500.0" mnemonicParsing="false" onAction="#hostelBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Hostel Management" />
+                <Button fx:id="reservationbtn" layoutX="30.0" layoutY="553.0" mnemonicParsing="false" onAction="#ReservationBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Reservation Management" />
+                <Button fx:id="forumbtnid" layoutX="30.0" layoutY="607.0" mnemonicParsing="false" onAction="#ForumBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Forum &amp; Posts Management" />
+                <Button fx:id="transportbtn" layoutX="30.0" layoutY="661.0" mnemonicParsing="false" onAction="#TransportBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Transport Management" />
+                <GlyphsStack />
+                <Label layoutX="23.0" layoutY="139.0" prefHeight="18.0" prefWidth="22.0" />
+                <Line endX="73.59999084472656" layoutX="120.0" layoutY="180.0" startX="-100.0" stroke="WHITE" />
+                <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="70.0" layoutY="130.0" size="100" tabSize="25" text="" />
+                <Label layoutX="50.0" layoutY="145.0" text="Welcome , Admin" textFill="#f2f2f2">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Button layoutX="79.0" layoutY="733.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="39.0" style="-fx-background-radius: 55;" textAlignment="CENTER" />
+                <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="88.0" layoutY="754.0" size="20" />
+            <Button fx:id="reviewbtn" layoutX="30.0" layoutY="446.0" mnemonicParsing="false" onAction="#ReviewBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Review Management" />
+            </children>
+        </AnchorPane>
+        <TableView fx:id="tabeT" layoutX="290.0" layoutY="262.0" prefHeight="118.0" prefWidth="706.0">
+            <columns>
+                <TableColumn fx:id="colidT" prefWidth="64.00001525878906" text="Id Tourist" />
+                <TableColumn fx:id="colfnT" prefWidth="86.4000244140625" text="First Name" />
+                <TableColumn fx:id="collnT" prefWidth="75.0" text="Last Name" />
+                <TableColumn fx:id="colpnT" prefWidth="117.5999755859375" text="Phone Number" />
+                <TableColumn fx:id="colemailT" prefWidth="108.0" text="Email" />
+                <TableColumn fx:id="colpwdT" minWidth="0.0" prefWidth="92.79998779296875" text="Password" />
+                <TableColumn fx:id="colbioT" minWidth="0.0" prefWidth="65.5999755859375" text="Bio" />
+                <TableColumn fx:id="colprefT" minWidth="0.0" prefWidth="100.8000366210938" text="Preferences" />
+            </columns>
+        </TableView>
+        <Text layoutX="297.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Tourists" wrappingWidth="166.39999999999986">
+            <font>
+                <Font name="Gill Sans MT" size="20.0" />
+            </font></Text>
+        <Button layoutX="926.0" layoutY="225.0" mnemonicParsing="false" onAction="#deleteT" prefHeight="26.0" prefWidth="55.0" style="-fx-background-radius: 55;" stylesheets="@design.css" />
+        <Text layoutX="290.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Local committees">
+            <font>
+                <Font name="Gill Sans MT" size="20.0" />
+            </font></Text>
+        <TableView fx:id="tableL" layoutX="288.0" layoutY="449.0" prefHeight="128.0" prefWidth="714.0">
+            <columns>
+                <TableColumn fx:id="colidL" prefWidth="117.60005187988281" text="Id Local committee" />
+                <TableColumn fx:id="colfnL" prefWidth="85.5999755859375" text="First Name" />
+                <TableColumn fx:id="collnL" minWidth="7.20001220703125" prefWidth="66.4000244140625" text="Last Name" />
+                <TableColumn fx:id="colpnL" prefWidth="101.5999755859375" text="Phone Number" />
+                <TableColumn fx:id="colemailL" minWidth="0.0" prefWidth="159.99993896484375" text="Email" />
+                <TableColumn fx:id="colpwdL" prefWidth="81.60003662109375" text="Password" />
+                <TableColumn fx:id="availL" prefWidth="97.5999755859375" text="Availability" />
+            </columns>
+        </TableView>
+        <Button layoutX="926.0" layoutY="412.0" mnemonicParsing="false" onAction="#deleteL" prefHeight="26.0" prefWidth="55.0" style="-fx-background-radius: 55;" />
+        <Text layoutX="297.0" layoutY="640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Admins" wrappingWidth="166.39999999999986">
+            <font>
+                <Font name="Gill Sans MT" size="20.0" />
+            </font></Text>
+        <TableView fx:id="tableA" layoutX="292.0" layoutY="647.0" prefHeight="128.0" prefWidth="362.0">
+            <columns>
+                <TableColumn fx:id="colidA" prefWidth="75.0" text="Id Admin" />
+                <TableColumn fx:id="colemailA" prefWidth="154.39996337890625" text="Email" />
+                <TableColumn fx:id="colpwdA" prefWidth="132.800048828125" text="pwd" />
+            </columns>
+        </TableView>
+        <Button layoutX="662.0" layoutY="698.0" mnemonicParsing="false" onAction="#deleteA" prefHeight="26.0" prefWidth="50.0" style="-fx-background-radius: 55;" />
+        <Button layoutX="664.0" layoutY="736.0" mnemonicParsing="false" onAction="#UpdateA" prefHeight="26.0" prefWidth="50.0" style="-fx-background-radius: 55;" />
+        <Button layoutX="662.0" layoutY="660.0" mnemonicParsing="false" onAction="#AddA" prefHeight="26.0" prefWidth="50.0" style="-fx-background-radius: 55;" />
+        <FontAwesomeIconView glyphName="TRASH" layoutX="946.0" layoutY="245.0" size="20" />
+        <FontAwesomeIconView glyphName="TRASH" layoutX="947.0" layoutY="431.0" size="20" />
+        <FontAwesomeIconView glyphName="PLUS" layoutX="680.0" layoutY="681.0" size="20" />
+        <FontAwesomeIconView glyphName="TRASH" layoutX="680.0" layoutY="718.0" size="20" />
+        <FontAwesomeIconView glyphName="PENCIL" layoutX="679.0" layoutY="756.0" size="20" />
+        <Text layoutX="778.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Display the list of all users" wrappingWidth="217.59999999999997">
+            <font>
+                <Font name="Gill Sans MT" size="20.0" />
+            </font>
+        </Text>
+        <Button layoutX="851.0" layoutY="706.0" mnemonicParsing="false" onAction="#displayUsers" prefHeight="35.0" prefWidth="71.0" style="-fx-background-radius: 55;" />
+        <FontAwesomeIconView glyphName="USERS" layoutX="871.0" layoutY="734.0" size="30" wrappingWidth="22.400000000000034" />
+      <Label layoutX="520.0" layoutY="100.0" text="Users Management" underline="true">
+         <font>
+            <Font name="Arial Narrow Bold" size="36.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

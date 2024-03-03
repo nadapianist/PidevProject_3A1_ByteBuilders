@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="1218.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.Postsgategory">
+    <children>
+        <HBox prefHeight="103.0" prefWidth="1126.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="106.0" prefWidth="214.0" stylesheets="@Front.css">
+                    <children>
+                        <ImageView fx:id="logoo" fitHeight="103.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Img/logo_tunism-removebg-preview.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+                <HBox prefHeight="103.0" prefWidth="694.0" styleClass="border-bottom" stylesheets="@Front.css">
+                    <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#home" prefHeight="75.0" prefWidth="110.0" stylesheets="@Front.css" text="Home">
+                            <styleClass>
+                                <String fx:value="menu-bar" />
+                                <String fx:value="menu-button" />
+                            </styleClass>
+                            <effect>
+                                <Blend />
+                            </effect>
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Button>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#locations" prefHeight="75.0" prefWidth="142.0" styleClass="menu-button" stylesheets="@Front.css" text="Locations">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Button>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#achievements" prefHeight="75.0" prefWidth="182.0" styleClass="menu-button" stylesheets="@Front.css" text="Achievements">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Button>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#services" prefHeight="75.0" prefWidth="136.0" styleClass="menu-button" stylesheets="@Front.css" text="Services">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Button>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#forum" prefHeight="75.0" prefWidth="122.0" styleClass="menu-button" stylesheets="@Front.css" text="Forum">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <VBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="159.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#Dashboard" prefHeight="78.0" prefWidth="87.0" styleClass="dashboard-button" stylesheets="@Front.css">
+                            <graphic>
+                                <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Img/dashboard.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="106.0" prefWidth="214.0" stylesheets="@Front.css">
+            <children>
+                <ImageView fx:id="logooo" fitHeight="103.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Img/logo_tunism-removebg-preview.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </HBox>
+        <VBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="159.0" />
+        <ScrollPane layoutX="7.0" layoutY="165.0" prefHeight="566.0" prefWidth="1204.0">
+            <content>
+                <!-- Your FXML file -->
+                <HBox fx:id="tfpostlist" styleClass="post-container" />
+            </content>
+        </ScrollPane>
+        <Button fx:id="ADDPOST" layoutX="28.0" layoutY="118.0" mnemonicParsing="false" onAction="#ADDPOST" prefHeight="37.0" prefWidth="158.0" styleClass="btn" text="What's New?">
+            <stylesheets>
+                <URL value="@Front.css" />
+                <URL value="@design.css" />
+                <URL value="@styles.css"/>
+            </stylesheets>
+        </Button>
+    </children>
+</AnchorPane>

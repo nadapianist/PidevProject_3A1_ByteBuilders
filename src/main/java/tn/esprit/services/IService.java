@@ -1,5 +1,6 @@
 package tn.esprit.services;
 
+import javafx.collections.ObservableList;
 import tn.esprit.entities.Activity;
 import tn.esprit.entities.Challenge;
 
@@ -18,5 +19,6 @@ public interface IService<T> {
     void delete(T t) throws  SQLException;
 
     List<T> diplayList() throws  SQLException;
+
 
 }
