@@ -299,7 +299,7 @@ public class DisplayUser {
         if (touristSelected != null) {
             touristSelected.setStatus(true);  // Set status to true (deactivate)
             ser.updateUserStatus(touristSelected.getUserID(), false);  // Update status in the database
-            showStatusAlert("Tourist deactivated. Status: " + touristSelected.getStatus());
+            showStatusAlert("Tourist deactivated. Status: " );
             initialize();
         } else {
             System.out.println("You must select a Tourist.");
@@ -312,7 +312,7 @@ public class DisplayUser {
         User localSelected = tableL.getSelectionModel().getSelectedItem();
         if (localSelected != null) {
             ser.deactivateUser(localSelected.getUserID());
-            showStatusAlert("Local committee deactivated. Status: " + localSelected.getStatus());
+            showStatusAlert("Local committee deactivated. Status: " );
             initialize();
         } else {
             System.out.println("You must select a Local committee.");
@@ -325,7 +325,7 @@ public class DisplayUser {
         if (touristSelected != null) {
             touristSelected.setStatus(false);  // Set status to false (activate)
             ser.updateUserStatus(touristSelected.getUserID(), true);  // Update status in the database
-            showStatusAlert("Tourist activated. Status: " + touristSelected.getStatus());
+            showStatusAlert("Tourist activated. Status: " );
             initialize();
         } else {
             System.out.println("You must select a Tourist.");
@@ -338,7 +338,7 @@ public class DisplayUser {
         User localSelected = tableL.getSelectionModel().getSelectedItem();
         if (localSelected != null) {
             ser.activateUser(localSelected.getUserID());
-            showStatusAlert("Local committee activated. Status: " + localSelected.getStatus());
+            showStatusAlert("Local committee activated. Status: ");
             initialize();
         } else {
             System.out.println("You must select a Local committee.");
@@ -352,7 +352,6 @@ public class DisplayUser {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
     //////////////////////////////////////////////////
     @FXML
     void activityBTN(ActionEvent event)throws IOException {

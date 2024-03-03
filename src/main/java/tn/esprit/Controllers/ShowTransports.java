@@ -4,6 +4,10 @@ package tn.esprit.Controllers;
 //import com.google.zxing.BarcodeFormat;
 //import com.google.zxing.MultiFormatWriter;
 //import com.google.zxing.common.BitMatrix;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -142,7 +146,7 @@ public class ShowTransports {
     }
 
     public void generateQRCodeForSelectedTransport() {
-       /* Transport selectedTransport = TransportList.getSelectionModel().getSelectedItem();
+       Transport selectedTransport = TransportList.getSelectionModel().getSelectedItem();
 
         if (selectedTransport != null) {
             String transportData = selectedTransport.toString(); // Convert transport data to string for QR code generation
@@ -157,7 +161,7 @@ public class ShowTransports {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
     public void AddNewTransport(ActionEvent actionEvent) {
 

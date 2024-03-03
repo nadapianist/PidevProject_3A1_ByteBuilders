@@ -107,7 +107,7 @@
         <TextField fx:id="SearchField" layoutX="965.0" layoutY="204.0" prefHeight="26.0" prefWidth="150.0" promptText="enter brand here.." />
         <RadioButton fx:id="SortButton" layoutX="684.0" layoutY="208.0" mnemonicParsing="false" onAction="#SortByType" text="  type" />
         <ImageView fx:id="QrView" fitHeight="286.0" fitWidth="267.0" layoutX="785.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true" />
-        <Button fx:id="generateButton" layoutX="1063.0" layoutY="542.0" mnemonicParsing="false" onMouseClicked="#generateQr" text="generate" />
+        <Button fx:id="generateButton" layoutX="1063.0" layoutY="542.0" mnemonicParsing="false" onAction="#generateQRCodeForSelectedTransport" onMouseClicked="#generateQr" text="generate" />
       <Label layoutX="520.0" layoutY="100.0" text="Transport Management" underline="true">
          <font>
             <Font name="Arial Narrow Bold" size="36.0" />

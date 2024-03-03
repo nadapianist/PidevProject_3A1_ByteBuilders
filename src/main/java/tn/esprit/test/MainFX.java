@@ -17,10 +17,10 @@ public class MainFX extends Application {
     public void start(Stage primaryStage) throws IOException {
         try {
 
-          // FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsultActivities.fxml"));
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsultActivities.fxml"));
          //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddPost.fxml"));
          //FXMLLoader loader = new FXMLLoader(getClass().getResource("/ActivityManagement.fxml"));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+           // FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
          //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/forumManagement.fxml"));
 
             // Define the root

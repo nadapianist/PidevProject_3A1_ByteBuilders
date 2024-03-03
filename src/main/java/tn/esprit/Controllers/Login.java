@@ -22,13 +22,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class Login {
-
     @FXML
     private TextField txtemail;
 
     @FXML
     private PasswordField txtpassword;
+    private static User authenticatedUser;
 
+    public static User getAuthenticatedUser() {
+        return authenticatedUser;
+    }
 
 
     @FXML
@@ -85,8 +88,14 @@ public class Login {
     @FXML
     void SignIn(ActionEvent event) throws SQLException {
         Alert al;
+
+        if (!VerifUserChamps()) {
+            return;
+        }
+
         String encPass = su.encrypt(txtpassword.getText());
         User user = su.find(txtemail.getText(), encPass);
+
         if (user == null) {
             al = new Alert(Alert.AlertType.ERROR);
             al.setTitle("Alert");
@@ -104,48 +113,25 @@ public class Login {
             al.show();
             return;
         }
+
+        if (user != null) {
+            authenticatedUser = user;
+        }
+
+        // Redirect based on user type
         if (user instanceof Admin) {
             // Redirect to the Display screen
-            try {
-                Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                loginStage.close();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/DisplayUser.fxml"));
-                Parent root = loader.load();
-                Stage displayStage = new Stage();
-                displayStage.setScene(new Scene(root));
-                displayStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            loadFXML("/DisplayUser.fxml", "Display User");
         } else if (user instanceof Tourist) {
             connectedTourist = (Tourist) user;
-
             // Redirect to TouristAccount screen
-            try {
-                Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                loginStage.close();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/TouristAccount.fxml"));
-                Parent root = loader.load();
-                TouristAccount touristAccountController = loader.getController();
-                touristAccountController.initialize();  // Initialize tourist data
-                Stage touristAccountStage = new Stage();
-                touristAccountStage.setScene(new Scene(root));
-                touristAccountStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            loadFXML("/home.fxml", "Tourist Account");
         } else if (user instanceof LocalCom) {
             LocalCom localcom = (LocalCom) user;
             System.out.println("localCom");
         } else {
             System.out.println("Other user type or null");
         }
-
-
-
-        // The rest of your existing code...
 
         // Display a sign-in success message
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -154,6 +140,23 @@ public class Login {
         alert.setContentText("You have successfully signed in!");
         alert.showAndWait();
     }
+
+    private void loadFXML(String fxmlPath, String title) {
+        try {
+            Stage loginStage = (Stage) txtemail.getScene().getWindow();
+            loginStage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     public Boolean VerifUserChamps() {
@@ -200,7 +203,6 @@ public class Login {
         // Show the forgot password window
         forgotPasswordStage.show();
     }
-
 
 }
 

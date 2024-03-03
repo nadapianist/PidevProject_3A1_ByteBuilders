@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.home">
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="dark-background" stylesheets="@Style/Font.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+        <top>
+            <HBox prefHeight="61.0" prefWidth="1203.0" BorderPane.alignment="CENTER">
+                <children>
+                    <HBox prefHeight="108.0" prefWidth="214.0">
+                        <children>
+                            <VBox prefHeight="138.0" prefWidth="188.0">
+                                <children>
+                                    <ImageView fitHeight="103.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@Img/logo_tunism-removebg-preview.png" />
+                                        </image>
+                                    </ImageView>
+                                </children>
+                            </VBox>
+                        </children>
+                    </HBox>
+                    <HBox prefHeight="103.0" prefWidth="787.0" styleClass="border-bottom">
+                        <children>
+                            <Button mnemonicParsing="false" onAction="#home" stylesheets="@Front.css" text="Home">
+                                <styleClass>
+                                    <String fx:value="menu-bar" />
+                                    <String fx:value="menu-button" />
+                                </styleClass>
+                            </Button>
+                            <Button mnemonicParsing="false" styleClass="menu-button" stylesheets="@Front.css" text="Locations" />
+                            <Button mnemonicParsing="false" stylesheets="@Front.css" text="Activity">
+                                <styleClass>
+                                    <String fx:value="menu-bar" />
+                                    <String fx:value="menu-button" />
+                                </styleClass>
+                            </Button>
+                            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="135.0" stylesheets="@Front.css" text="Services">
+                                <styleClass>
+                                    <String fx:value="menu-bar" />
+                                    <String fx:value="menu-button" />
+                                </styleClass>
+                            </Button>
+                            <Button mnemonicParsing="false" stylesheets="@Front.css" text="Forum">
+                                <styleClass>
+                                    <String fx:value="menu-bar" />
+                                    <String fx:value="menu-button" />
+                                </styleClass>
+                            </Button>
+                            <Button mnemonicParsing="false" onAction="#account" prefHeight="75.0" prefWidth="170.0" stylesheets="@Front.css" text="My account">
+                                <styleClass>
+                                    <String fx:value="menu-button" />
+                                    <String fx:value="menu-bar" />
+                                </styleClass>
+                            </Button>
+                        </children>
+                    </HBox>
+                </children>
+            </HBox>
+        </top>
+        <center>
+            <VBox prefHeight="658.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                <children>
+                    <HBox prefHeight="206.0" prefWidth="1200.0">
+                        <children>
+                            <AnchorPane prefHeight="118.0" prefWidth="1024.0">
+                                <children>
+                                    <Label alignment="CENTER" layoutX="270.0" layoutY="30.0" prefHeight="46.0" prefWidth="473.0" text="About Tunism" textFill="#087ea1">
+                                        <font>
+                                            <Font name="Gill Sans MT Bold" size="40.0" />
+                                        </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="229.0" layoutY="83.0" text="Welcome to Tunism - Where Every Journey is a Unique Adventure!" textFill="#087ea1">
+                                        <font>
+                                            <Font name="Gill Sans MT" size="20.0" />
+                                        </font>
+                                    </Label>
+                                </children>
+                            </AnchorPane>
+                        </children>
+                    </HBox>
+                    <BorderPane prefHeight="484.0" prefWidth="1200.0">
+                        <left>
+                            <AnchorPane prefHeight="484.0" prefWidth="439.0" BorderPane.alignment="CENTER">
+                                <children>
+                                    <Label alignment="CENTER" layoutX="106.0" layoutY="14.0" text="Our Story" textFill="#087ea1">
+                                        <font>
+                                            <Font name="System Bold" size="40.0" />
+                                        </font>
+                                    </Label>
+                                    <Text layoutX="57.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tunism is more than just an app; it's a movement, a celebration of Tunisia's rich culture, vibrant communities, and the spirit of exploration. Developed by a passionate team of five individuals, Tunism was born out of the desire to redefine tourism and offer travelers a truly distinctive experience." wrappingWidth="325.33673095703125">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Text>
+                                </children>
+                            </AnchorPane>
+                        </left>
+                        <right>
+                            <AnchorPane prefHeight="484.0" prefWidth="326.0" BorderPane.alignment="CENTER">
+                                <children>
+                                    <Label alignment="CENTER" layoutX="14.0" layoutY="12.0" text="What sets us apart" textFill="#087ea1">
+                                        <font>
+                                            <Font name="System Bold" size="40.0" />
+                                        </font>
+                                    </Label>
+                                    <Text layoutX="7.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tunism redefines travel through joy-infused exploration and a unique partnership with passionate local volunteers. Beyond conventional tourism, our community-driven approach aims for a positive impact, making every journey in Tunisia an extraordinary and enriching experience. Join us in embracing spontaneity, forging connections, and contributing to local well-being. Tunism is not just an app; it's a movement transforming how you discover and connect with Tunisia." wrappingWidth="400.53668212890625">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Text>
+                                </children>
+                            </AnchorPane>
+                        </right>
+                        <center>
+                            <AnchorPane prefHeight="484.0" prefWidth="367.0" BorderPane.alignment="CENTER">
+                                <children>
+                                    <Label alignment="CENTER" layoutX="62.0" layoutY="18.0" text="Our Mission" textFill="#087ea1">
+                                        <font>
+                                            <Font name="System Bold" size="40.0" />
+                                        </font>
+                                    </Label>
+                                    <Text layoutX="14.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="At Tunism, we believe in breaking away from the conventional tourist experience. It's not just about ticking off landmarks from a list but immersing yourself in the heart and soul of Tunisia. We aim to transform the way people perceive travel by providing a platform that fosters authentic connections between tourists and local volunteers." wrappingWidth="325.33673095703125">
+                                        <font>
+                                            <Font size="20.0" />
+                                        </font>
+                                    </Text>
+                                </children>
+                            </AnchorPane>
+                        </center>
+                    </BorderPane>
+                </children>
+            </VBox>
+        </center>
+    </BorderPane>
+
+</AnchorPane>

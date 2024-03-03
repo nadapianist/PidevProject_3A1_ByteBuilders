@@ -70,6 +70,7 @@
                 <TableColumn fx:id="colbioT" minWidth="0.0" prefWidth="65.5999755859375" text="Bio" />
                 <TableColumn fx:id="colprefT" minWidth="0.0" prefWidth="100.8000366210938" text="Preferences" />
             </columns>
+            
         </TableView>
         <Text layoutX="297.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Tourists" wrappingWidth="166.39999999999986">
             <font>
@@ -91,7 +92,7 @@
                 <TableColumn fx:id="availL" prefWidth="97.5999755859375" text="Availability" />
             </columns>
         </TableView>
-        <Button layoutX="926.0" layoutY="412.0" mnemonicParsing="false" onAction="#deleteL" prefHeight="26.0" prefWidth="55.0" style="-fx-background-radius: 55;" />
+        <Button layoutX="922.0" layoutY="412.0" mnemonicParsing="false" onAction="#deleteL" prefHeight="26.0" prefWidth="55.0" style="-fx-background-radius: 55;" />
         <Text layoutX="297.0" layoutY="640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Admins" wrappingWidth="166.39999999999986">
             <font>
                 <Font name="Gill Sans MT" size="20.0" />
@@ -107,7 +108,7 @@
         <Button layoutX="664.0" layoutY="736.0" mnemonicParsing="false" onAction="#UpdateA" prefHeight="26.0" prefWidth="50.0" style="-fx-background-radius: 55;" />
         <Button layoutX="662.0" layoutY="660.0" mnemonicParsing="false" onAction="#AddA" prefHeight="26.0" prefWidth="50.0" style="-fx-background-radius: 55;" />
         <FontAwesomeIconView glyphName="TRASH" layoutX="946.0" layoutY="245.0" size="20" />
-        <FontAwesomeIconView glyphName="TRASH" layoutX="947.0" layoutY="431.0" size="20" />
+        <FontAwesomeIconView glyphName="TRASH" layoutX="941.0" layoutY="431.0" size="20" />
         <FontAwesomeIconView glyphName="PLUS" layoutX="680.0" layoutY="681.0" size="20" />
         <FontAwesomeIconView glyphName="TRASH" layoutX="680.0" layoutY="718.0" size="20" />
         <FontAwesomeIconView glyphName="PENCIL" layoutX="679.0" layoutY="756.0" size="20" />
@@ -123,5 +124,9 @@
             <Font name="Arial Narrow Bold" size="36.0" />
          </font>
       </Label>
+      <Button layoutX="832.0" layoutY="413.0" mnemonicParsing="false" onAction="#deactivateL" style="-fx-background-radius: 55;" stylesheets="@design.css" text="Desactivate" />
+      <Button layoutX="761.0" layoutY="413.0" mnemonicParsing="false" onAction="#activateL" style="-fx-background-radius: 55;" stylesheets="@design.css" text="Activate" />
+      <Button layoutX="830.0" layoutY="226.0" mnemonicParsing="false" onAction="#deactivateT" prefHeight="26.0" prefWidth="86.0" style="-fx-background-radius: 55;" stylesheets="@design.css" text="Desactivate" />
+      <Button layoutX="755.0" layoutY="227.0" mnemonicParsing="false" onAction="#activateT" prefHeight="26.0" prefWidth="64.0" style="-fx-background-radius: 55;" stylesheets="@design.css" text="Activate" />
     </children>
 </AnchorPane>

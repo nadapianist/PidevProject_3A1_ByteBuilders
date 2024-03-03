@@ -25,6 +25,10 @@ sealed  public class User permits Tourist,Admin,LocalCom{
         this.status=status;
     }
 
+    public User(int i) {
+        this.UserID=i;
+    }
+
     public String getVerifcode() {
         return verifcode;
     }
