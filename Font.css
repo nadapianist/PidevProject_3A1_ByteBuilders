@@ -1,0 +1,204 @@
+.dark-background{
+    -fx-background-color: #b3efff;
+
+}
+.icon-button {
+    -fx-font-size: 32px; /* Adjust font size as needed */
+    -fx-text-fill: #000000; /* Set icon color */
+}
+/* Style for the entire menu bar */
+.menu-bar {
+    -fx-background-color: #b3efff; /* Dark background color */
+}
+.menu-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-font-weight: bold; /* Extra bold text */
+    -fx-border-style: solid; /* Add a solid border */
+    -fx-border-color: transparent transparent transparent #1f4277; /* Border color and position (right) */
+}
+
+/* Underline effect when selected */
+.menu-button:focused {
+    -fx-underline: true; /* Underline text when focused */
+}
+
+/* Color change on hover */
+.menu-button:hover {
+    -fx-background-color: #90c4ff; /* Light gray background on hover */
+}
+
+.button-bar {
+    -fx-spacing: 10px;
+}
+
+/* Style for dashboard button */
+.dashboard-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/dashboard.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+
+/* Underline effect when selected */
+.dashboard-button:focused {
+    -fx-underline: true; /* Underline text when focused */
+}
+
+/* Color change on hover */
+.dashboard-button:hover {
+    -fx-background-color: #90c4ff; /* Light gray background on hover */
+}
+
+.dashboard-label {
+    /* Other styles */
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-padding: 5px; /* Padding around the label */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+.border-bottom{
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color:#1f4277;
+
+
+}
+.scroll-pane {
+    -fx-background-color: #156d73; /* Adjust the color to be a little darker than light blue */
+}
+/* CSS file */
+.vbox-with-border {
+    -fx-border-color:   #087ea1;
+    -fx-border-width: 9px; /* Adjust thickness as needed */
+    -fx-border-radius: 10px; /* Adjust radius for rounded corners */
+}
+.rev_btn {
+    -fx-background-color: #b3efff; /* Default background color */
+    -fx-font-size: 16px; /* Font size */
+    -fx-font-weight: bold; /* Extra bold text */
+    -fx-text-fill: #1f4277; /* Dark text color */
+}
+
+.rev_btn:pressed {
+    -fx-underline: true; /* Underline text when pressed */
+}
+.pdf-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/file.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+.calendar-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/calendar.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+.search-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/loupe.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+.sort-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/ascending-bars.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+.rightArrow-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/right-arrow.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+.leftArrow-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/black-triangular-arrowhead-pointing-to-left-direction.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+.VideoPlayer-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/playlist.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+.camera-button {
+    -fx-text-fill: #1f4277; /* Dark text color */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-width: 0px; /* Remove border */
+    -fx-font-size: 16px; /* Font size */
+    -fx-spacing: 50px; /* Spacing between buttons */
+    -fx-margin-top: 200px; /* Margin top */
+    -fx-padding: 25px 30px; /* Padding */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Drop shadow effect */
+    -fx-graphic: url('Img/camera.png'); /* Set the icon image */
+    -fx-padding: 10px; /* Padding around the button */
+    -fx-font-weight: bold; /* Extra bold text */
+}
+/* Rounded background for TextField */
+.text-field {
+    -fx-background-radius: 15px;
+}
