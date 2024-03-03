@@ -150,6 +150,11 @@ int idForum;
         Parent root= FXMLLoader.load(getClass().getResource("/AddPost.fxml"));
         ADDPOST.getScene().setRoot(root);
     }
+    @FXML
+    void NEWS(ActionEvent event) throws IOException {
+            Parent root= FXMLLoader.load(getClass().getResource("/News.fxml"));
+            ADDPOST.getScene().setRoot(root);
+    }
 
     private void navigateToPostsPage(int idForum) throws SQLException, IOException {
         // Load the FXML file and get the controller

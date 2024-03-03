@@ -106,5 +106,12 @@
             <URL value="@styles.css" />
          </stylesheets>
       </Button>
+      <Button layoutX="471.0" layoutY="118.0" mnemonicParsing="false" onAction="#NEWS" prefHeight="37.0" prefWidth="158.0" styleClass="btn" text="NEWS">
+         <stylesheets>
+            <URL value="@Front.css" />
+            <URL value="@design.css" />
+            <URL value="@styles.css" />
+         </stylesheets>
+      </Button>
     </children>
 </AnchorPane>

@@ -214,7 +214,7 @@ public class Posts implements Initializable  {
                     VBox.setVgrow(commentsContainer, Priority.ALWAYS);
                     addCommentButton.setOnAction(event -> {
                         Comment newComment = new Comment(
-                                123, // Replace with the actual user ID of the logged-in user
+                                1, // Replace with the actual user ID of the logged-in user
                                 p.getIDPost(),
                                 newCommentField.getText()
                         );

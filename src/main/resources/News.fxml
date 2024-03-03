@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controller.News"
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background-color: #F0FFF0;"> <!-- Set light green background -->
+
+    <!-- ScrollPane to contain the ListView -->
+    <ScrollPane layoutX="7.0" layoutY="165.0" prefHeight="566.0" prefWidth="1204.0">
+        <!-- VBox to contain the news articles -->
+        <VBox fx:id="newsContainer"
+              style="-fx-background-color: #FFFFFF; -fx-padding: 10px;">
+        </VBox> <!-- Make sure to close the VBox element -->
+    </ScrollPane>
+
+</AnchorPane>
