@@ -71,13 +71,24 @@ public class AddPost implements Initializable  {
     private ImageView PhotoPost;
     private final postService ps=new postService();
     private final forumService fs = new forumService();
-    //ObservableList<String> categoryPostList= FXCollections.observableArrayList("Activity","Challenge");
     private String selectedImagePath;
     private final ImageAPI imageAPI = new ImageAPI();
 
     private int getLoggedInUserId() {
-        return 123; // Replace 1 with the actual ID
+       // return 123; // Replace 1 with the actual ID
+        //User loggedInUser = SessionManager.getCurrentUser();
+        User loggedInUser= new User(1,"uh@kjjl.com ","jkjkj" ,"bghbhj" );
+        // Check if a user is logged in
+        if (loggedInUser != null) {
+            return loggedInUser.getUserID();
+        } else {
+            // Handle the case where no user is logged in
+            // You might throw an exception, return a default value, or handle it as needed.
+            return -1; // Example: return -1 if no user is logged in
+        }
+
     }
+
     @FXML
     public void initialize(URL url , ResourceBundle resourceBundle){
         try {
@@ -155,7 +166,7 @@ public class AddPost implements Initializable  {
             int idForum= fs.getIdForum(category);
 
             post p=new post(
-                    content,selectedImagePath,category,123,idForum
+                    content,selectedImagePath,category, getLoggedInUserId(),idForum
             );
             // Set the Cloudinary URL obtained after image upload
             String cloudinaryUrl = ImageAPI.uploadImage(selectedImagePath);

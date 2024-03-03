@@ -1,7 +1,9 @@
 package tn.esprit.entities;
+import tn.esprit.controller.SessionManager;
+
 import java.util.Objects;
 
-sealed abstract public class User permits Tourist {
+sealed  public class User permits Tourist,Admin,LocalCom{
     protected int UserID;
     private String Email;
     private String pwd;
@@ -12,6 +14,10 @@ sealed abstract public class User permits Tourist {
         Email = email;
         this.pwd = pwd;
         this.verifcode = verifcode;
+    }
+
+    public User(int userID) {
+        UserID = userID;
     }
 
     public User(String email, String pwd, String verifcode) {
@@ -48,7 +54,7 @@ sealed abstract public class User permits Tourist {
         this(Email,pwd);
         this.UserID = UserID;
     }
-    protected User()
+    public User()
     {}
 
     public int getUserID() {
@@ -80,7 +86,21 @@ sealed abstract public class User permits Tourist {
     public int hashCode() {
         return Objects.hash(UserID, Email, pwd);
     }
+    public static User getCurrentUser() {
+        // This is a simplified example assuming you have a SessionManager class
+        // responsible for managing user sessions and returning the current user
+        return SessionManager.getCurrentUser();
+    }
+    private static User loggedInUser; // Variable to store logged-in user information
 
+    // Method to set the logged-in user
+    public static void setLoggedInUser(User user) {
+        loggedInUser = user;
+    }
 
+    // Method to get the logged-in user
+    public static User getLoggedInUser() {
+        return loggedInUser;
+    }
 
 }

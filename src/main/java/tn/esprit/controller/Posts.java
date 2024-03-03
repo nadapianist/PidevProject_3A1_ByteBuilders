@@ -69,6 +69,20 @@ public class Posts implements Initializable  {
     private final forumService fs = new forumService();
     ServiceComment serviceComment = new ServiceComment();
     private ProfanityFilter profanityFilter = new ProfanityFilter();
+    private int getLoggedInUserId() {
+        // return 123; // Replace 1 with the actual ID
+        //User loggedInUser = SessionManager.getCurrentUser();
+      // User loggedInUser= new User(1,"uh@kjjl.com ","jkjkj" ,"bghbhj" );
+        User loggedInUser= new User(1 );
+
+        // Check if a user is logged in
+        if (loggedInUser != null) {
+            return loggedInUser.getUserID();
+        } else {
+            // Handle the case where no user is logged in
+            // You might throw an exception, return a default value, or handle it as needed.
+            return -1; // Example: return -1 if no user is logged in
+        }}
 
 
     @FXML
@@ -180,6 +194,9 @@ public class Posts implements Initializable  {
 
                     photoImageView.setFitWidth(100);
                     photoImageView.setPreserveRatio(true);
+                    Label user = new Label(ps.getFNameById(getLoggedInUserId()));
+                    Label user1 = new Label(ps.getLNameById(getLoggedInUserId()));
+
                     Label contentLabel = new Label(p.getContentPost());
                     contentLabel.getStyleClass().add("post-content");
                     contentLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #333;");
@@ -215,7 +232,7 @@ public class Posts implements Initializable  {
                     });
 
                     loadComments(p.getIDPost(), commentsContainer);
-                    postBox.getChildren().addAll(photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer, deleteIcon);
+                    postBox.getChildren().addAll(user, user1, photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer, deleteIcon);
                     rowBox.getChildren().add(postBox);
                 }
 

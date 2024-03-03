@@ -231,6 +231,41 @@ public class postService implements IService<post> {
     }
 
 
+    public String getFNameById(int loggedInUserId) {
+        String firstName = null;
+
+        try (PreparedStatement statement = con.prepareStatement("SELECT Fname FROM user WHERE UserID = ?")) {
+            statement.setInt(1, loggedInUserId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    firstName = resultSet.getString("Fname");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception according to your needs
+        }
+
+        return firstName;
+    }
+
+    public String getLNameById(int loggedInUserId) {
+        String firstName = null;
+
+        try (PreparedStatement statement = con.prepareStatement("SELECT Lname FROM user WHERE UserID = ?")) {
+            statement.setInt(1, loggedInUserId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    firstName = resultSet.getString("Lname");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception according to your needs
+        }
+
+        return firstName;
+    }
 }
 
 

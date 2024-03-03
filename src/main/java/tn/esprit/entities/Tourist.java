@@ -1,5 +1,6 @@
 package tn.esprit.entities;
 
+
 final public class Tourist extends User {
     private String Fname;
     private String Lname;
