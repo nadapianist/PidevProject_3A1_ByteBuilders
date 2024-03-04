@@ -72,7 +72,7 @@ public class postService implements IServiceforum<post> {
     }
 
     public void update(post p) throws SQLException {
-        String query = "UPDATE `post` SET ContentPost=?,PhotoPost=?,DatePost=?,categoryPost=?,UserID=?,IDForum=? WHERE IDPost=?";
+        String query = "UPDATE `post` SET ContentPost=?,PhotoPost=?,DatePost=?,`UserID`=? ,categoryPost=?,IDForum=? WHERE IDPost=?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, p.getContentPost());
             ps.setString(2, p.getPhotoPost());
@@ -80,8 +80,8 @@ public class postService implements IServiceforum<post> {
             ps.setInt(4, p.getUserID());
             ps.setString(5, p.getCategoryPost());
             // Assuming there is an 'IDPost' field in your 'post' table
-            ps.setInt(6, p.getIDPost());
-            ps.setInt(7, p.getIDForum());
+            ps.setInt(7, p.getIDPost());
+            ps.setInt(6, p.getIDForum());
 
 
             ps.executeUpdate();
@@ -281,6 +281,34 @@ public class postService implements IServiceforum<post> {
         }
 
         return firstName;
+    }
+    public List<post> sortPostsByCategory(String selectedCategory) throws SQLException {
+        String query = "SELECT * FROM post WHERE `categoryPost`=?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, selectedCategory);
+            ResultSet res = ps.executeQuery();
+            List<post> posts = new ArrayList<>();
+            while (res.next()) {
+                post p = new post(
+                        res.getInt("IDPost"),
+                        res.getString("ContentPost"),
+                        res.getString("PhotoPost"),
+                        res.getDate("DatePost"),
+                        res.getInt("UserID"),
+                        res.getString("categoryPost"));
+
+                posts.add(p);
+            }
+            return posts;
+        }
+    }
+    public void deletePostsByCategory(String category) throws SQLException {
+        String query = "DELETE FROM post WHERE `categoryPost`=?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, category);
+            ps.executeUpdate();
+            System.out.println("Posts related to category " + category + " deleted!");
+        }
     }
 }
 

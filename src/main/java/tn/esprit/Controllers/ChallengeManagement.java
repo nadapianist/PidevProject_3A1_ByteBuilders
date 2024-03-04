@@ -5,11 +5,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import tn.esprit.entities.Activity;
 import tn.esprit.entities.Challenge;
 import tn.esprit.services.ActivityService;
@@ -157,6 +160,22 @@ public class ChallengeManagement {
     void initialize() throws SQLException {
         // Initialize the ComboBox with sorting options
         combo_chall.setItems(sortOptionss);
+        // Add listener to the ComboBox selection
+        combo_chall.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                try {
+                    // When a new sorting option is selected, trigger the sorting operation
+                    ObservableList<Challenge> sortedChallenges = cs.Sorte(newValue);
+                    TableViewChallenge.setItems(sortedChallenges);
+                } catch (SQLException ex) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Sort Failed");
+                    alert.setContentText("An error occurred while sorting challenges: " + ex.getMessage());
+                    alert.showAndWait();
+                }
+            }
+        });
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
             RefreshTableView();
@@ -414,7 +433,7 @@ public class ChallengeManagement {
         desc_ch_id.clear();
         points_id.clear();
     }
-    //////////////////////////////////////////////////BUTTONS//////////
+    //////////////////////////////////////////////////BUTTONS/////////////////
     @FXML
     void activityBTN(ActionEvent event)throws IOException {
        Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
@@ -467,20 +486,30 @@ public class ChallengeManagement {
         Parent root = FXMLLoader.load(getClass().getResource("/DisplayUser.fxml"));
         userbtn.getScene().setRoot(root);
 
-
     }
     @FXML
     void challengeBTN(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
-        userbtn.getScene().setRoot(root);
+        /*Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
+        userbtn.getScene().setRoot(root);*/
+    }
+    public void logout(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    void logout(ActionEvent event) throws IOException {
-        Parent root =FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ConsultActivities.fxml")));
-        name_ch_id.getScene().setRoot(root);
 
-    }
+
 
 }
 

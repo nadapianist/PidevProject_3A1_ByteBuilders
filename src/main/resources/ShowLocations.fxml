@@ -142,6 +142,8 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <Button layoutX="1144.0" layoutY="30.0" mnemonicParsing="false" onAction="#logout" prefHeight="27.0" prefWidth="25.0" />
+      <FontAwesomeIconView glyphName="CLOSE" layoutX="1153.0" layoutY="49.0" wrappingWidth="16.0" />
 
 
     </children>

@@ -61,19 +61,7 @@
                         </Button>
                     </children>
                 </HBox>
-                <VBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="159.0">
-                    <children>
-                        <Button mnemonicParsing="false" onAction="#Dashboard" prefHeight="78.0" prefWidth="87.0" styleClass="dashboard-button" stylesheets="@Front.css">
-                            <graphic>
-                                <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@Img/dashboard.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </children>
-                </VBox>
+                <VBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="159.0" />
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="106.0" prefWidth="214.0" stylesheets="@Front.css">
@@ -96,7 +84,7 @@
             <stylesheets>
                 <URL value="@Front.css" />
                 <URL value="@design.css" />
-                <URL value="@styles.css"/>
+                <URL value="@styles.css" />
             </stylesheets>
         </Button>
     </children>

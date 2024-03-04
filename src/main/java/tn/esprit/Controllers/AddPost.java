@@ -77,7 +77,7 @@ public class AddPost implements Initializable  {
     private int getLoggedInUserId() {
         // return 123; // Replace 1 with the actual ID
         //User loggedInUser = SessionManager.getCurrentUser();
-        User loggedInUser= new User(462);
+        User loggedInUser= new User(459);
         // Check if a user is logged in
         if (loggedInUser != null) {
             return loggedInUser.getUserID();
@@ -165,14 +165,16 @@ public class AddPost implements Initializable  {
             String category = categoryPost.getValue();
             int idForum= fs.getIdForum(category);
 
+
             post p=new post(
-                    content,selectedImagePath,category, getLoggedInUserId(),idForum
+                    content,selectedImagePath,category,getLoggedInUserId(),idForum
             );
+
             // Set the Cloudinary URL obtained after image upload
             String cloudinaryUrl = ImageAPI.uploadImage(selectedImagePath);
             p.setPhotoPost(cloudinaryUrl);
 
-            p.setUserID(getLoggedInUserId());
+            //p.setUserID(getLoggedInUserId());
 
 
             ps.add(p);

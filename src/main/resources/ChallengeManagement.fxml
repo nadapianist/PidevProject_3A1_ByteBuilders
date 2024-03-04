@@ -100,7 +100,6 @@
          </children>
       </AnchorPane>
       <TextField fx:id="Search_ch_field" layoutX="1015.0" layoutY="233.0" prefHeight="26.0" prefWidth="150.0" promptText="Search" />
-      <Button layoutX="899.0" layoutY="232.0" mnemonicParsing="false" onAction="#SortChallenge" styleClass="btn" stylesheets="@design.css" text="Sort" />
       <ComboBox fx:id="combo_chall" layoutX="741.0" layoutY="233.0" prefWidth="150.0" promptText="Select Sorting Criteria" style="-fx-background-color: #087ea1;" />
       <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="986.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
          <image>

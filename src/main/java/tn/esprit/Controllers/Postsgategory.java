@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,10 +19,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
-import tn.esprit.entities.Comment;
-import tn.esprit.entities.post;
+import tn.esprit.entities.*;
 import tn.esprit.services.ServiceComment;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
@@ -72,75 +73,7 @@ public class Postsgategory {
 
 
     }
-    /* private void loadPosts() {
-         try {
 
-             List<post> posts = ps.displayList();
-             for (post p : posts) {
-
-                 HBox postBox = new HBox();
-
-                 ImageView photoImageView = new ImageView(new Image(p.getPhotoPost()));
-                 photoImageView.setFitWidth(100);
-                 photoImageView.setPreserveRatio(true);
-
-                 Label contentLabel = new Label(p.getContentPost());
-                 contentLabel.getStyleClass().add("post-content");
-                 contentLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #333;");
-
-                 TextField newCommentField = new TextField();
-                 newCommentField.textProperty().addListener((observable, oldValue, newValue) -> {
-                     // Call the findAndReplaceProfanity method to detect and replace profanity in TextArea
-                     String   text= findProfanity(newValue);
-                     deleteString(newValue,text,newCommentField);
-                 });
-                 newCommentField.setStyle("-fx-font-size: 14px;");
-
-                 Button addCommentButton = new Button("Add Comment");
-                 addCommentButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
-
-                 VBox commentsContainer = new VBox();
-                 commentsContainer.setSpacing(6); // Adjust spacing as needed
-                 VBox.setVgrow(commentsContainer, Priority.ALWAYS);
-
-
-                 addCommentButton.setOnAction(event -> {
-                     Comment newComment = new Comment(
-                             123, // Replace with the actual user ID of the logged-in user
-                             p.getIDPost(),
-                             newCommentField.getText()
-                     );
-
-                     try {
-                         serviceComment.addComment(newComment);
-                         showNotification("success","comment added");
-
-                         // Update the timestamp of the new comment
-                         newComment.setDate_c(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
-                         VBox commentBox = createCommentBox(newComment);
-                         commentsContainer.getChildren().add(commentBox);
-
-                         // Clear the comment field after adding the comment
-                         newCommentField.clear();
-                     } catch (SQLException e) {
-                         e.printStackTrace();
-                         throw new RuntimeException(e);
-                     }
-                 });
-
-                 loadComments(p.getIDPost(), commentsContainer);
-
-
-                 // Add the components to the postBox in the desired order
-                 postBox.getChildren().addAll(photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer);
-                 tfpostlist.getChildren().add(postBox);
-             }
-         } catch (SQLException e) {
-             e.printStackTrace();
-             throw new RuntimeException(e);
-         }
-     }*/
     private void loadPosts() {
         try {
             Forumuser u=new Forumuser();
@@ -162,6 +95,11 @@ public class Postsgategory {
                     // Create a VBox for each post
                     VBox postBox = new VBox();
                     postBox.getStyleClass().add("post-box");
+                    FontAwesomeIconView modif = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
+                    modif.setFill(Color.GREEN);
+                    modif.setGlyphSize(25);
+                    modif.setCursor(Cursor.HAND);
+
                     // Add the delete button (supp)
                     FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH_ALT);
                     deleteIcon.setFill(Color.RED);
@@ -213,7 +151,7 @@ public class Postsgategory {
                     });
 
                     loadComments(p.getIDPost(), commentsContainer);
-                    postBox.getChildren().addAll(photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer, deleteIcon);
+                    postBox.getChildren().addAll(photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer, deleteIcon,modif);
                     rowBox.getChildren().add(postBox);
                 }
 
@@ -225,6 +163,8 @@ public class Postsgategory {
             throw new RuntimeException(e);
         }
     }
+
+
     private void loadPostsForum() {
         try {
             List<post> posts = ps.displayListForum(idForum);
@@ -276,7 +216,7 @@ public class Postsgategory {
                     VBox.setVgrow(commentsContainer, Priority.ALWAYS);
                     addCommentButton.setOnAction(event -> {
                         Comment newComment = new Comment(
-                                123, // Replace with the actual user ID of the logged-in user
+                                459, // Replace with the actual user ID of the logged-in user
                                 p.getIDPost(),
                                 newCommentField.getText()
                         );
@@ -454,38 +394,102 @@ public class Postsgategory {
         ADDPOST.getScene().setRoot(root);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
+    public void home(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/home.fxml"));
+        tfpostlist.getScene().setRoot(root);
+    }
     @FXML
-    void Dashboard(ActionEvent event) throws IOException {
-        Parent root= FXMLLoader.load(getClass().getResource("/forumManagement.fxml"));
-        ADDPOST.getScene().setRoot(root);
+    void achievements(ActionEvent event)  throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ConsultActivities.fxml"));
+        tfpostlist.getScene().setRoot(root);
     }
 
     @FXML
-    void achievements(ActionEvent event) {
-
+    void forum(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Forumuser.fxml"));
+        tfpostlist.getScene().setRoot(root);
     }
 
     @FXML
-    void forum(ActionEvent event)  throws IOException {
-        Parent root= FXMLLoader.load(getClass().getResource("/forumuser.fxml"));
-        ADDPOST.getScene().setRoot(root);
+    void locations(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/LocationFront.fxml"));
+        tfpostlist.getScene().setRoot(root);
+    }
 
+
+    @FXML
+    void services(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/HostelFront.fxml"));
+        tfpostlist.getScene().setRoot(root);
 
     }
 
-    @FXML
-    void home(ActionEvent event) {
+    public void account(ActionEvent actionEvent) {
+        // Retrieve the authenticated user from the Login class
+        User user = Login.getAuthenticatedUser();
 
+        if (user == null) {
+            // Handle the case where the user is not authenticated
+            showAlert("Error", "You are not authenticated. Please sign in.");
+            return;
+        }
+
+        // Redirect based on user type
+        if (user instanceof Admin) {
+            // Handle the case where the user is logged in as Admin
+            // You can redirect to a different page or display a message
+            showAlert("Information", "You are logged in as an Admin.");
+        } else if (user instanceof Tourist) {
+            // Redirect to TouristAccount screen
+            loadTouristAccountScreen(actionEvent, (Tourist) user);
+        } else if (user instanceof LocalCom) {
+            // Redirect to LocalComAccount screen
+            loadLocalComAccountScreen(actionEvent, (LocalCom) user);
+        } else {
+            // Handle other cases or show a login page
+            // You may want to implement a login functionality here
+        }
+    }
+    ///
+    private void loadTouristAccountScreen(ActionEvent event, Tourist tourist) {
+        try {
+            // Load the TouristAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TouristAccount.fxml"));
+            Parent root = loader.load();
+            TouristAccount touristAccountController = loader.getController();
+            touristAccountController.initialize();  // Pass the Tourist instance
+            showStage(event, root, "Tourist Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    void locations(ActionEvent event) {
-
+    private void loadLocalComAccountScreen(ActionEvent event, LocalCom localcom) {
+        try {
+            // Load the LocalComAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LocalComAccount.fxml"));
+            Parent root = loader.load();
+            showStage(event, root, "LocalCom Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    void services(ActionEvent event) {
+    private void showStage(ActionEvent event, Parent root, String title) {
+        // Your existing showStage method
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
     private Stage stage; // Reference to the stage
 

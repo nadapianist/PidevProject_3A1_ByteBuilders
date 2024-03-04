@@ -5,9 +5,11 @@ import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -20,6 +22,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import tn.esprit.entities.Admin;
+import tn.esprit.entities.LocalCom;
+import tn.esprit.entities.Tourist;
+import tn.esprit.entities.User;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -52,8 +58,7 @@ public class ReviewManagementFront implements Initializable {
     @FXML
     private ImageView imageView;
     private String imagePath;
-   // @FXML
-  //  private Label activityLabel;
+
    Connection con;
     Statement stm;
     PreparedStatement pste;
@@ -553,5 +558,73 @@ void UpdateRev(ActionEvent event) {
         // Clear the image view
         imageView.setImage(null);
     }
+    //////////////////////////////////////////////////////////////////////////////////
 
+
+    public void account(ActionEvent actionEvent) {
+        // Retrieve the authenticated user from the Login class
+        User user = Login.getAuthenticatedUser();
+
+        if (user == null) {
+            // Handle the case where the user is not authenticated
+            showAlert("Error", "You are not authenticated. Please sign in.");
+            return;
+        }
+
+        // Redirect based on user type
+        if (user instanceof Admin) {
+            // Handle the case where the user is logged in as Admin
+            // You can redirect to a different page or display a message
+            showAlert("Information", "You are logged in as an Admin.");
+        } else if (user instanceof Tourist) {
+            // Redirect to TouristAccount screen
+            loadTouristAccountScreen(actionEvent, (Tourist) user);
+        } else if (user instanceof LocalCom) {
+            // Redirect to LocalComAccount screen
+            loadLocalComAccountScreen(actionEvent, (LocalCom) user);
+        } else {
+            // Handle other cases or show a login page
+            // You may want to implement a login functionality here
+        }
+    }
+    ///
+    private void loadTouristAccountScreen(ActionEvent event, Tourist tourist) {
+        try {
+            // Load the TouristAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TouristAccount.fxml"));
+            Parent root = loader.load();
+            TouristAccount touristAccountController = loader.getController();
+            touristAccountController.initialize();  // Pass the Tourist instance
+            showStage(event, root, "Tourist Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLocalComAccountScreen(ActionEvent event, LocalCom localcom) {
+        try {
+            // Load the LocalComAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LocalComAccount.fxml"));
+            Parent root = loader.load();
+            showStage(event, root, "LocalCom Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showStage(ActionEvent event, Parent root, String title) {
+        // Your existing showStage method
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }

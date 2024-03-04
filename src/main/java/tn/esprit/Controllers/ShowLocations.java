@@ -10,11 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import tn.esprit.entities.Location;
 import tn.esprit.entities.Rating;
@@ -315,7 +318,15 @@ public class ShowLocations {
         }
     }
 
-    //////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////BUTTONS/////////////////
     @FXML
     void activityBTN(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
@@ -331,7 +342,7 @@ public class ShowLocations {
 
     @FXML
     void LocationBTN(ActionEvent event) throws IOException {
-      /*  Parent root = FXMLLoader.load(getClass().getResource("/ShowLocations.fxml"));
+       /* Parent root = FXMLLoader.load(getClass().getResource("/ShowLocations.fxml"));
         locationbtn.getScene().setRoot(root);*/
     }
 
@@ -344,8 +355,8 @@ public class ShowLocations {
 
     @FXML
     void ReviewBTN(ActionEvent event) throws IOException {
-         Parent root = FXMLLoader.load(getClass().getResource("/ReviewChallengeManagement.fxml"));
-         reviewbtn.getScene().setRoot(root);
+        Parent root = FXMLLoader.load(getClass().getResource("/ReviewChallengeManagement.fxml"));
+        reviewbtn.getScene().setRoot(root);
 
     }
 
@@ -368,13 +379,30 @@ public class ShowLocations {
         Parent root = FXMLLoader.load(getClass().getResource("/DisplayUser.fxml"));
         userbtn.getScene().setRoot(root);
 
-
     }
     @FXML
     void challengeBTN(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
         userbtn.getScene().setRoot(root);
     }
+    public void logout(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 

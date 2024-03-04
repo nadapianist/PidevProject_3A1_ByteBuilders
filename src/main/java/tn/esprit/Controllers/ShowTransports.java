@@ -15,12 +15,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import tn.esprit.entities.Location;
 import tn.esprit.entities.Transport;
@@ -296,8 +299,7 @@ public class ShowTransports {
     public void generateQr(MouseEvent mouseEvent) {
        // generateQRCodeForSelectedTransport();
     }
-
-    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////BUTTONS/////////////////
     @FXML
     void activityBTN(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
@@ -333,8 +335,8 @@ public class ShowTransports {
 
     @FXML
     void TransportBTN(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/ShowTransports.fxml"));
-        transportbtn.getScene().setRoot(root);
+      /*  Parent root = FXMLLoader.load(getClass().getResource("/ShowTransports.fxml"));
+        transportbtn.getScene().setRoot(root);*/
 
     }
 
@@ -350,12 +352,26 @@ public class ShowTransports {
         Parent root = FXMLLoader.load(getClass().getResource("/DisplayUser.fxml"));
         userbtn.getScene().setRoot(root);
 
-
     }
     @FXML
     void challengeBTN(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
         userbtn.getScene().setRoot(root);
+    }
+    public void logout(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

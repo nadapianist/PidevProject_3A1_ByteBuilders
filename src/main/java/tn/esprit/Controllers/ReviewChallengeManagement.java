@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -198,6 +199,22 @@ public class ReviewChallengeManagement  {
     void initialize() throws SQLException {
         // Initialize the ComboBox with sorting options
         combo_rev.setItems(sortOptions);
+        // Add listener to the ComboBox selection
+        combo_rev.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                try {
+                    // When a new sorting option is selected, trigger the sorting operation
+                    SortReview(null);
+                } catch (Exception ex) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Sort Failed");
+                    alert.setContentText("An error occurred while sorting reviews: " + ex.getMessage());
+                    alert.showAndWait();
+                }
+            }
+        });
+
 
         try {
 
@@ -233,6 +250,7 @@ public class ReviewChallengeManagement  {
                 alert.showAndWait();
             }
         });
+
     }
 
     @FXML
@@ -325,24 +343,7 @@ void SearchReview(String searchTerm) throws SQLException {
 
     @FXML
     void SortReview(ActionEvent event) {
-       /* ReviewChallengeService rs = new ReviewChallengeService();
 
-        ObservableList<ReviewChallenge> reviews = rs.Sort();
-
-        // Set the data model for the TableView with the sorted data
-        TableViewReviewChallenge.setItems(reviews);
-
-        // Update the columns to display the correct values
-        Info_column.setCellValueFactory(new PropertyValueFactory<>("info"));
-        Datepub_column.setCellValueFactory(new PropertyValueFactory<>("date_pub"));
-        Titlerev_column.setCellValueFactory(new PropertyValueFactory<>("title_rev"));
-
-        // Set cell value factory for nameactivity_column and namechallenge_column
-        nameactivity_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNameActivity()));
-        namechallenge_column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNameChallenge()));
-
-        // Refresh the TableView to reflect the changes
-        TableViewReviewChallenge.refresh();*/
         String selectedCriteria = combo_rev.getValue();
         if (selectedCriteria != null) {
             try {
@@ -504,12 +505,11 @@ private void handleException(String title, String message) {
         alert.setContentText(content);
         alert.showAndWait();
     }
-    //////////////////////////////////////////////////Buttons ///////////////////////////////////////////
+    //////////////////////////////////////////////////BUTTONS/////////////////
     @FXML
     void activityBTN(ActionEvent event)throws IOException {
        Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
         activitybtn.getScene().setRoot(root);
-
     }
     @FXML
     void ForumBTN(ActionEvent event) throws IOException {
@@ -533,7 +533,7 @@ private void handleException(String title, String message) {
 
     @FXML
     void ReviewBTN(ActionEvent event) throws IOException {
-        /*Parent root = FXMLLoader.load(getClass().getResource("/ReviewChallengeManagement.fxml"));
+       /* Parent root = FXMLLoader.load(getClass().getResource("/ReviewChallengeManagement.fxml"));
         reviewbtn.getScene().setRoot(root);*/
 
     }
@@ -557,21 +557,29 @@ private void handleException(String title, String message) {
         Parent root = FXMLLoader.load(getClass().getResource("/DisplayUser.fxml"));
         userbtn.getScene().setRoot(root);
 
-
     }
     @FXML
     void challengeBTN(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
         userbtn.getScene().setRoot(root);
     }
+    public void logout(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
 
-
-    @FXML
-    void logout(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ConsultActivities.fxml")));
-        Search_rev_field.getScene().setRoot(root);
-
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
 
 }
 

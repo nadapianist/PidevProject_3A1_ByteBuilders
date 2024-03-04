@@ -10,23 +10,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
+import tn.esprit.entities.*;
 import tn.esprit.services.ServiceComment;
 import javafx.fxml.Initializable;
-import tn.esprit.entities.Comment;
-import tn.esprit.entities.User;
-import tn.esprit.entities.Tourist;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import tn.esprit.entities.post;
 import tn.esprit.services.ServiceComment;
 import tn.esprit.services.forumService;
 import tn.esprit.services.postService;
@@ -62,6 +61,7 @@ public class Posts implements Initializable  {
 
     @FXML
     private HBox tfpostlist;
+
     @FXML
     private ScrollPane scrollPane;
 
@@ -73,7 +73,7 @@ public class Posts implements Initializable  {
         // return 123; // Replace 1 with the actual ID
         //User loggedInUser = SessionManager.getCurrentUser();
         // User loggedInUser= new User(1,"uh@kjjl.com ","jkjkj" ,"bghbhj" );
-        User loggedInUser= new User(461);
+        User loggedInUser= new User(462);
 
         // Check if a user is logged in
         if (loggedInUser != null) {
@@ -86,7 +86,32 @@ public class Posts implements Initializable  {
 
 
     @FXML
+    private Label userIdLabel;
+    @FXML
+    private Label user;
+
+    @FXML
+    private Label user1;
+    @FXML
     public void initialize(URL url , ResourceBundle resourceBundle) {
+        // Initialize the controller
+        int loggedInUserId = SessionManager.getInstance().getAuthenticatedUserId();
+        String firstName = ps.getFNameById(loggedInUserId);
+        String lastName = ps.getLNameById(loggedInUserId);
+
+
+// Set the text of the labels to the retrieved first and last names
+        user.setText(firstName);
+        user1.setText(lastName);
+
+
+
+        if (loggedInUserId != -1) {
+            userIdLabel.setText("Logged-in User ID: " + loggedInUserId);
+        } else {
+            userIdLabel.setText("User not logged in");
+        }
+
         loadPosts();
         String cssFile = getClass().getResource("/styles.css").toExternalForm();
         tfpostlist.getStylesheets().add(cssFile);
@@ -180,6 +205,11 @@ public class Posts implements Initializable  {
                     // Create a VBox for each post
                     VBox postBox = new VBox();
                     postBox.getStyleClass().add("post-box");
+                    FontAwesomeIconView modif = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
+                    modif.setFill(Color.GREEN);
+                    modif.setGlyphSize(25);
+                    modif.setCursor(Cursor.HAND);
+                    modif.setOnMouseClicked(event -> {handleEditButton(p);});
                     // Add the delete button (supp)
                     FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH_ALT);
                     deleteIcon.setFill(Color.RED);
@@ -194,9 +224,9 @@ public class Posts implements Initializable  {
 
                     photoImageView.setFitWidth(100);
                     photoImageView.setPreserveRatio(true);
-                    Label user = new Label(ps.getFNameById(ps.getLoggedInUserId()));
-                    Label user1 = new Label(ps.getLNameById(ps.getLoggedInUserId()));
-
+                    //Label user = new Label(ps.getFNameById(ps.getLoggedInUserId()));
+                    //Label user1 = new Label(ps.getLNameById(ps.getLoggedInUserId()));
+Label user =new Label(Integer.toString( SessionManager.getInstance().getAuthenticatedUserId()));
                     Label contentLabel = new Label(p.getContentPost());
                     contentLabel.getStyleClass().add("post-content");
                     contentLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #333;");
@@ -232,7 +262,7 @@ public class Posts implements Initializable  {
                     });
 
                     loadComments(p.getIDPost(), commentsContainer);
-                    postBox.getChildren().addAll(user, user1, photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer, deleteIcon);
+                    postBox.getChildren().addAll(photoImageView, contentLabel, newCommentField, addCommentButton, commentsContainer, deleteIcon,modif);
                     rowBox.getChildren().add(postBox);
                 }
 
@@ -244,6 +274,34 @@ public class Posts implements Initializable  {
             throw new RuntimeException(e);
         }
     }
+    private void handleEditButton(post selectedPost) {
+        try {
+            // Pass the loggedInUserId to the EditPostController
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditPost.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller for the editing window
+            EditPost EditPost = loader.getController();
+
+            // Pass the selected post data and loggedInUserId to the controller
+            EditPost.setPostData(selectedPost);
+
+            // Show the editing window
+            Stage editStage = new Stage();
+            editStage.initModality(Modality.APPLICATION_MODAL);
+            editStage.setTitle("Edit Post");
+            editStage.setScene(new Scene(root));
+            editStage.showAndWait();
+
+            // Refresh the UI after editing (reload posts)
+            clearAndReloadPosts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private void deletePost(post selectedPost) {
         try {
@@ -398,33 +456,102 @@ public class Posts implements Initializable  {
         Parent root= FXMLLoader.load(getClass().getResource("/forumManagement.fxml"));
         ADDPOST.getScene().setRoot(root);
     }
-
+    //////////////////////////////////////////////////////////////////////////////////
+    public void home(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/home.fxml"));
+        tfpostlist.getScene().setRoot(root);
+    }
     @FXML
-    void achievements(ActionEvent event) {
-
+    void achievements(ActionEvent event)  throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ConsultActivities.fxml"));
+        tfpostlist.getScene().setRoot(root);
     }
 
     @FXML
-    void forum(ActionEvent event)  throws IOException {
-        Parent root= FXMLLoader.load(getClass().getResource("/forumuser.fxml"));
-        ADDPOST.getScene().setRoot(root);
-
-
+    void forum(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Forumuser.fxml"));
+        tfpostlist.getScene().setRoot(root);
     }
 
     @FXML
-    void home(ActionEvent event) {
+    void locations(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/LocationFront.fxml"));
+        tfpostlist.getScene().setRoot(root);
+    }
+
+
+    @FXML
+    void services(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/HostelFront.fxml"));
+        tfpostlist.getScene().setRoot(root);
 
     }
 
-    @FXML
-    void locations(ActionEvent event) {
+    public void account(ActionEvent actionEvent) {
+        // Retrieve the authenticated user from the Login class
+        User user = Login.getAuthenticatedUser();
 
+        if (user == null) {
+            // Handle the case where the user is not authenticated
+            showAlert("Error", "You are not authenticated. Please sign in.");
+            return;
+        }
+
+        // Redirect based on user type
+        if (user instanceof Admin) {
+            // Handle the case where the user is logged in as Admin
+            // You can redirect to a different page or display a message
+            showAlert("Information", "You are logged in as an Admin.");
+        } else if (user instanceof Tourist) {
+            // Redirect to TouristAccount screen
+            loadTouristAccountScreen(actionEvent, (Tourist) user);
+        } else if (user instanceof LocalCom) {
+            // Redirect to LocalComAccount screen
+            loadLocalComAccountScreen(actionEvent, (LocalCom) user);
+        } else {
+            // Handle other cases or show a login page
+            // You may want to implement a login functionality here
+        }
+    }
+    ///
+    private void loadTouristAccountScreen(ActionEvent event, Tourist tourist) {
+        try {
+            // Load the TouristAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TouristAccount.fxml"));
+            Parent root = loader.load();
+            TouristAccount touristAccountController = loader.getController();
+            touristAccountController.initialize();  // Pass the Tourist instance
+            showStage(event, root, "Tourist Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    void services(ActionEvent event) {
+    private void loadLocalComAccountScreen(ActionEvent event, LocalCom localcom) {
+        try {
+            // Load the LocalComAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LocalComAccount.fxml"));
+            Parent root = loader.load();
+            showStage(event, root, "LocalCom Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void showStage(ActionEvent event, Parent root, String title) {
+        // Your existing showStage method
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
     private Stage stage; // Reference to the stage
 

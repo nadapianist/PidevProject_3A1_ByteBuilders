@@ -1,3 +1,4 @@
-*****************************Credit Card Receipt*****************************
+
+
 Credit Card Number: 4242424242424242
-Expiry Date: 10/2025
+Expiry Date: 12/2025

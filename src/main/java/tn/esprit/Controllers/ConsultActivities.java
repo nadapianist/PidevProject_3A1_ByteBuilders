@@ -30,8 +30,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import tn.esprit.entities.Activity;
-import tn.esprit.entities.Challenge;
+import tn.esprit.entities.*;
 import tn.esprit.services.ActivityService;
 import tn.esprit.services.ChallengeService;
 import tn.esprit.utils.MyDb;
@@ -84,39 +83,7 @@ public class ConsultActivities implements Initializable {
     private int selectedActivityId = 0;
     private int selectedChallengeId = 0;
 
-    ////////////////////menu buttons ////////////////////////////////////////////////////////
 
-    @FXML
-    void achievements(ActionEvent event)  throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/ConsultActivities.fxml"));
-        combobox.getScene().setRoot(root);
-    }
-
-    @FXML
-    void forum(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Forumuser.fxml"));
-        combobox.getScene().setRoot(root);
-    }
-
-    @FXML
-    void home(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Home.fxml"));
-        combobox.getScene().setRoot(root);
-    }
-
-    @FXML
-    void locations(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/LocationFront.fxml"));
-        combobox.getScene().setRoot(root);
-    }
-
-
-    @FXML
-    void services(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/HostelFront.fxml"));
-        combobox.getScene().setRoot(root);
-
-    }
 
     ///////////////////////////////sort+search  Activty /////////////////////////////////////////////
     @FXML
@@ -221,12 +188,6 @@ public class ConsultActivities implements Initializable {
                 combo_challenge.getItems().add(challenge.getName_ch());
             }
         }
-    @FXML
-    void Dashboard(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
-        combobox.getScene().setRoot(root);
-
-    }
 
 
     @FXML
@@ -318,6 +279,7 @@ public class ConsultActivities implements Initializable {
             e.printStackTrace();
         }
     }
+
     private ChallengeService challengeService;
     private ActivityService activityService;
     @Override
@@ -337,10 +299,92 @@ public class ConsultActivities implements Initializable {
         // Add listener for ComboBox selection
         combobox.setOnAction(event -> displayActivityInfo());
         combo_challenge.setOnAction(event -> displayChallengeInfo()); // Add listener for challenge ComboBox
+// Add listener to the activity combo box
+        combobox.setOnAction(event -> {
+            // Clear existing content
+            box.getChildren().clear();
+            // Display activity info based on selected activity
+            displayActivityInfo();
+        });
 
+        // Add listener to the challenge combo box
+        combo_challenge.setOnAction(event -> {
+            // Clear existing content
+            vbox_challenge.getChildren().clear();
+            // Display challenge info based on selected challenge
+            displayChallengeInfo();
+        });
+
+        // Add listener to the criteria combo boxes for sorting
+        combo_act_criteria.setOnAction(event -> sortActivity());
+        combo_criteria.setOnAction(event -> sortChallenge());
 
     }
+    // Method to handle dynamic sorting of activities
+    private void sortActivity() {
+        String selectedCriteria = combo_act_criteria.getValue();
+        if (selectedCriteria != null) {
+            // Clear existing items in the ComboBox
+            combobox.getItems().clear();
 
+            // Populate the ComboBox based on selected sorting criteria
+            ObservableList<Activity> sortedActivities = null;
+            switch (selectedCriteria) {
+                case "Name":
+                    sortedActivities = activityService.Sort();
+                    break;
+                case "Description":
+                    sortedActivities = activityService.sortByDescription();
+                    break;
+                case "Date_act":
+                    sortedActivities = activityService.Sort();
+                    break;
+                default:
+                    // Handle invalid criteria selection
+                    break;
+            }
+
+            // Populate ComboBox with sorted activity names
+            if (sortedActivities != null) {
+                for (Activity activity : sortedActivities) {
+                    combobox.getItems().add(activity.getName());
+                }
+            }
+        }
+    }
+
+    // Method to handle dynamic sorting of challenges
+    private void sortChallenge() {
+        String selectedCriteria = combo_criteria.getValue();
+        if (selectedCriteria != null) {
+            // Clear existing items in the ComboBox
+            combo_challenge.getItems().clear();
+
+            // Populate the ComboBox based on selected sorting criteria
+            ObservableList<Challenge> sortedChallenges = null;
+            switch (selectedCriteria) {
+                case "Name":
+                    sortedChallenges = challengeService.Sort();
+                    break;
+                case "Description":
+                    sortedChallenges = challengeService.sortByDescription();
+                    break;
+                case "Points":
+                    sortedChallenges = challengeService.sortByPoints();
+                    break;
+                default:
+                    // Handle invalid criteria selection
+                    break;
+            }
+
+            // Populate ComboBox with sorted challenge names
+            if (sortedChallenges != null) {
+                for (Challenge challenge : sortedChallenges) {
+                    combo_challenge.getItems().add(challenge.getName_ch());
+                }
+            }
+        }
+    }
     private void displayActivityInfo() {
         try {
             String selectedActivity = combobox.getValue();
@@ -594,22 +638,212 @@ public class ConsultActivities implements Initializable {
     }
 
     public void generate(ActionEvent event) {
+        String loc= searchid.getText().trim(); // Get the location from the text field
 
+        // Call the generate method with the extracted location
+        generatee(loc);
     }
     public void generatee(String location) {
-
+        try {
+            // Ensure the location is not empty
+            if (!location.isEmpty()) {
+                ActivityPDFGenerator pdfGenerator = new ActivityPDFGenerator();
+                pdfGenerator.generateActivityListPDF(location);
+                System.out.println("PDF generated successfully.");
+            } else {
+                // Handle case when the location field is empty
+                System.out.println("Please enter a location.");
+            }
+        } finally {
+            // You can add any cleanup code here if needed
+        }
     }
     @FXML
     void calendar(ActionEvent event) throws IOException {
-
+        Parent root =FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/calendar.fxml")));
+        searchid.getScene().setRoot(root);
 
     }
 
     @FXML
     void cam(ActionEvent event) {
+        Stage webcamStage = new Stage();
+        webcamStage.setTitle("Webcam Feed");
+
+        // Create a webcam instance and set its properties
+        Webcam webcam = Webcam.getDefault();
+        webcam.setViewSize(new Dimension(640, 480));
+        webcam.open();
+
+        // Create an ImageView to display the webcam feed
+        ImageView imageView = new ImageView();
+
+        // Create a button to capture an image
+        Button captureButton = new Button("Capture");
+        captureButton.setOnAction(e -> {
+            System.out.println("Capturing image...");
+            // Capture a webcam frame
+            BufferedImage bufferedImage = webcam.getImage();
+
+            // Convert the BufferedImage to a JavaFX Image
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+
+            // Optionally, you can save the captured image to a file here
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Image");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("PNG Files", "*.png"),
+                    new FileChooser.ExtensionFilter("JPEG Files", "*.jpg", "*.jpeg"),
+                    new FileChooser.ExtensionFilter("All Files", "*.*")
+            );
+            File file = fileChooser.showSaveDialog(webcamStage);
+            if (file != null) {
+                try {
+                    ImageIO.write(bufferedImage, "png", file);
+                    System.out.println("Image saved successfully at: " + file.getAbsolutePath());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    System.out.println("Failed to save image.");
+                }
+            }
+
+            // Display a message to the user
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Image Captured");
+            alert.setHeaderText(null);
+            alert.setContentText("Image captured successfully!");
+            alert.showAndWait();
+        });
+
+        // Start a new thread to continuously update the ImageView with webcam frames
+        Thread updateThread = new Thread(() -> {
+            while (true) {
+                // Capture a webcam frame
+                BufferedImage bufferedImage = webcam.getImage();
+
+                // Convert the BufferedImage to a JavaFX Image
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+
+                // Update the ImageView with the new image
+                Platform.runLater(() -> imageView.setImage(image));
+
+                // Sleep for a short duration before capturing the next frame
+                try {
+                    Thread.sleep(1000 / 20); // 20 frames per second
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        updateThread.setDaemon(true);
+        updateThread.start();
+
+        // Set up the layout for the scene
+        VBox layout = new VBox(imageView, captureButton);
+        layout.setAlignment(Pos.CENTER);
+        layout.setSpacing(10);
+
+        // Set up the scene and show the stage
+        webcamStage.setScene(new Scene(layout, 640, 520)); // Increased height to accommodate the button
+        webcamStage.show();
+    }
+    //////////////////////////////////////////////////////////////////////////////////
+    public void home(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/home.fxml"));
+        combobox.getScene().setRoot(root);
+    }
+    @FXML
+    void achievements(ActionEvent event)  throws IOException {
+       /* Parent root = FXMLLoader.load(getClass().getResource("/ConsultActivities.fxml"));
+        combobox.getScene().setRoot(root);*/
+    }
+
+    @FXML
+    void forum(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Forumuser.fxml"));
+        combobox.getScene().setRoot(root);
+    }
+
+    @FXML
+    void locations(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/LocationFront.fxml"));
+        combobox.getScene().setRoot(root);
+    }
+
+
+    @FXML
+    void services(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/HostelFront.fxml"));
+        combobox.getScene().setRoot(root);
 
     }
 
+    public void account(ActionEvent actionEvent) {
+        // Retrieve the authenticated user from the Login class
+        User user = Login.getAuthenticatedUser();
+
+        if (user == null) {
+            // Handle the case where the user is not authenticated
+            showAlert("Error", "You are not authenticated. Please sign in.");
+            return;
+        }
+
+        // Redirect based on user type
+        if (user instanceof Admin) {
+            // Handle the case where the user is logged in as Admin
+            // You can redirect to a different page or display a message
+            showAlert("Information", "You are logged in as an Admin.");
+        } else if (user instanceof Tourist) {
+            // Redirect to TouristAccount screen
+            loadTouristAccountScreen(actionEvent, (Tourist) user);
+        } else if (user instanceof LocalCom) {
+            // Redirect to LocalComAccount screen
+            loadLocalComAccountScreen(actionEvent, (LocalCom) user);
+        } else {
+            // Handle other cases or show a login page
+            // You may want to implement a login functionality here
+        }
+    }
+    ///
+    private void loadTouristAccountScreen(ActionEvent event, Tourist tourist) {
+        try {
+            // Load the TouristAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TouristAccount.fxml"));
+            Parent root = loader.load();
+            TouristAccount touristAccountController = loader.getController();
+            touristAccountController.initialize();  // Pass the Tourist instance
+            showStage(event, root, "Tourist Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLocalComAccountScreen(ActionEvent event, LocalCom localcom) {
+        try {
+            // Load the LocalComAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LocalComAccount.fxml"));
+            Parent root = loader.load();
+            showStage(event, root, "LocalCom Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showStage(ActionEvent event, Parent root, String title) {
+        // Your existing showStage method
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
 
 
