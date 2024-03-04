@@ -277,22 +277,6 @@ public class DisplayUser {
         }
     }
 
-    public void logOut(ActionEvent actionEvent) {
-        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        currentStage.close();
-
-        try {
-            // Open new window (displayUser)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
-            Parent root = loader.load();
-            Stage displayUserStage = new Stage();
-            displayUserStage.setScene(new Scene(root));
-            displayUserStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     void deactivateT(ActionEvent actionEvent) throws SQLException {
         User touristSelected = tabeT.getSelectionModel().getSelectedItem();
@@ -352,7 +336,7 @@ public class DisplayUser {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////BUTTONS/////////////////
     @FXML
     void activityBTN(ActionEvent event)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
@@ -411,6 +395,22 @@ public class DisplayUser {
         Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
         userbtn.getScene().setRoot(root);
     }
+    public void logout(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

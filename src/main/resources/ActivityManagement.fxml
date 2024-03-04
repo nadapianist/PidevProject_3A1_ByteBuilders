@@ -90,13 +90,13 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="1154.0" layoutY="11.0" mnemonicParsing="false" onAction="#logout" prefHeight="22.0" prefWidth="22.0" styleClass="close" stylesheets="@design.css" />
-            <FontAwesomeIconView glyphName="CLOSE" layoutX="1161.0" layoutY="27.0" />
             <ImageView fitHeight="72.0" fitWidth="90.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Img/logo_tunism-removebg-preview.png" />
                </image>
             </ImageView>
+            <Button layoutX="1144.0" layoutY="30.0" mnemonicParsing="false" onAction="#logout" prefHeight="27.0" prefWidth="25.0" />
+            <FontAwesomeIconView glyphName="CLOSE" layoutX="1152.0" layoutY="48.0" wrappingWidth="16.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="240.0" layoutY="200.0" prefHeight="553.0" prefWidth="250.0" styleClass="AnchorPane" stylesheets="@design.css">

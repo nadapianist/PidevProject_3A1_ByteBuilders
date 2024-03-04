@@ -49,8 +49,8 @@
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Button layoutX="1144.0" layoutY="30.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="25.0" />
-                <FontAwesomeIconView glyphName="CLOSE" layoutX="1149.0" layoutY="49.0" wrappingWidth="16.0" />
+                <Button layoutX="1144.0" layoutY="30.0" mnemonicParsing="false" onAction="#logout" prefHeight="27.0" prefWidth="25.0" />
+                <FontAwesomeIconView glyphName="CLOSE" layoutX="1152.0" layoutY="49.0" wrappingWidth="16.0" />
             <ImageView fitHeight="72.0" fitWidth="90.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Img/logo_tunism-removebg-preview.png" />
@@ -96,13 +96,13 @@
         </AnchorPane>
         <TextField fx:id="Search_field" layoutX="950.0" layoutY="252.0" prefHeight="26.0" prefWidth="150.0" promptText="Search" />
         <Button layoutX="910.0" layoutY="243.0" mnemonicParsing="false" onAction="#SearchByDate" styleClass="search-button" stylesheets="@Front.css" />
-        <Button layoutX="730.0" layoutY="253.0" mnemonicParsing="false" onAction="#FilterByPM" text="Sort" />
+        <Button layoutX="725.0" layoutY="243.0" mnemonicParsing="false" onAction="#FilterByPM" styleClass="sort-button" stylesheets="@Front.css" />
       <Label layoutX="520.0" layoutY="100.0" text="Reservation Management" underline="true">
          <font>
             <Font name="Arial Narrow Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="663.0" layoutY="256.0" stylesheets="@design.css" text="Filter :">
+      <Label layoutX="675.0" layoutY="256.0" stylesheets="@design.css" text="Filter :">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

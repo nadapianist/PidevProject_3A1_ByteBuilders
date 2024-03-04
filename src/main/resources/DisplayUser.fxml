@@ -54,8 +54,6 @@
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <Button layoutX="79.0" layoutY="733.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="39.0" style="-fx-background-radius: 55;" textAlignment="CENTER" />
-                <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="88.0" layoutY="754.0" size="20" />
             <Button fx:id="reviewbtn" layoutX="30.0" layoutY="446.0" mnemonicParsing="false" onAction="#ReviewBTN" prefHeight="42.0" prefWidth="150.0" styleClass="nav-btn" stylesheets="@design.css" text="Review Management" />
             </children>
         </AnchorPane>

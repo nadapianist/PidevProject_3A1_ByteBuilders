@@ -5,7 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
 import javafx.scene.control.TableCell;
@@ -15,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
+import javafx.stage.Stage;
 import tn.esprit.Exception.InvalidLengthException;
 import tn.esprit.entities.forum;
 import tn.esprit.entities.post;
@@ -92,16 +95,46 @@ public class ForumManagement  {
     @FXML
     private Button SearchButton;
 
+    ////////////////////////////////////////////Buttons/////////////////////
+
+    @FXML
+    private Button activitybtn;
+
+    @FXML
+    private Button challengebtn;
+    @FXML
+    private Button forumbtnid;
+
+    @FXML
+    private Button hostelbtn;
+    @FXML
+    private Button locationbtn;
+
+    @FXML
+    private Button reservationbtn;
+
+    @FXML
+    private Button reviewbtn;
+
+    @FXML
+    private Button transportbtn;
+
+    @FXML
+    private Button userbtn;
+
+
     @FXML
     private TableColumn<post, Integer> UserID;
     private final postService ps=new postService();
     private final forumService fs=new forumService();
     public final int MAXLENGTH=15;
     private String selectedImagePath;
-
+    @FXML
+    private ComboBox<String> comboBoxx;
 
     @FXML
     void initialize() {
+
         try {
             ForumList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
@@ -121,6 +154,7 @@ public class ForumManagement  {
             Category.setCellValueFactory(new PropertyValueFactory<>("Category"));
             initpost();
             initcat();
+            initcatpo();
         }catch (SQLException e){
             Alert alert= new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -233,27 +267,6 @@ public class ForumManagement  {
     public static void validateStringLength(String str, int maxLength) throws InvalidLengthException {
         if (str.length() > maxLength) {
             throw new InvalidLengthException("The given string must not exceed " + maxLength + " characters.");
-        }
-    }
-    @FXML
-
-    private void DeleteForumById(ActionEvent event) {
-        forum selectedForum = ForumList.getSelectionModel().getSelectedItem();
-        if (selectedForum != null) {
-            try {
-                // Call your service method to delete the forum
-                fs.delete(selectedForum.getIDForum());
-
-                // Remove the selected forum from the TableView
-                ForumList.getItems().remove(selectedForum);
-                List<forum> forums = fs.displayList();
-                ObservableList<forum> observableList = FXCollections.observableList(forums);
-                ForumList.setItems(observableList);
-                initcat();
-            } catch (SQLException e) {
-                // Handle any SQL exception
-                e.printStackTrace();
-            }
         }
     }
 
@@ -396,6 +409,182 @@ public class ForumManagement  {
             alert.showAndWait();
         }
     }
+    @FXML
+    public void sortPostsByCategory(ActionEvent actionEvent) {
+        try {
+            String selectedCategory = comboBoxx.getValue();
+
+            // Check if "pick category" is selected
+            if (selectedCategory == null || selectedCategory.equals("pick category!")) {
+                // Get all posts
+                List<post> searchResults = ps.displayList();
+                ObservableList<post> observableList = FXCollections.observableList(searchResults);
+                PostsList.setItems(observableList);
+            } else {
+                // Get posts based on the selected category
+                List<post> searchResults = ps.sortPostsByCategory(selectedCategory);
+                ObservableList<post> observableList = FXCollections.observableList(searchResults);
+                PostsList.setItems(observableList);
+            }
+
+            IDPost.setCellValueFactory(new PropertyValueFactory<>("IDPost"));
+            ContentPost.setCellValueFactory(new PropertyValueFactory<>("ContentPost"));
+            PhotoPost.setCellValueFactory(new PropertyValueFactory<>("PhotoPost"));
+            DatePost.setCellValueFactory(new PropertyValueFactory<>("DatePost"));
+            UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+            CategoryPost.setCellValueFactory(new PropertyValueFactory<>("CategoryPost"));
+
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void initcatpo() {
+        try{
+            List<String> categories = ps.getAllCategories();
+            // If you have any default values, add them
+            categories.add(0, "pick category!");
+            // Set the ComboBox items
+            comboBoxx.setItems(FXCollections.observableArrayList(categories));
+            comboBoxx.setValue(categories.get(0)); // Set a default value if needed
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    @FXML
+
+    private void DeleteForumById(ActionEvent event) {
+        forum selectedForum = ForumList.getSelectionModel().getSelectedItem();
+        if (selectedForum != null) {
+            try {
+                // Check if the corresponding category's NB_posts is 0
+                if (selectedForum.getNB_posts() == 0) {
+                    // Call a method to delete posts associated with the category
+                    deletePostsByCategory(selectedForum.getCategory());
+                }
+
+                // Call your service method to delete the forum
+                fs.delete(selectedForum.getIDForum());
+
+                // Remove the selected forum from the TableView
+                ForumList.getItems().remove(selectedForum);
+
+                // Refresh the TableView
+                ForumList.refresh();
+
+                // Update the ObservableList with the latest data
+                List<forum> forums = fs.displayList();
+                ObservableList<forum> observableList = FXCollections.observableList(forums);
+                ForumList.setItems(observableList);
+
+                // Refresh the PostsList TableView as well
+                List<post> posts = ps.displayList();
+                ObservableList<post> observableListPosts = FXCollections.observableList(posts);
+                PostsList.setItems(observableListPosts);
+                PostsList.refresh();
+
+                initcat();
+            } catch (SQLException e) {
+                // Handle any SQL exception
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void deletePostsByCategory(String category) {
+        try {
+            // Call your service method to delete posts based on category
+            ps.deletePostsByCategory(category);
+
+            // Refresh the PostsList to reflect the changes
+            List<post> posts = ps.displayList();
+            ObservableList<post> observableList = FXCollections.observableList(posts);
+            PostsList.setItems(observableList);
+        } catch (SQLException e) {
+            // Handle any SQL exception
+            e.printStackTrace();
+        }
+    }
+    //////////////////////////////////////////////////BUTTONS/////////////////
+    @FXML
+    void activityBTN(ActionEvent event)throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
+        activitybtn.getScene().setRoot(root);
+
+    }
+    @FXML
+    void ForumBTN(ActionEvent event) throws IOException {
+       /* Parent root = FXMLLoader.load(getClass().getResource("/forumManagement.fxml"));
+        forumbtnid.getScene().setRoot(root);*/
+
+    }
+
+    @FXML
+    void LocationBTN(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ShowLocations.fxml"));
+        locationbtn.getScene().setRoot(root);
+    }
+
+    @FXML
+    void ReservationBTN(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ReservationManagement.fxml"));
+        reservationbtn.getScene().setRoot(root);
+
+    }
+
+    @FXML
+    void ReviewBTN(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ReviewChallengeManagement.fxml"));
+        reviewbtn.getScene().setRoot(root);
+
+    }
+
+    @FXML
+    void TransportBTN(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ShowTransports.fxml"));
+        transportbtn.getScene().setRoot(root);
+
+    }
+
+    @FXML
+    void hostelBTN(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/HostelManagement.fxml"));
+        hostelbtn.getScene().setRoot(root);
+
+    }
+
+    @FXML
+    void userBTN(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/DisplayUser.fxml"));
+        userbtn.getScene().setRoot(root);
+
+    }
+    @FXML
+    void challengeBTN(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
+        userbtn.getScene().setRoot(root);
+    }
+    public void logout(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

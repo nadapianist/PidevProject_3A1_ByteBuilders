@@ -63,19 +63,17 @@
                      </font></Button>
                </children>
             </HBox>
-            <VBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="159.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="88.0" prefWidth="150.0" />
+            <AnchorPane prefHeight="103.0" prefWidth="167.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#Dashboard" prefHeight="78.0" prefWidth="87.0" styleClass="dashboard-button" stylesheets="@Front.css">
-                     <graphic>
-                        <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Img/dashboard.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                  <Button layoutX="30.0" layoutY="15.0" mnemonicParsing="false" onAction="#account" prefHeight="26.0" prefWidth="40.0" styleClass="Account-button" stylesheets="@Front.css" />
+                  <Label layoutX="20.0" layoutY="67.0" text="My Account" textFill="#288181">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
-            </VBox>
+            </AnchorPane>
          </children>
       </HBox>
    </top>
@@ -86,52 +84,41 @@
                <children>
                   <AnchorPane prefHeight="226.0" prefWidth="1202.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="156.0" mnemonicParsing="false" onAction="#Sort_activity" prefHeight="40.0" prefWidth="102.0" styleClass="sort-button" stylesheets="@Front.css">
+                        <Button alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="310.0" layoutY="151.0" mnemonicParsing="false" onAction="#Seach_activity" prefHeight="46.0" prefWidth="34.0" styleClass="search-button" stylesheets="@Front.css">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Label alignment="BASELINE_LEFT" layoutX="209.0" prefHeight="55.0" prefWidth="182.0" text=" Activities" textFill="#087ea1">
+                        <Label alignment="BASELINE_LEFT" layoutX="209.0" layoutY="12.0" prefHeight="55.0" prefWidth="182.0" text=" Activities" textFill="#087ea1">
                            <font>
                               <Font name="Brush Script MT Italic" size="40.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="searchid" alignment="BOTTOM_LEFT" layoutX="107.0" layoutY="154.0" prefHeight="38.0" prefWidth="176.0" promptText="Enter  your destination ">
+                        <TextField fx:id="searchid" alignment="BOTTOM_LEFT" layoutX="149.0" layoutY="152.0" prefHeight="38.0" prefWidth="169.0" promptText="Enter  your destination ">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </TextField>
-                        <Button alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="300.0" layoutY="155.0" mnemonicParsing="false" onAction="#Seach_activity" prefHeight="42.0" prefWidth="64.0" styleClass="search-button" stylesheets="@Front.css">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                        <Label alignment="BOTTOM_RIGHT" layoutX="790.0" prefHeight="40.0" prefWidth="200.0" text=" Challenges" textFill="#087ea1">
+                        <Label alignment="BOTTOM_RIGHT" layoutX="790.0" layoutY="12.0" prefHeight="40.0" prefWidth="200.0" text=" Challenges" textFill="#087ea1">
                            <font>
                               <Font name="Brush Script MT Italic" size="40.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="search_challengeid" alignment="BOTTOM_LEFT" layoutX="717.0" layoutY="153.0" prefHeight="0.0" prefWidth="190.0" promptText="Search Challenge By Name">
+                        <TextField fx:id="search_challengeid" alignment="BOTTOM_LEFT" layoutX="740.0" layoutY="152.0" prefHeight="38.0" prefWidth="169.0" promptText="Search Challenge ">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </TextField>
-                        <Button layoutX="1081.0" layoutY="150.0" mnemonicParsing="false" onAction="#sort_challenge" prefHeight="42.0" prefWidth="66.0" styleClass="sort-button" stylesheets="@Front.css">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
                         <Button layoutX="890.0" layoutY="150.0" mnemonicParsing="false" onAction="#search_challenge" prefHeight="42.0" prefWidth="70.0" styleClass="search-button" stylesheets="@Front.css">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="530.0" layoutY="14.0" mnemonicParsing="false" onAction="#Validate" styleClass="rev_btn" stylesheets="@Front.css" text="Reviews Section" />
-                        <Button layoutX="631.0" layoutY="150.0" mnemonicParsing="false" onAction="#watch" prefHeight="45.0" prefWidth="81.0" styleClass="VideoPlayer-button" stylesheets="@Front.css" />
-                        <Button layoutX="419.0" layoutY="149.0" mnemonicParsing="false" onAction="#generate" prefHeight="54.0" prefWidth="61.0" styleClass="pdf-button" stylesheets="@Front.css" />
-                        <Button layoutX="1133.0" layoutY="154.0" mnemonicParsing="false" onAction="#calendar" styleClass="calendar-button" stylesheets="@Front.css" />
-                        <Button layoutX="43.0" layoutY="154.0" mnemonicParsing="false" onAction="#cam" styleClass="camera-button" stylesheets="@Front.css" />
-                        <ComboBox fx:id="combo_criteria" layoutX="939.0" layoutY="159.0" prefHeight="26.0" prefWidth="168.0" promptText="Select Sorting Criteria">
+                        <Button layoutX="533.0" layoutY="22.0" mnemonicParsing="false" onAction="#Validate" styleClass="rev_btn" stylesheets="@Front.css" text="Reviews Section" />
+                        <Button layoutX="1156.0" layoutY="144.0" mnemonicParsing="false" onAction="#watch" prefHeight="46.0" prefWidth="45.0" styleClass="VideoPlayer-button" stylesheets="@Front.css" />
+                        <Button layoutX="510.0" layoutY="144.0" mnemonicParsing="false" onAction="#generate" prefHeight="54.0" prefWidth="61.0" styleClass="pdf-button" stylesheets="@Front.css" />
+                        <Button layoutX="1106.0" layoutY="145.0" mnemonicParsing="false" onAction="#calendar" styleClass="calendar-button" stylesheets="@Front.css" />
+                        <ComboBox fx:id="combo_criteria" layoutX="945.0" layoutY="151.0" prefHeight="32.0" prefWidth="158.0" promptText="Select Sorting Criteria" style="-fx-background-color: #087ea1;">
                            <items>
                               <FXCollections fx:factory="observableArrayList">
                                  <String fx:value="Name" />
@@ -140,7 +127,7 @@
                               </FXCollections>
                            </items>
                         </ComboBox>
-                        <ComboBox fx:id="combo_act_criteria" layoutX="481.0" layoutY="161.0" prefWidth="150.0" promptText="Select Sorting Criteria">
+                        <ComboBox fx:id="combo_act_criteria" layoutX="349.0" layoutY="155.0" prefHeight="32.0" prefWidth="159.0" promptText="Select Sorting Criteria" style="-fx-background-color: #087ea1;">
                         <items>
                            <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Name" />
@@ -149,7 +136,6 @@
                            </FXCollections>
                         </items>
                         </ComboBox>
-                        <Label fx:id="touristNameLabel" layoutX="58.0" layoutY="69.0" prefHeight="43.0" prefWidth="188.0" />
                      </children>
                   </AnchorPane>
                </children>

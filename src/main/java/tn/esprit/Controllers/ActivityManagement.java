@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -461,6 +462,56 @@ public class ActivityManagement {
 
     @FXML
     private void stat() {
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+
+        try {
+            Connection con = MyDb.getInstance().getCon();
+            Statement ste = con.createStatement();
+
+            // Query to get the count of activities by location
+            String sql = "SELECT l.Name, COUNT(al.Activity) AS activityCount " +
+                    "FROM location l " +
+                    "LEFT JOIN association_activity_location al ON l.ID = al.Location " +
+                    "GROUP BY l.Name";
+
+            ResultSet rs = ste.executeQuery(sql);
+
+            // Populate the series with data from the result set
+            while (rs.next()) {
+                String locationName = rs.getString("Name");
+                int activityCount = rs.getInt("activityCount");
+                series.getData().add(new XYChart.Data<>(locationName, activityCount));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Clear existing data and add the new series to the chart
+        Chart.getData().clear();
+        Chart.getData().add(series);
+
+        // Create a Timeline to change the colors of the bars
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            int colorIndex = 0;
+
+            @Override
+            public void handle(ActionEvent event) {
+                for (XYChart.Data<String, Integer> data : series.getData()) {
+                    String color = getRandomColor(); // Function to get a random color
+                    data.getNode().setStyle("-fx-bar-fill: " + color + ";");
+                }
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private String getRandomColor() {
+        // Generate a random color in hexadecimal format
+        return String.format("#%02X%02X%02X",
+                (int) (Math.random() * 256),
+                (int) (Math.random() * 256),
+                (int) (Math.random() * 256));
     }
     /////////////////////////////////////////////////////////////Import//////////////////////////
 
@@ -488,6 +539,10 @@ public class ActivityManagement {
             }
         }
     }
+    // Replace "YOUR_API_KEY" with your actual API key
+    private static final String API_KEY = "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";
+    private static final String CHATGPT_URL = "https://api.openai.com/v1/completions";
+
     //////////////////////////////////////////////////BUTTONS/////////////////
     @FXML
     void activityBTN(ActionEvent event)throws IOException {
@@ -547,13 +602,22 @@ public class ActivityManagement {
            Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
         userbtn.getScene().setRoot(root);
     }
+    public void logout(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
 
-    @FXML
-    void logout(ActionEvent event) throws IOException {
-        Parent root =FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ConsultActivities.fxml")));
-        Nameid.getScene().setRoot(root);
-
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 
 }

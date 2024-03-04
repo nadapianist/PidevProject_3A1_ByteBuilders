@@ -150,3 +150,9 @@
     -fx-padding: 10px; /* Padding around the button */
     -fx-font-weight: bold; /* Extra bold text */
 }
+.text-area {
+    -fx-background-color: transparent; /* Set background color to transparent */
+
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #000000; /* Text color */
+}

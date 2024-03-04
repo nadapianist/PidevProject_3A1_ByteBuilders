@@ -14,7 +14,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="1206.0" style="-fx-background-color: #b3efff;" stylesheets="@Front.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Controllers.News"> <!-- Set light green background -->
 
     <!-- ScrollPane to contain the ListView -->
-    <ScrollPane layoutX="37.0" layoutY="149.0" prefHeight="614.0" prefWidth="1134.0">
+    <ScrollPane layoutX="246.0" layoutY="149.0" prefHeight="553.0" prefWidth="718.0">
         <!-- VBox to contain the news articles -->
         <VBox fx:id="newsContainer" style="-fx-background-color: #FFFFFF; -fx-padding: 10px;">
         </VBox> <!-- Make sure to close the VBox element -->
@@ -24,7 +24,7 @@
          <HBox alignment="CENTER" prefHeight="106.0" prefWidth="214.0" stylesheets="@Front.css" />
          <HBox prefHeight="103.0" prefWidth="694.0" styleClass="border-bottom" stylesheets="@Front.css">
             <children>
-               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@Front.css" text="Home">
+               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#home" prefHeight="75.0" prefWidth="110.0" stylesheets="@Front.css" text="Home">
                   <styleClass>
                      <String fx:value="menu-bar" />
                      <String fx:value="menu-button" />
@@ -36,22 +36,22 @@
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="142.0" styleClass="menu-button" stylesheets="@Front.css" text="Locations">
+               <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#locations" prefHeight="75.0" prefWidth="142.0" styleClass="menu-button" stylesheets="@Front.css" text="Locations">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="182.0" styleClass="menu-button" stylesheets="@Front.css" text="Achievements">
+               <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#achievements" prefHeight="75.0" prefWidth="182.0" styleClass="menu-button" stylesheets="@Front.css" text="Activity">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="136.0" styleClass="menu-button" stylesheets="@Front.css" text="Services">
+               <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#services" prefHeight="75.0" prefWidth="136.0" styleClass="menu-button" stylesheets="@Front.css" text="Services">
                   <font>
                      <Font size="36.0" />
                   </font>
                </Button>
-               <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="75.0" prefWidth="122.0" styleClass="menu-button" stylesheets="@Front.css" text="Forum">
+               <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#forum" prefHeight="75.0" prefWidth="122.0" styleClass="menu-button" stylesheets="@Front.css" text="Forum">
                   <font>
                      <Font size="36.0" />
                   </font>
@@ -66,6 +66,5 @@
          <Image url="@Img/logo_tunism-removebg-preview.png" />
       </image>
    </ImageView>
-   <Button layoutX="85.0" layoutY="113.0" mnemonicParsing="false" text="Back" />
 
 </AnchorPane>

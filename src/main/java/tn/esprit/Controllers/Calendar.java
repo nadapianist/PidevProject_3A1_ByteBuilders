@@ -126,29 +126,106 @@ public class Calendar implements Initializable {
 
     @FXML
     void backOneMonth() {
-
+        dateFocus = dateFocus.minusMonths(1);
+        calendar.getChildren().clear();
+        drawCalendar();
     }
 
     @FXML
     void forwardOneMonth() {
-
+        dateFocus = dateFocus.plusMonths(1);
+        calendar.getChildren().clear();
+        drawCalendar();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dateFocus = ZonedDateTime.now();
+        calendar.setStyle("-fx-border-radius: 10;");
+        calendar.setStyle("-fx-background-radius: 20;");
 
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
+            pste = connection.prepareStatement("SELECT * FROM activity WHERE YEAR(date_act) = ? AND MONTH(date_act) = ?");
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle connection failure gracefully in your application
+        }
+
+        drawCalendar();
     }
 
     // Method to fetch activities from the database for the given year and month
     private List<Activity> fetchActivitiesForMonth(int year, int month) {
         List<Activity> activities = new ArrayList<>();
-
+        try {
+            pste.setInt(1, year);
+            pste.setInt(2, month);
+            try (ResultSet resultSet = pste.executeQuery()) {
+                while (resultSet.next()) {
+                    Activity activity = new Activity(resultSet);
+                    activities.add(activity);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle potential exceptions more gracefully in your actual application
+        }
 
         return activities;
     }
 
     private void drawCalendar() {
+        year.setText(String.valueOf(dateFocus.getYear()));
+        month.setText(String.valueOf(dateFocus.getMonth()));
 
+        double calendarWidth = calendar.getPrefWidth();
+        double calendarHeight = calendar.getPrefHeight();
+        double strokeWidth = 1;
+        double spacingH = calendar.getHgap();
+        double spacingV = calendar.getVgap();
+
+        int monthMaxDate = dateFocus.getMonth().length(true);
+        int dateOffset = ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), 1, 0, 0, 0, 0, dateFocus.getZone()).getDayOfWeek().getValue();
+
+        List<Activity> activities = fetchActivitiesForMonth(dateFocus.getYear(), dateFocus.getMonthValue());
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                StackPane stackPane = new StackPane();
+
+                Rectangle rectangle = new Rectangle();
+                rectangle.setFill(Color.LIGHTBLUE);
+                rectangle.setStroke(Color.BLACK);
+                rectangle.setStrokeWidth(strokeWidth);
+                double rectangleWidth = (calendarWidth / 7) - strokeWidth - spacingH;
+                rectangle.setWidth(rectangleWidth);
+                double rectangleHeight = (calendarHeight / 6) - strokeWidth - spacingV;
+                rectangle.setHeight(rectangleHeight);
+                stackPane.getChildren().add(rectangle);
+
+                int calculatedDate = (j + 1) + (7 * i);
+                if (calculatedDate > dateOffset) {
+                    int currentDate = calculatedDate - dateOffset;
+                    if (currentDate <= monthMaxDate) {
+                        Text date = new Text(String.valueOf(currentDate));
+                        double textTranslationY = -(rectangleHeight / 2) * 0.75;
+                        date.setTranslateY(textTranslationY);
+                        stackPane.getChildren().add(date);
+
+                        // Fetch activities for the current date
+                        List<Activity> activitiesForDate = activities.stream()
+                                .filter(activity -> activity.getDate_act().getDayOfMonth() == currentDate)
+                                .collect(Collectors.toList());
+
+                        // Create labels for each activity and add them to the cell
+                        for (Activity activity : activitiesForDate) {
+                            Text activityName = new Text(activity.getName());
+                            stackPane.getChildren().add(activityName);
+                            rectangle.setFill(Color.YELLOW); // Change cell color to yellow
+                        }
+                    }
+                }
+                calendar.getChildren().add(stackPane);
+            }
         }
     }
-
+}

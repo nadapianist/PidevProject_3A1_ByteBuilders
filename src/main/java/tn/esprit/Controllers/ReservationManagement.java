@@ -5,13 +5,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import tn.esprit.entities.Hostel;
 import tn.esprit.entities.Reservation;
 import tn.esprit.services.ReservationService;
@@ -241,11 +244,10 @@ public class ReservationManagement {
         IdtouristID.getScene().setRoot(root);
     }
 
-
-    //////////////////////////////////////////////////
+    //////////////////////////////////////////////////BUTTONS/////////////////
     @FXML
     void activityBTN(ActionEvent event)throws IOException {
-       Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ActivityManagement.fxml"));
         activitybtn.getScene().setRoot(root);
 
     }
@@ -264,7 +266,7 @@ public class ReservationManagement {
 
     @FXML
     void ReservationBTN(ActionEvent event) throws IOException {
-       /* Parent root = FXMLLoader.load(getClass().getResource("/ReservationManagement.fxml"));
+      /*  Parent root = FXMLLoader.load(getClass().getResource("/ReservationManagement.fxml"));
         reservationbtn.getScene().setRoot(root);*/
 
     }
@@ -295,13 +297,29 @@ public class ReservationManagement {
         Parent root = FXMLLoader.load(getClass().getResource("/DisplayUser.fxml"));
         userbtn.getScene().setRoot(root);
 
-
     }
     @FXML
     void challengeBTN(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ChallengeManagement.fxml"));
         userbtn.getScene().setRoot(root);
     }
+    public void logout(ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
+        try {
+            // Open new window (displayUser)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+            Parent root = loader.load();
+            Stage displayUserStage = new Stage();
+            displayUserStage.setScene(new Scene(root));
+            displayUserStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 }

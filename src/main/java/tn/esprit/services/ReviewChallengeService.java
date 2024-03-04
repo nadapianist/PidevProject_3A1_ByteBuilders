@@ -91,10 +91,11 @@ public class ReviewChallengeService implements IService<ReviewChallenge>,IAdvanc
             String Info = res.getString("Info");
             java.util.Date Date_pub = res.getDate("Date_pub");
             String Title_rev = res.getString("Title_rev");
+            String img = res.getString("image");
             String activityName = res.getString("activityName");
             String challengeName = res.getString("challengeName");
 
-            ReviewChallenge reviewChallenge = new ReviewChallenge(idact, idchall, Info, Date_pub, Title_rev, activityName, challengeName);
+            ReviewChallenge reviewChallenge = new ReviewChallenge(idact, idchall, Info, Date_pub, Title_rev, activityName, challengeName,img);
 
             reviews.add(reviewChallenge);
         }

@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import tn.esprit.entities.Hostel;
+import tn.esprit.entities.*;
 import tn.esprit.services.HostelService;
 
 import java.io.IOException;
@@ -50,12 +50,8 @@ public class HostelFront {
     private ComboBox<String> SortBox;
     private final HostelService hs = new HostelService();
     private Stage primaryStage;
-    @FXML
-    void Dashboard(ActionEvent event) throws IOException {
-        /*Parent root = FXMLLoader.load(getClass().getResource("/HostelManagement.fxml"));
-        dashboard.getScene().setRoot(root);
-*/
-    }
+
+
     public void initialize() {
         SortBox.getItems().addAll("Name","NBStars","Info");
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "")) {
@@ -129,7 +125,7 @@ public class HostelFront {
                 bookController.setHostel(selectedHostel);
 
                 // Set the primary stage scene
-                Stage stage = (Stage) dashboard.getScene().getWindow(); // Get the current stage
+                Stage stage = (Stage) Search_field.getScene().getWindow(); // Get the current stage
                 stage.setScene(scene);
                 stage.show();
             } else {
@@ -362,43 +358,102 @@ public class HostelFront {
     }
     @FXML
     private Button goback;
-    @FXML
-    void Goback(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/HostelFront.fxml"));
-        goback.getScene().setRoot(root);
-
+    //////////////////////////////////////////////////////////////////////////////////
+    public void home(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/home.fxml"));
+        Search_field.getScene().setRoot(root);
     }
     @FXML
     void achievements(ActionEvent event)  throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ConsultActivities.fxml"));
-        hostelBox.getScene().setRoot(root);
+        Search_field.getScene().setRoot(root);
     }
 
     @FXML
     void forum(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Forumuser.fxml"));
-        hostelBox.getScene().setRoot(root);
-    }
-
-    @FXML
-    void home(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Home.fxml"));
-        hostelBox.getScene().setRoot(root);
+        Search_field.getScene().setRoot(root);
     }
 
     @FXML
     void locations(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/LocationFront.fxml"));
-        hostelBox.getScene().setRoot(root);
+        Search_field.getScene().setRoot(root);
     }
 
 
     @FXML
     void services(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/HostelFront.fxml"));
-        hostelBox.getScene().setRoot(root);
+       /* Parent root = FXMLLoader.load(getClass().getResource("/HostelFront.fxml"));
+        Search_field.getScene().setRoot(root);*/
 
     }
 
+    public void account(ActionEvent actionEvent) {
+        // Retrieve the authenticated user from the Login class
+        User user = Login.getAuthenticatedUser();
+
+        if (user == null) {
+            // Handle the case where the user is not authenticated
+            showAlert("Error", "You are not authenticated. Please sign in.");
+            return;
+        }
+
+        // Redirect based on user type
+        if (user instanceof Admin) {
+            // Handle the case where the user is logged in as Admin
+            // You can redirect to a different page or display a message
+            showAlert("Information", "You are logged in as an Admin.");
+        } else if (user instanceof Tourist) {
+            // Redirect to TouristAccount screen
+            loadTouristAccountScreen(actionEvent, (Tourist) user);
+        } else if (user instanceof LocalCom) {
+            // Redirect to LocalComAccount screen
+            loadLocalComAccountScreen(actionEvent, (LocalCom) user);
+        } else {
+            // Handle other cases or show a login page
+            // You may want to implement a login functionality here
+        }
+    }
+    ///
+    private void loadTouristAccountScreen(ActionEvent event, Tourist tourist) {
+        try {
+            // Load the TouristAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TouristAccount.fxml"));
+            Parent root = loader.load();
+            TouristAccount touristAccountController = loader.getController();
+            touristAccountController.initialize();  // Pass the Tourist instance
+            showStage(event, root, "Tourist Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLocalComAccountScreen(ActionEvent event, LocalCom localcom) {
+        try {
+            // Load the LocalComAccount.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LocalComAccount.fxml"));
+            Parent root = loader.load();
+            showStage(event, root, "LocalCom Account");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showStage(ActionEvent event, Parent root, String title) {
+        // Your existing showStage method
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
 }

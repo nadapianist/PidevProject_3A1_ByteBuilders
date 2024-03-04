@@ -87,6 +87,58 @@ public class Login {
 
     @FXML
     void SignIn(ActionEvent event) throws SQLException {
+      /*  Alert al;
+
+        if (!VerifUserChamps()) {
+            return;
+        }
+
+        String encPass = su.encrypt(txtpassword.getText());
+        User user = su.find(txtemail.getText(), encPass);
+
+        if (user == null) {
+            al = new Alert(Alert.AlertType.ERROR);
+            al.setTitle("Alert");
+            al.setContentText("Invalid login or password");
+            al.setHeaderText((String) null);
+            al.show();
+            return;
+        }
+
+        if (user.getStatus()) {
+            al = new Alert(Alert.AlertType.ERROR);
+            al.setTitle("Alert");
+            al.setContentText("Account is deactivated. Please contact support.");
+            al.setHeaderText((String) null);
+            al.show();
+            return;
+        }
+
+        if (user != null) {
+            authenticatedUser = user;
+        }
+
+        // Redirect based on user type
+        if (user instanceof Admin) {
+            // Redirect to the Display screen
+            loadFXML("/DisplayUser.fxml", "Display User");
+        } else if (user instanceof Tourist) {
+            connectedTourist = (Tourist) user;
+            // Redirect to TouristAccount screen
+            loadFXML("/home.fxml", "Tourist Account");
+        } else if (user instanceof LocalCom) {
+            LocalCom localcom = (LocalCom) user;
+            System.out.println("localCom");
+        } else {
+            System.out.println("Other user type or null");
+        }
+
+        // Display a sign-in success message
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sign-in Success");
+        alert.setHeaderText(null);
+        alert.setContentText("You have successfully signed in!");
+        alert.showAndWait();*/
         Alert al;
 
         if (!VerifUserChamps()) {
@@ -115,6 +167,8 @@ public class Login {
         }
 
         if (user != null) {
+            // Set authenticated user ID in SessionManager
+            SessionManager.getInstance().setAuthenticatedUserId(user.getUserID());
             authenticatedUser = user;
         }
 
